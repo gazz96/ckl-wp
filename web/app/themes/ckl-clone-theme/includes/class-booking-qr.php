@@ -78,8 +78,8 @@ class CKL_Booking_QR {
 	 * @return void
 	 */
 	public function enqueue_frontend_styles() {
-		// Only load on my account pages
-		if (!is_account_page()) {
+		// Only load on my account pages (check if WooCommerce is active)
+		if (!function_exists('is_account_page') || !is_account_page()) {
 			return;
 		}
 

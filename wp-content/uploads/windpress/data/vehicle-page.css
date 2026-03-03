@@ -1,0 +1,289 @@
+/**
+ * Vehicle Page Styles for WindPress
+ * Custom styles for vehicle listing, cards, and filters
+ */
+
+/* Vehicle card hover effects */
+.vehicle-card {
+    @apply transition-all duration-300 ease-in-out;
+}
+
+.vehicle-card:hover {
+    @apply shadow-xl;
+    @apply border-primary/50;
+    transform: translateY(-2px);
+}
+
+/* Filter sidebar styling */
+#vehicle-filter-form {
+    @apply space-y-6;
+}
+
+/* Checkbox styling */
+.vehicle-type-filter {
+    @apply w-4 h-4;
+    @apply text-primary;
+    @apply border-gray-300;
+    @apply rounded;
+    @apply focus:ring-primary;
+}
+
+.vehicle-type-filter:checked + span {
+    @apply font-semibold;
+    @apply text-primary;
+}
+
+/* Date picker customization */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    @apply cursor-pointer;
+    @apply hover:opacity-70;
+    transition: opacity 0.2s;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    @apply opacity-70;
+}
+
+/* Search input focus */
+#search-vehicles:focus {
+    @apply ring-2;
+    @apply ring-primary;
+    @apply border-transparent;
+}
+
+/* Button hover effects */
+.bg-primary:hover {
+    filter: brightness(1.1);
+}
+
+.bg-primary\/90:hover {
+    filter: brightness(1.05);
+}
+
+/* Bookmark button animation */
+.bookmark-btn {
+    @apply transition-transform;
+}
+
+.bookmark-btn:hover {
+    @apply scale-110;
+}
+
+.bookmark-btn:active {
+    @apply scale-95;
+}
+
+/* Loading animation */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Fade out animation */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.animate-fade-out {
+    animation: fadeOut 0.3s ease-out;
+}
+
+/* Vehicle grid transitions */
+#vehicle-grid {
+    @apply transition-opacity;
+    duration: 200ms;
+}
+
+/* Spec icons hover effect */
+.vehicle-card .grid > div:hover {
+    @apply bg-primary/10;
+    @apply transition-colors;
+}
+
+/* Pagination styling */
+.pagination {
+    @apply flex;
+    @apply items-center;
+    @apply gap-2;
+}
+
+.pagination a,
+.pagination span {
+    @apply px-4 py-2;
+    @apply border;
+    @apply border-gray-300;
+    @apply rounded;
+    @apply hover:bg-gray-100;
+    @apply transition-colors;
+}
+
+.pagination .current {
+    @apply bg-primary;
+    @apply text-white;
+    @apply border-primary;
+}
+
+/* Empty state styling */
+.col-span-full.text-center {
+    @apply py-12;
+}
+
+.col-span-full .text-6xl {
+    @apply mb-4;
+}
+
+/* Results count styling */
+.mb-6.text-gray-600 {
+    @apply font-medium;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .vehicle-card {
+        @apply mx-auto;
+    }
+
+    #vehicle-filter-form {
+        @apply space-y-4;
+    }
+}
+
+/* Bookmark heart animation */
+@keyframes heartBeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.2);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    75% {
+        transform: scale(1.1);
+    }
+}
+
+.bookmark-btn.bookmarked svg {
+    animation: heartBeat 0.3s ease-in-out;
+}
+
+/* Type badge hover */
+.vehicle-card .absolute.top-3.left-3 {
+    @apply transition-transform;
+}
+
+.vehicle-card:hover .absolute.top-3.left-3 {
+    transform: scale(1.05);
+}
+
+/* Price highlight */
+.text-primary {
+    @apply font-bold;
+}
+
+/* Smooth transitions for all interactive elements */
+input,
+select,
+button,
+a {
+    @apply transition-all;
+    duration: 200ms;
+}
+
+/* Focus visible styles for accessibility */
+*:focus-visible {
+    @apply outline-none;
+    @apply ring-2;
+    @apply ring-primary;
+    @apply ring-offset-2;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .vehicle-card {
+        @apply border-2;
+    }
+
+    .vehicle-card:hover {
+        @apply border-primary;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .vehicle-card,
+    .bookmark-btn,
+    input,
+    select,
+    button,
+    a {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Loading overlay */
+.loading-overlay {
+    @apply absolute;
+    @apply inset-0;
+    @apply bg-white/80;
+    @apply flex;
+    @apply items-center;
+    @apply justify-center;
+    @apply rounded-lg;
+}
+
+/* Notification styling */
+.fixed.top-4.right-4 {
+    @apply shadow-lg;
+    @apply rounded-lg;
+    @apply z-50;
+}
+
+/* Vehicle image aspect ratio */
+.aspect-w-16.aspect-h-9 {
+    aspect-ratio: 16 / 9;
+}
+
+/* Specs grid consistency */
+.vehicle-card .grid.grid-cols-3 {
+    @apply gap-3;
+}
+
+.vehicle-card .grid.grid-cols-3 > div {
+    @apply aspect-square;
+    @apply flex;
+    @apply flex-col;
+    @apply items-center;
+    @apply justify-center;
+    @apply p-2;
+    @apply bg-gray-50;
+    @apply rounded;
+}

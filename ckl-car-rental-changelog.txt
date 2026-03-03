@@ -1,0 +1,26 @@
+# CKL Car Rental Changelog
+
+## [1.0.1] - 2026-02-23
+
+### Added
+- HPOS (High-Performance Order Storage) compatibility declaration
+- `Requires Plugins: woocommerce` header for proper dependency management
+- PHP tested up to version 8.4
+
+### Changed
+- Updated WC requires at least from 7.0 to 9.8
+- Updated WC tested up to from 8.0 to 10.5
+- Updated WordPress requires at least from 6.0 to 6.7
+
+### Fixed
+- Fixed "incompatible with currently enabled WooCommerce features" warning
+- Improved compatibility with WooCommerce 10.5.1 and higher
+- Ensured proper order data storage with HPOS enabled
+
+## [1.0.0] - Initial Release
+- Initial release of CKL Car Rental plugin
+- Vehicle custom post type with WooCommerce Bookings sync
+- Late fee calculation system
+- Location-based pickup and return
+- Customer dashboard with booking management
+- Analytics and reporting

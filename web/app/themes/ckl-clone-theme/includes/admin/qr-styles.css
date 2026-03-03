@@ -1,0 +1,121 @@
+/**
+ * QR Code Styles
+ *
+ * Styles for booking/order QR code display components.
+ * Additional styles to complement inline styles in templates.
+ *
+ * @package CKL_Car_Rental
+ * @version 1.0.0
+ */
+
+/* ==========================================================================
+   QR Code Container
+   ========================================================================== */
+
+.ckl-qr-code-container {
+	clear: both;
+}
+
+/* ==========================================================================
+   Admin Specific Styles
+   ========================================================================== */
+
+.ckl-qr-admin .ckl-qr-card {
+	max-width: 300px;
+	margin: 0 auto;
+}
+
+.ckl-qr-metabox .ckl-qr-code-wrapper {
+	padding: 10px;
+}
+
+.ckl-qr-metabox .ckl-qr-label {
+	font-size: 12px;
+	margin-bottom: 8px;
+}
+
+.ckl-qr-metabox .ckl-qr-ids {
+	font-size: 12px;
+	line-height: 1.4;
+}
+
+/* ==========================================================================
+   Frontend Specific Styles
+   ========================================================================== */
+
+.ckl-qr-frontend .ckl-qr-card {
+	max-width: 400px;
+	margin: 24px auto;
+}
+
+.ckl-qr-frontend .ckl-qr-card:hover {
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ==========================================================================
+   HPOS (High-Performance Order Storage) Support
+   ========================================================================== */
+
+/* Ensure QR displays correctly with HPOS enabled */
+.woocommerce-page .ckl-qr-code-container {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+
+.ckl-qr-code-image:focus {
+	outline: 2px solid #cc2e28;
+	outline-offset: 2px;
+}
+
+.ckl-qr-print-btn:focus {
+	outline: 2px solid #cc2e28;
+	outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Dark Mode Support (optional)
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+	.ckl-qr-card {
+		background: #1f2937;
+		border-color: #374151;
+	}
+
+	.ckl-qr-header h3 {
+		color: #f9fafb;
+	}
+
+	.ckl-qr-subtitle,
+	.ckl-qr-label {
+		color: #9ca3af;
+	}
+
+	.ckl-qr-id {
+		background: #374151;
+		color: #e5e7eb;
+	}
+}
+
+/* ==========================================================================
+   Animation
+   ========================================================================== */
+
+@keyframes ckl-qr-fade-in {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.ckl-qr-card {
+	animation: ckl-qr-fade-in 0.3s ease-out;
+}

@@ -1,0 +1,236 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Exact values from Next.js shadcn/ui config */
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 222.2 84% 4.9%;
+    --sidebar-primary: 221.2 83.2% 53.3%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 210 40% 96.1%;
+    --sidebar-accent-foreground: 222.2 47.4% 11.2%;
+    --sidebar-border: 214.3 31.8% 91.4%;
+    --sidebar-ring: 221.2 83.2% 53.3%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 221.2 83.2% 53.3%;
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --sidebar-background: 222.2 84% 4.9%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 221.2 83.2% 53.3%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217.2 32.6% 17.5%;
+    --sidebar-ring: 221.2 83.2% 53.3%;
+  }
+}
+
+@layer components {
+  /* Checkout Payment Page Styles */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Payment method radio button custom styles */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Smooth transitions for all interactive elements */
+  .ckl-checkout-pay-wrapper button,
+  .ckl-checkout-pay-wrapper label,
+  .ckl-checkout-pay-wrapper input,
+  .ckl-checkout-pay-wrapper select {
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Focus styles for accessibility */
+  .ckl-checkout-pay-wrapper *:focus-visible {
+    outline: 2px solid rgb(59 130 246);
+    outline-offset: 2px;
+  }
+
+  /* Breadcrumb Styles */
+  .ckl-woocommerce-breadcrumb {
+    @apply bg-gray-50 border-b border-gray-200;
+  }
+
+  .ckl-breadcrumb-wrapper ol {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(203 213 225) transparent;
+  }
+
+  .ckl-breadcrumb-wrapper ol::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .ckl-breadcrumb-wrapper ol::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .ckl-breadcrumb-wrapper ol::-webkit-scrollbar-thumb {
+    background-color: rgb(203 213 225);
+    border-radius: 2px;
+  }
+
+  /* Breadcrumb link hover effect */
+  .ckl-breadcrumb-wrapper a:hover {
+    @apply text-blue-600;
+  }
+
+  /* Breadcrumb current page */
+  .ckl-breadcrumb-wrapper span[aria-current="page"] {
+    @apply text-gray-900 font-semibold;
+  }
+
+  /* My Account Page Layout Styles */
+  /* Desktop: Sidebar is static, content flows naturally */
+  @media (min-width: 1024px) {
+    .ckl-my-account-sidebar {
+      position: relative;
+      height: auto;
+      max-height: calc(100vh - 8rem);
+      overflow-y: auto;
+    }
+
+    .ckl-my-account-content {
+      width: 100%;
+    }
+  }
+
+  /* Mobile: Sidebar is fixed overlay */
+  @media (max-width: 1023px) {
+    .ckl-my-account-sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 280px;
+      max-width: 80vw;
+    }
+
+    .ckl-my-account-wrapper.sidebar-open {
+      overflow: hidden;
+    }
+  }
+
+  /* Login Page Card Styles */
+  .animate-fade-in {
+    animation: slideUpFade 0.5s ease-out;
+  }
+
+  @keyframes slideUpFade {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Login form input focus enhancement */
+  .woocommerce-form input:focus,
+  .woocommerce-form textarea:focus,
+  .woocommerce-form select:focus {
+    box-shadow: 0 0 0 3px rgba(204, 46, 40, 0.15);
+    transform: translateY(-1px);
+  }
+
+  /* Login form button hover animation */
+  .woocommerce-form button[type="submit"] {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .woocommerce-form button[type="submit"]:hover {
+    box-shadow: 0 10px 15px -3px rgba(204, 46, 40, 0.3), 0 4px 6px -2px rgba(204, 46, 40, 0.2);
+  }
+
+  /* Responsive padding for mobile login cards */
+  @media (max-width: 767px) {
+    .woocommerce-form .bg-white {
+      padding: 1.5rem !important;
+    }
+  }
+
+  /* Checkbox custom styling */
+  .woocommerce-form input[type="checkbox"] {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .woocommerce-form input[type="checkbox"]:checked {
+    background-color: #cc2e28;
+    border-color: #cc2e28;
+  }
+}
+

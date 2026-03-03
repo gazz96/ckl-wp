@@ -1,0 +1,278 @@
+/**
+ * Vehicle Meta Box Tabs Styles
+ */
+
+.ckl-tabs-container {
+    margin: -12px -12px 0;
+}
+
+.ckl-tabs-nav {
+    display: flex;
+    background: #f0f0f1;
+    border-bottom: 1px solid #c3c4c7;
+    overflow-x: auto;
+}
+
+.ckl-tab-button {
+    padding: 10px 20px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #646970;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.ckl-tab-button:hover {
+    color: #135e96;
+    background: #f6f7f7;
+}
+
+.ckl-tab-button.active {
+    color: #2271b1;
+    border-bottom-color: #2271b1;
+    background: #fff;
+    font-weight: 600;
+}
+
+.ckl-tab-content {
+    display: none;
+    padding: 15px 0;
+}
+
+.ckl-tab-content.active {
+    display: block;
+}
+
+/* Field Groups */
+.ckl-field-group {
+    margin-bottom: 15px;
+}
+
+.ckl-field-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.ckl-field-row .ckl-field-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.ckl-field-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.ckl-field-description {
+    font-size: 12px;
+    color: #646970;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* Amenities Grid */
+.ckl-amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.ckl-amenity-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+}
+
+.ckl-amenity-item input[type="checkbox"] {
+    margin: 2px 8px 0 0;
+}
+
+.ckl-amenity-item label {
+    flex: 1;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.ckl-amenity-icon {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+/* Pricing Table */
+.ckl-pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ckl-pricing-table th,
+.ckl-pricing-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.ckl-pricing-table th {
+    background: #f0f0f1;
+    font-weight: 600;
+}
+
+/* Special Pricing Repeater */
+.ckl-repeater-item {
+    border: 1px solid #ddd;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #f9f9f9;
+    border-radius: 4px;
+}
+
+.ckl-repeater-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.ckl-repeater-title {
+    font-weight: 600;
+    font-size: 13px;
+}
+
+/* Calendar Preview */
+.ckl-calendar-preview {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.ckl-calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: #f0f0f1;
+    border-bottom: 1px solid #ddd;
+}
+
+.ckl-calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background: #ddd;
+}
+
+.ckl-calendar-day {
+    background: #fff;
+    padding: 8px;
+    text-align: center;
+    font-size: 12px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ckl-calendar-day.available {
+    background: #e7f7ed;
+    color: #00a32a;
+}
+
+.ckl-calendar-day.full {
+    background: #f7e7e7;
+    color: #d63638;
+}
+
+.ckl-calendar-day.past {
+    background: #f0f0f1;
+    color: #999;
+}
+
+/* Vehicle Type Selector */
+.ckl-vehicle-type-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ckl-vehicle-type-group {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.ckl-vehicle-type-group-header {
+    background: #f0f0f1;
+    padding: 10px;
+    font-weight: 600;
+    border-bottom: 1px solid #ddd;
+}
+
+.ckl-vehicle-type-options {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ckl-vehicle-type-option {
+    display: flex;
+    align-items: center;
+}
+
+.ckl-vehicle-type-option input[type="radio"] {
+    margin-right: 8px;
+}
+
+/* Status Badges */
+.ckl-status-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.ckl-status-badge.available {
+    background: #e7f7ed;
+    color: #00a32a;
+}
+
+.ckl-status-badge.full {
+    background: #f7e7e7;
+    color: #d63638;
+}
+
+/* Responsive */
+@media (max-width: 782px) {
+    .ckl-field-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .ckl-field-row .ckl-field-group {
+        margin-bottom: 15px;
+    }
+
+    .ckl-amenities-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .ckl-tab-button {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}

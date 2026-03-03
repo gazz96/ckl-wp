@@ -1,3 +1,24 @@
+<?php
+/**
+ * Helper function to get my account URL safely
+ */
+function ckl_get_my_account_url() {
+    if (function_exists('wc_get_page_permalink')) {
+        return wc_get_page_permalink('myaccount');
+    }
+    return wp_login_url(home_url());
+}
+
+/**
+ * Helper function to get shop URL safely
+ */
+function ckl_get_shop_url() {
+    if (function_exists('wc_get_page_id')) {
+        return get_permalink(wc_get_page_id('shop'));
+    }
+    return home_url('/shop/');
+}
+?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -47,7 +68,7 @@
             <!-- Action Buttons -->
             <div class="hidden lg:flex items-center space-x-4">
                 <?php if (is_user_logged_in()) : ?>
-                    <a href="<?php echo esc_url(wc_get_page_permalink('myaccount')); ?>"
+                    <a href="<?php echo esc_url(ckl_get_my_account_url()); ?>"
                        class="text-gray-700 hover:text-primary font-medium transition">
                         <?php esc_html_e('My Account', 'ckl-car-rental'); ?>
                     </a>
@@ -56,11 +77,11 @@
                         <?php esc_html_e('Sign Out', 'ckl-car-rental'); ?>
                     </a>
                 <?php else : ?>
-                    <a href="<?php echo esc_url(wc_get_page_permalink('myaccount')); ?>"
+                    <a href="<?php echo esc_url(ckl_get_my_account_url()); ?>"
                        class="text-gray-700 hover:text-primary font-medium transition">
                         <?php esc_html_e('Sign In', 'ckl-car-rental'); ?>
                     </a>
-                    <a href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>"
+                    <a href="<?php echo esc_url(ckl_get_shop_url()); ?>"
                        class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition">
                         <?php esc_html_e('Book Now', 'ckl-car-rental'); ?>
                     </a>
@@ -94,7 +115,7 @@
             ?>
             <div class="flex flex-col space-y-4 mt-4 pt-4 border-t">
                 <?php if (is_user_logged_in()) : ?>
-                    <a href="<?php echo esc_url(wc_get_page_permalink('myaccount')); ?>"
+                    <a href="<?php echo esc_url(ckl_get_my_account_url()); ?>"
                        class="text-gray-700 hover:text-primary font-medium transition">
                         <?php esc_html_e('My Account', 'ckl-car-rental'); ?>
                     </a>
@@ -103,11 +124,11 @@
                         <?php esc_html_e('Sign Out', 'ckl-car-rental'); ?>
                     </a>
                 <?php else : ?>
-                    <a href="<?php echo esc_url(wc_get_page_permalink('myaccount')); ?>"
+                    <a href="<?php echo esc_url(ckl_get_my_account_url()); ?>"
                        class="text-gray-700 hover:text-primary font-medium transition">
                         <?php esc_html_e('Sign In', 'ckl-car-rental'); ?>
                     </a>
-                    <a href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>"
+                    <a href="<?php echo esc_url(ckl_get_shop_url()); ?>"
                        class="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition text-center">
                         <?php esc_html_e('Book Now', 'ckl-car-rental'); ?>
                     </a>

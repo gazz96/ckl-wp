@@ -1,0 +1,1 @@
+var a=document.querySelector("#app"),t=a.__vue__,e=document.querySelector("#app #iframe"),r=e==null?void 0:e.contentDocument.querySelector("#breakdance_canvas"),c=r.__vue__;export{t as a,c as i,e as n,r,a as t};

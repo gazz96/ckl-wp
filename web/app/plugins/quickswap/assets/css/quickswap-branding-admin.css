@@ -1,0 +1,159 @@
+/**
+ * QuickSwap Admin Branding - Settings Page Styles
+ *
+ * Admin settings page styles for branding options
+ *
+ * @package QuickSwap
+ * @since 1.1.0
+ */
+
+/* Image uploader styles */
+.quickswap-image-uploader {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.quickswap-image-preview {
+    width: 100px;
+    height: 100px;
+    border: 2px dashed #c3c4c7;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f6f7f7;
+    overflow: hidden;
+}
+
+.quickswap-image-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.quickswap-image-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+.quickswap-image-actions .button {
+    margin: 0;
+}
+
+.quickswap-upload-image,
+.quickswap-remove-image {
+    white-space: nowrap;
+}
+
+/* Color picker styles */
+.quickswap-color-picker {
+    width: 50px;
+    height: 35px;
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 2px;
+    vertical-align: middle;
+}
+
+.quickswap-color-text {
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    padding: 6px 8px;
+    vertical-align: middle;
+    text-transform: uppercase;
+}
+
+/* Settings section improvements */
+.quickswap-branding-section {
+    margin: 20px 0;
+}
+
+.quickswap-branding-section h2 {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #c3c4c7;
+}
+
+/* Form field improvements */
+.quickswap-branding-setting {
+    margin: 15px 0;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+}
+
+.quickswap-branding-setting label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 782px) {
+    .quickswap-image-uploader {
+        flex-direction: column;
+    }
+
+    .quickswap-image-preview {
+        width: 100%;
+        height: 150px;
+    }
+}
+
+/* Tab navigation styles */
+.quickswap-tabs {
+    display: flex;
+    border-bottom: 1px solid #c3c4c7;
+    margin: 20px 0 30px 0;
+}
+
+.quickswap-tab {
+    padding: 10px 20px;
+    margin-right: 5px;
+    background: #f6f7f7;
+    border: 1px solid #c3c4c7;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+    cursor: pointer;
+    text-decoration: none;
+    color: #3c434a;
+    transition: all 0.2s ease;
+}
+
+.quickswap-tab:hover {
+    background: #fff;
+    color: #2271b1;
+}
+
+.quickswap-tab.active {
+    background: #fff;
+    border-bottom: 1px solid #fff;
+    margin-bottom: -1px;
+    color: #2271b1;
+    font-weight: 600;
+}
+
+/* Tab content */
+.quickswap-tab-content {
+    display: none;
+}
+
+.quickswap-tab-content.active {
+    display: block;
+}
+
+/* Settings form improvements in branding tab */
+#quickswap-branding-form .form-table th {
+    padding-left: 0;
+}
+
+#quickswap-branding-form .form-table td {
+    padding-left: 0;
+}

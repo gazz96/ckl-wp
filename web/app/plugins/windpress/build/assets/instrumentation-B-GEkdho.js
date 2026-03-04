@@ -1,0 +1,1 @@
+var e=class{start(r){performance.mark(`${r} (start)`)}end(r,a){performance.mark(`${r} (end)`),performance.measure(r,{start:`${r} (start)`,end:`${r} (end)`,detail:a})}hit(r,a){performance.mark(r,{detail:a})}error(r){throw performance.mark("(error)",{detail:{error:`${r}`}}),r}};export{e as t};

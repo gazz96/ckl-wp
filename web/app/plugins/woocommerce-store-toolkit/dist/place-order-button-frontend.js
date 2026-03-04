@@ -1,0 +1,1 @@
+!function o(){window.wc&&window.wc.blocksCheckout?function(){const{registerCheckoutFilters:o}=window.wc.blocksCheckout;o("woocommerce-store-toolkit",{placeOrderButtonLabel:(o,t,e)=>{var c;return null!==(c=woo_st_place_order_button_params.place_order_button_text)&&void 0!==c?c:o}})}():setTimeout(o,100)}();

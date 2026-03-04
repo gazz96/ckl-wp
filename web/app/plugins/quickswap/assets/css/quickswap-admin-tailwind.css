@@ -1,0 +1,1035 @@
+/**
+ * QuickSwap Admin Tailwind Styles
+ * Tailwind-inspired utility classes for WordPress admin
+ *
+ * @package QuickSwap
+ * @since 1.3.0
+ */
+
+/* CSS Variables - sync with theme */
+:root {
+    --qs-border: 214.3 31.8% 91.4%;
+    --qs-primary: 221.2 83.2% 53.3%;
+    --qs-secondary: 210 100% 62%;  /* Lighter blue for gradient */
+    --qs-primary-foreground: 210 40% 98%;
+    --qs-muted: 210 40% 96.1%;
+    --qs-muted-foreground: 215.4 16.3% 46.9%;
+    --qs-card: 0 0% 100%;
+    --qs-card-foreground: 222.2 84% 4.9%;
+    --qs-radius: 0.5rem;
+}
+
+/* Modern Card Component */
+.qs-card {
+    background: white;
+    border-radius: var(--qs-radius);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid hsl(var(--qs-border));
+}
+
+.qs-card:hover {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Modern Button */
+.qs-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: calc(var(--qs-radius) - 2px);
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.qs-btn-primary {
+    background: hsl(var(--qs-primary));
+    color: hsl(var(--qs-primary-foreground));
+}
+
+.qs-btn-primary:hover {
+    opacity: 0.9;
+}
+
+.qs-btn-secondary {
+    background: hsl(var(--qs-muted));
+    color: hsl(var(--qs-muted-foreground));
+}
+
+.qs-btn-secondary:hover {
+    background: #e5e7eb;
+}
+
+.qs-btn-outline {
+    background: transparent;
+    border: 1px solid hsl(var(--qs-border));
+    color: hsl(var(--qs-card-foreground));
+}
+
+.qs-btn-outline:hover {
+    background: hsl(var(--qs-muted));
+}
+
+.qs-btn-danger {
+    background: #dc2626;
+    color: white;
+}
+
+.qs-btn-danger:hover {
+    background: #b91c1c;
+}
+
+.qs-btn-success {
+    background: #16a34a;
+    color: white;
+}
+
+.qs-btn-success:hover {
+    background: #15803d;
+}
+
+/* Badge Component */
+.qs-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.qs-badge-success { background: #dcfce7; color: #166534; }
+.qs-badge-warning { background: #fef9c3; color: #854d0e; }
+.qs-badge-error { background: #fee2e2; color: #991b1b; }
+.qs-badge-info { background: #dbeafe; color: #1e40af; }
+.qs-badge-default { background: hsl(var(--qs-muted)); color: hsl(var(--qs-muted-foreground)); }
+
+/* Table Styles */
+.qs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+.qs-table th {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    background: hsl(var(--qs-muted));
+    font-weight: 600;
+    border-bottom: 1px solid hsl(var(--qs-border));
+}
+
+.qs-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid hsl(var(--qs-border));
+}
+
+.qs-table tr:hover {
+    background: hsl(var(--qs-muted) / 0.5);
+}
+
+.qs-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Progress Bar */
+.qs-progress {
+    height: 0.5rem;
+    background: hsl(var(--qs-muted));
+    border-radius: 9999px;
+    overflow: hidden;
+}
+
+.qs-progress-bar {
+    height: 100%;
+    background: hsl(var(--qs-primary));
+    border-radius: 9999px;
+    transition: width 0.3s ease;
+}
+
+/* Utility Classes - Display */
+.qs-block { display: block; }
+.qs-inline-block { display: inline-block; }
+.qs-flex { display: flex; }
+.qs-inline-flex { display: inline-flex; }
+.qs-grid { display: grid; }
+.qs-hidden { display: none; }
+
+/* Utility Classes - Flex Direction */
+.qs-flex-col { flex-direction: column; }
+.qs-flex-row { flex-direction: row; }
+.qs-flex-wrap { flex-wrap: wrap; }
+
+/* Utility Classes - Align Items */
+.qs-items-start { align-items: flex-start; }
+.qs-items-center { align-items: center; }
+.qs-items-end { align-items: flex-end; }
+.qs-items-stretch { align-items: stretch; }
+
+/* Utility Classes - Justify Content */
+.qs-justify-start { justify-content: flex-start; }
+.qs-justify-center { justify-content: center; }
+.qs-justify-end { justify-content: flex-end; }
+.qs-justify-between { justify-content: space-between; }
+.qs-justify-around { justify-content: space-around; }
+
+/* Utility Classes - Gap */
+.qs-gap-1 { gap: 0.25rem; }
+.qs-gap-2 { gap: 0.5rem; }
+.qs-gap-3 { gap: 0.75rem; }
+.qs-gap-4 { gap: 1rem; }
+.qs-gap-6 { gap: 1.5rem; }
+.qs-gap-8 { gap: 2rem; }
+
+/* Utility Classes - Padding */
+.qs-p-0 { padding: 0; }
+.qs-p-1 { padding: 0.25rem; }
+.qs-p-2 { padding: 0.5rem; }
+.qs-p-3 { padding: 0.75rem; }
+.qs-p-4 { padding: 1rem; }
+.qs-p-6 { padding: 1.5rem; }
+.qs-p-8 { padding: 2rem; }
+
+.qs-px-4 { padding-left: 1rem; padding-right: 1rem; }
+.qs-px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.qs-py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.qs-py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+
+/* Utility Classes - Margin */
+.qs-m-0 { margin: 0; }
+.qs-m-1 { margin: 0.25rem; }
+.qs-m-2 { margin: 0.5rem; }
+.qs-m-4 { margin: 1rem; }
+.qs-m-6 { margin: 1.5rem; }
+
+.qs-mx-auto { margin-left: auto; margin-right: auto; }
+.qs-my-4 { margin-top: 1rem; margin-bottom: 1rem; }
+
+.qs-mt-0 { margin-top: 0; }
+.qs-mt-2 { margin-top: 0.5rem; }
+.qs-mt-4 { margin-top: 1rem; }
+.qs-mt-6 { margin-top: 1.5rem; }
+.qs-mt-8 { margin-top: 2rem; }
+
+.qs-mb-0 { margin-bottom: 0; }
+.qs-mb-2 { margin-bottom: 0.5rem; }
+.qs-mb-4 { margin-bottom: 1rem; }
+.qs-mb-6 { margin-bottom: 1.5rem; }
+.qs-mb-8 { margin-bottom: 2rem; }
+
+.qs-ml-2 { margin-left: 0.5rem; }
+.qs-ml-4 { margin-left: 1rem; }
+.qs-mr-2 { margin-right: 0.5rem; }
+.qs-mr-4 { margin-right: 1rem; }
+
+/* Utility Classes - Text Size */
+.qs-text-xs { font-size: 0.75rem; }
+.qs-text-sm { font-size: 0.875rem; }
+.qs-text-base { font-size: 1rem; }
+.qs-text-lg { font-size: 1.125rem; }
+.qs-text-xl { font-size: 1.25rem; }
+.qs-text-2xl { font-size: 1.5rem; }
+.qs-text-3xl { font-size: 1.875rem; }
+
+/* Utility Classes - Font Weight */
+.qs-font-normal { font-weight: 400; }
+.qs-font-medium { font-weight: 500; }
+.qs-font-semibold { font-weight: 600; }
+.qs-font-bold { font-weight: 700; }
+
+/* Utility Classes - Text Colors */
+.qs-text-gray-500 { color: #6b7280; }
+.qs-text-gray-600 { color: #4b5563; }
+.qs-text-gray-700 { color: #374151; }
+.qs-text-gray-900 { color: #111827; }
+.qs-text-white { color: white; }
+.qs-text-primary { color: hsl(var(--qs-primary)); }
+.qs-text-green-600 { color: #16a34a; }
+.qs-text-red-600 { color: #dc2626; }
+.qs-text-blue-600 { color: #2563eb; }
+.qs-text-center { text-align: center; }
+.qs-text-left { text-align: left; }
+.qs-text-right { text-align: right; }
+
+/* Utility Classes - Border Radius */
+.qs-rounded { border-radius: 0.25rem; }
+.qs rounded-md { border-radius: 0.375rem; }
+.qs-rounded-lg { border-radius: 0.5rem; }
+.qs-rounded-xl { border-radius: 0.75rem; }
+.qs-rounded-2xl { border-radius: 1rem; }
+.qs-rounded-full { border-radius: 9999px; }
+
+/* Utility Classes - Width */
+.qs-w-full { width: 100%; }
+.qs-w-auto { width: auto; }
+.qs-w-1\/2 { width: 50%; }
+.qs-w-1\/3 { width: 33.333333%; }
+.qs-w-2\/3 { width: 66.666667%; }
+.qs-w-1\/4 { width: 25%; }
+
+/* Utility Classes - Max Width */
+.qs-max-w-sm { max-width: 24rem; }
+.qs-max-w-md { max-width: 28rem; }
+.qs-max-w-lg { max-width: 32rem; }
+.qs-max-w-xl { max-width: 36rem; }
+.qs-max-w-2xl { max-width: 42rem; }
+.qs-max-w-full { max-width: 100%; }
+
+/* Utility Classes - Height */
+.qs-h-full { height: 100%; }
+.qs-h-auto { height: auto; }
+.qs-h-screen { height: 100vh; }
+
+/* Utility Classes - Overflow */
+.qs-overflow-hidden { overflow: hidden; }
+.qs-overflow-auto { overflow: auto; }
+.qs-overflow-scroll { overflow: scroll; }
+.qs-overflow-x-auto { overflow-x: auto; }
+.qs-overflow-y-auto { overflow-y: auto; }
+
+/* Grid System */
+.qs-grid { display: grid; }
+.qs-grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.qs-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.qs-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.qs-grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+@media (min-width: 1024px) {
+    .qs-lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .qs-lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .qs-lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* Admin Wrap Styling */
+.wrap .qs-admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.wrap .qs-admin-header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Metabox Styling */
+.qs-metabox {
+    background: white;
+    border: 1px solid hsl(var(--qs-border));
+    border-radius: var(--qs-radius);
+    padding: 1.5rem;
+}
+
+.qs-metabox-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid hsl(var(--qs-border));
+}
+
+.qs-metabox-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Form Elements */
+.qs-input,
+.qs-select,
+.qs-textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid hsl(var(--qs-border));
+    border-radius: calc(var(--qs-radius) - 2px);
+    font-size: 0.875rem;
+    transition: all 0.2s;
+    background: white;
+}
+
+.qs-input:focus,
+.qs-select:focus,
+.qs-textarea:focus {
+    outline: none;
+    border-color: hsl(var(--qs-primary));
+    box-shadow: 0 0 0 3px hsl(var(--qs-primary) / 0.1);
+}
+
+.qs-textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Checkbox & Radio */
+.qs-checkbox,
+.qs-radio {
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid hsl(var(--qs-border));
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.qs-checkbox:checked,
+.qs-radio:checked {
+    background: hsl(var(--qs-primary));
+    border-color: hsl(var(--qs-primary));
+}
+
+/* Avatar */
+.qs-avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    object-fit: cover;
+    display: inline-block;
+}
+
+.qs-avatar-sm {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.qs-avatar-lg {
+    width: 4rem;
+    height: 4rem;
+}
+
+/* Stats Card */
+.qs-stats-card {
+    background: white;
+    border-radius: var(--qs-radius);
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid hsl(var(--qs-border));
+}
+
+.qs-stats-value {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: hsl(var(--qs-primary));
+}
+
+.qs-stats-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b7280;
+}
+
+/* Alert/Notice Components */
+.qs-alert {
+    padding: 1rem 1.25rem;
+    border-radius: var(--qs-radius);
+    margin-bottom: 1rem;
+    border-left: 4px solid;
+}
+
+.qs-alert-info {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    color: #1e40af;
+}
+
+.qs-alert-success {
+    background: #f0fdf4;
+    border-color: #22c55e;
+    color: #166534;
+}
+
+.qs-alert-warning {
+    background: #fffbeb;
+    border-color: #f59e0b;
+    color: #92400e;
+}
+
+.qs-alert-error {
+    background: #fef2f2;
+    border-color: #ef4444;
+    color: #991b1b;
+}
+
+/* Divider */
+.qs-divider {
+    border: none;
+    border-top: 1px solid hsl(var(--qs-border));
+    margin: 1.5rem 0;
+}
+
+/* Tooltip */
+.qs-tooltip {
+    position: relative;
+}
+
+.qs-tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2937;
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+.qs-tooltip:hover::after {
+    opacity: 1;
+}
+
+/* Skeleton Loading */
+.qs-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: qs-skeleton-loading 1.5s infinite;
+    border-radius: var(--qs-radius);
+}
+
+@keyframes qs-skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Spinner */
+.qs-spinner {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid hsl(var(--qs-muted));
+    border-top-color: hsl(var(--qs-primary));
+    border-radius: 9999px;
+    animation: qs-spin 0.6s linear infinite;
+}
+
+@keyframes qs-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive Utilities */
+@media (max-width: 640px) {
+    .qs-sm\:hidden { display: none; }
+    .qs-sm\:flex-col { flex-direction: column; }
+    .qs-sm\:grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+}
+
+@media (min-width: 768px) {
+    .qs-md\:block { display: block; }
+    .qs-md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .qs-md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1024px) {
+    .qs-lg\:block { display: block; }
+    .qs-lg\:flex { display: flex; }
+}
+
+/* Shadow Utilities */
+.qs-shadow-sm { box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+.qs-shadow { box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.qs-shadow-md { box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.qs-shadow-lg { box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
+.qs-shadow-none { box-shadow: none; }
+
+/* Position Utilities */
+.qs-relative { position: relative; }
+.qs-absolute { position: absolute; }
+.qs-fixed { position: fixed; }
+.qs-sticky { position: sticky; }
+
+/* Z-Index */
+.qs-z-0 { z-index: 0; }
+.qs-z-10 { z-index: 10; }
+.qs-z-20 { z-index: 20; }
+.qs-z-50 { z-index: 50; }
+
+/* Opacity */
+.qs-opacity-0 { opacity: 0; }
+.qs-opacity-50 { opacity: 0.5; }
+.qs-opacity-100 { opacity: 1; }
+
+/* Transition */
+.qs-transition { transition: all 0.2s ease-in-out; }
+.qs-transition-all { transition-property: all; }
+.qs-transition-colors { transition-property: color, background-color, border-color; }
+
+/* Transform */
+.qs-scale-95 { transform: scale(0.95); }
+.qs-scale-100 { transform: scale(1); }
+.qs-scale-105 { transform: scale(1.05); }
+
+/* Cursor */
+.qs-cursor-pointer { cursor: pointer; }
+.qs-cursor-not-allowed { cursor: not-allowed; }
+.qs-cursor-move { cursor: move; }
+
+/* Pointer Events */
+.qs-pointer-events-none { pointer-events: none; }
+.qs-pointer-events-auto { pointer-events: auto; }
+
+/* Select */
+.qs-select-none { user-select: none; }
+.qs-select-text { user-select: text; }
+.qs-select-all { user-select: all; }
+
+/* ========================================
+ * WordPress Core Style Overrides
+ * ========================================
+ * These styles automatically transform WordPress core markup
+ * with modern Tailwind-inspired styling when quickswap-modern-admin
+ * body class is present.
+ */
+
+/* ============================================
+ * ADMIN MENU - Modern Custom CSS
+ * Only colors and basic styling - no layout changes
+ * ============================================ */
+
+/* Admin Menu Container - Modern border */
+.quickswap-modern-admin #adminmenu {
+    background: #ffffff;
+    border-right: 1px solid #e5e7eb;
+}
+
+/* Menu items - Modern colors only */
+.quickswap-modern-admin #adminmenu a.menu-top {
+    color: #374151;
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+/* Hover - Simple gray background */
+.quickswap-modern-admin #adminmenu .menu-top:hover,
+.quickswap-modern-admin #adminmenu .menu-top:focus {
+    background-color: #f3f4f6;
+    color: #1f2937;
+}
+
+/* Active menu - Simple gray background, no gradients */
+.quickswap-modern-admin #adminmenu li.current a.menu-top,
+.quickswap-modern-admin #adminmenu li.wp-has-current-submenu a.wp-has-current-submenu {
+    background-color: #e5e7eb;
+    color: #111827;
+}
+
+/* Icons - Modern gray tones */
+.quickswap-modern-admin #adminmenu .wp-menu-image:before {
+    color: #9ca3af;
+    transition: color 0.15s ease;
+}
+
+.quickswap-modern-admin #adminmenu .menu-top:hover .wp-menu-image:before,
+.quickswap-modern-admin #adminmenu li.current a.menu-top .wp-menu-image:before,
+.quickswap-modern-admin #adminmenu li.wp-has-current-submenu a.wp-has-current-submenu .wp-menu-image:before {
+    color: #4b5563;
+}
+
+/* Submenu - Clean modern style */
+.quickswap-modern-admin #adminmenu .wp-submenu {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+}
+
+.quickswap-modern-admin #adminmenu .wp-submenu a {
+    color: #6b7280;
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.quickswap-modern-admin #adminmenu .wp-submenu a:hover,
+.quickswap-modern-admin #adminmenu .wp-submenu a:focus {
+    background-color: #f9fafb;
+    color: #374151;
+}
+
+/* Current submenu item */
+.quickswap-modern-admin #adminmenu .wp-submenu .current a {
+    color: #111827;
+    font-weight: 600;
+}
+
+/* Count badges - Modern blue */
+.quickswap-modern-admin #adminmenu .awaiting-mod,
+.quickswap-modern-admin #adminmenu .update-plugins {
+    background-color: #3b82f6;
+    color: #ffffff;
+}
+
+/* ========================================
+ * Tab Navigation Styling
+ * ======================================== */
+
+.quickswap-modern-admin .nav-tab-wrapper {
+    border-bottom: 2px solid hsl(var(--qs-border));
+    margin: 0 0 2rem 0;
+    padding: 0;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.quickswap-modern-admin .nav-tab {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    background: transparent;
+    border: none;
+    border-radius: 0.5rem 0.5rem 0 0;
+    color: #6b7280;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    margin-bottom: -2px;
+}
+
+.quickswap-modern-admin .nav-tab:hover {
+    background: hsl(var(--qs-muted));
+    color: #374151;
+}
+
+.quickswap-modern-admin .nav-tab-active,
+.quickswap-modern-admin .nav-tab.nav-tab-active {
+    background: white;
+    color: hsl(var(--qs-primary));
+    font-weight: 600;
+    border-bottom: 2px solid hsl(var(--qs-primary));
+    margin-bottom: -2px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Tab Content Area */
+.quickswap-modern-admin .nav-tab-wrapper + .form-table,
+.quickswap-modern-admin .nav-tab-wrapper + .quickswap-settings-section {
+    background: white;
+    border: 1px solid hsl(var(--qs-border));
+    border-radius: 0 0.5rem 0.5rem 0.5rem;
+    padding: 1.5rem;
+}
+
+/* Main Wrap Container */
+.quickswap-modern-admin .wrap {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+/* Page Header */
+.quickswap-modern-admin .wrap h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #111827;
+}
+
+.quickswap-modern-admin .wrap h1:first-child {
+    margin-top: 0;
+}
+
+/* Page Title Action */
+.quickswap-modern-admin .page-title-action {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    margin-left: 0.75rem;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+}
+
+/* Description */
+.quickswap-modern-admin .wrap > p.description,
+.quickswap-modern-admin .wrap .subtitle {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Postboxes - Card Styling */
+.quickswap-modern-admin .postbox,
+.quickswap-modern-admin .stuffbox {
+    background: white;
+    border: 1px solid hsl(var(--qs-border));
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+    transition: box-shadow 0.2s;
+}
+
+.quickswap-modern-admin .postbox:hover,
+.quickswap-modern-admin .stuffbox:hover {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Postbox Header */
+.quickswap-modern-admin .postbox .hndle,
+.quickswap-modern-admin .stuffbox .hndle {
+    background: transparent;
+    border: none;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+    border-bottom: 1px solid hsl(var(--qs-border));
+    cursor: move;
+}
+
+/* Postbox Content */
+.quickswap-modern-admin .postbox .inside,
+.quickswap-modern-admin .stuffbox .inside {
+    padding: 1.5rem;
+}
+
+/* Closed Postbox */
+.quickswap-modern-admin .closed .postbox .hndle,
+.quickswap-modern-admin .closed .stuffbox .hndle {
+    border-bottom: none;
+}
+
+/* Toggle Indicator */
+.quickswap-modern-admin .toggle-indicator {
+    color: #9ca3af;
+    transition: transform 0.2s;
+}
+
+.quickswap-modern-admin .closed .toggle-indicator {
+    transform: rotate(-90deg);
+}
+
+/* List Tables */
+.quickswap-modern-admin .wp-list-table {
+    background: white;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    border: 1px solid hsl(var(--qs-border));
+}
+
+.quickswap-modern-admin .wp-list-table thead th {
+    background: hsl(var(--qs-muted));
+    border-bottom: 1px solid hsl(var(--qs-border));
+    padding: 0.875rem 1rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.quickswap-modern-admin .wp-list-table tbody td {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid hsl(var(--qs-border));
+    vertical-align: middle;
+}
+
+.quickswap-modern-admin .wp-list-table tr:last-child td {
+    border-bottom: none;
+}
+
+.quickswap-modern-admin .wp-list-table tr:hover td {
+    background: hsl(var(--qs-muted) / 0.5);
+}
+
+/* Row Actions */
+.quickswap-modern-admin .row-actions {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.quickswap-modern-admin tr:hover .row-actions {
+    opacity: 1;
+}
+
+.quickswap-modern-admin .row-actions a {
+    text-decoration: none;
+    color: hsl(var(--qs-primary));
+}
+
+.quickswap-modern-admin .row-actions a:hover {
+    color: hsl(var(--qs-secondary));
+}
+
+/* Table Navigation */
+.quickswap-modern-admin .tablenav {
+    padding: 1rem;
+    background: white;
+    border-radius: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid hsl(var(--qs-border));
+}
+
+.quickswap-modern-admin .tablenav .tablenav-pages {
+    margin: 0;
+}
+
+/* Pagination */
+.quickswap-modern-admin .pagination-links a,
+.quickswap-modern-admin .pagination-links span {
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
+    border: 1px solid hsl(var(--qs-border));
+    margin: 0 0.125rem;
+    text-decoration: none;
+}
+
+.quickswap-modern-admin .pagination-links a:hover {
+    background: hsl(var(--qs-muted));
+}
+
+.quickswap-modern-admin .pagination-links .current {
+    background: hsl(var(--qs-primary));
+    color: white;
+    border-color: hsl(var(--qs-primary));
+}
+
+/* Form Table */
+.quickswap-modern-admin .form-table {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    border: 1px solid hsl(var(--qs-border));
+}
+
+.quickswap-modern-admin .form-table th {
+    padding: 0.75rem 1rem;
+    color: #374151;
+    font-weight: 500;
+    vertical-align: top;
+}
+
+.quickswap-modern-admin .form-table td {
+    padding: 0.75rem 1rem;
+}
+
+/* Form Controls */
+.quickswap-modern-admin input[type="text"],
+.quickswap-modern-admin input[type="email"],
+.quickswap-modern-admin input[type="url"],
+.quickswap-modern-admin input[type="password"],
+.quickswap-modern-admin input[type="number"],
+.quickswap-modern-admin input[type="search"],
+.quickswap-modern-admin select,
+.quickswap-modern-admin textarea {
+    padding: 0.625rem 0.875rem;
+    border: 1px solid hsl(var(--qs-border));
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+}
+
+.quickswap-modern-admin input[type="text"]:focus,
+.quickswap-modern-admin input[type="email"]:focus,
+.quickswap-modern-admin input[type="url"]:focus,
+.quickswap-modern-admin input[type="password"]:focus,
+.quickswap-modern-admin input[type="number"]:focus,
+.quickswap-modern-admin input[type="search"]:focus,
+.quickswap-modern-admin select:focus,
+.quickswap-modern-admin textarea:focus {
+    outline: none;
+    border-color: hsl(var(--qs-primary));
+    box-shadow: 0 0 0 3px hsl(var(--qs-primary) / 0.1);
+}
+
+/* Checkboxes & Radio */
+.quickswap-modern-admin input[type="checkbox"],
+.quickswap-modern-admin input[type="radio"] {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid hsl(var(--qs-border));
+    cursor: pointer;
+}
+
+/* Buttons */
+.quickswap-modern-admin .button,
+.quickswap-modern-admin input[type="submit"],
+.quickswap-modern-admin input[type="button"],
+.quickswap-modern-admin input[type="reset"] {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.quickswap-modern-admin .button-primary,
+.quickswap-modern-admin input[type="submit"].button-primary {
+    background: hsl(var(--qs-primary));
+    border-color: hsl(var(--qs-primary));
+    color: white;
+}
+
+.quickswap-modern-admin .button-primary:hover,
+.quickswap-modern-admin input[type="submit"].button-primary:hover {
+    background: hsl(var(--qs-secondary));
+    border-color: hsl(var(--qs-secondary));
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.quickswap-modern-admin .button-secondary {
+    background: white;
+    border-color: hsl(var(--qs-border));
+    color: #374151;
+}
+
+.quickswap-modern-admin .button-secondary:hover {
+    background: hsl(var(--qs-muted));
+}
+
+/* Notices */
+.quickswap-modern-admin .notice {
+    padding: 1rem 1.25rem;
+    border-radius: 0.75rem;
+    margin: 1.5rem 0;
+    border-left: 4px solid;
+}
+
+.quickswap-modern-admin .notice-info {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    color: #1e40af;
+}
+
+.quickswap-modern-admin .notice-success {
+    background: #f0fdf4;
+    border-color: #22c55e;
+    color: #166534;
+}
+
+.quickswap-modern-admin .notice-warning {
+    background: #fffbeb;
+    border-color: #f59e0b;
+    color: #92400e;
+}
+
+.quickswap-modern-admin .notice-error {
+    background: #fef2f2;
+    border-color: #ef4444;
+    color: #991b1b;
+}
+
+/* ============================================
+ * RESPONSIVE BREAKPOINTS
+ * Only colors - no layout overrides
+ * ============================================ */
+
+/* Mobile - keep colors consistent */
+@media (max-width: 960px) {
+    .quickswap-modern-admin #adminmenu .wp-submenu {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+    }
+}
+
+@media (max-width: 782px) {
+    /* Mobile colors only - no layout changes */
+    .quickswap-modern-admin #adminmenu .wp-submenu a {
+        color: #6b7280;
+    }
+}

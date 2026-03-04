@@ -1,0 +1,5 @@
+import"./dist-DEatGUTy.min.js";import"./runtime-core.esm-bundler-oUzOcJDx.min.js";import"./vue.runtime.esm-bundler-zrGjzb-b.min.js";import"./core-CM2IDBdF.min.js";import"./isObject-BIXYRKoS.min.js";import"./_toKey-Bx4Bju8b.min.js";import"./_MapCache-CEiDyXI1.min.js";import"./set-Br-JnhMO.min.js";import"./_isIndex-1gFRY1uN.min.js";import"./get-Cil2H5_k.min.js";import{t as e}from"./virtualRef-DYSQzXPB.js";import{t as o}from"./logger-P3tS6JnT.js";import{t as r}from"./windpress-BUHj40mA.min.js";var i="#oxygen-topbar .oxygen-toolbar-menus:has(.oxygen-dom-tree-button)",n=document.createRange().createContextualFragment(`
+    <div class="windpressoxygen-settings-button">
+        ${r}
+    </div>
+`),{getVirtualRef:x}=e({},{persist:"windpress.ui.state"}),t=document.querySelector(i);t.insertBefore(n,t.firstChild),window.tippy(".windpressoxygen-settings-button",{content:"WindPress is detected",animation:"shift-toward",placement:"bottom"}),document.querySelector(".windpressoxygen-settings-button"),o("Module loaded!",{module:"settings"});

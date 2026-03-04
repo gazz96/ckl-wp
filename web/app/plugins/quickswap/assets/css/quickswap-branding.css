@@ -1,0 +1,34 @@
+/**
+ * QuickSwap Admin Branding - Dynamic Styles
+ *
+ * Dynamic CSS for branding styles applied to WordPress admin
+ *
+ * @package QuickSwap
+ * @since 1.1.0
+ */
+
+/* CSS Variables for custom colors */
+:root {
+    --quickswap-primary-color: #2271b1;
+    --quickswap-secondary-color: #135e96;
+    --quickswap-bg-color: #f0f0f1;
+}
+
+/* Welcome message on login page */
+.quickswap-welcome-message {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #fff;
+    border-left: 4px solid var(--quickswap-primary-color);
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.quickswap-welcome-message p {
+    margin: 0;
+}
+
+/* Admin logo in toolbar */
+#wpadminbar #wp-admin-bar-site-icon > .ab-item:before {
+    transition: all 0.2s ease;
+}

@@ -1,0 +1,161 @@
+/* Body */
+body.toplevel_page_store-toolkit,
+body.toplevel_page_store-toolkit #wpwrap,
+body.store-toolkit_page_store-toolkit-help,
+body.store-toolkit_page_store-toolkit-help #wpwrap,
+body.store-toolkit_page_store-toolkit-about,
+body.store-toolkit_page_store-toolkit-about #wpwrap {
+  background: #ffffff;
+}
+
+/* Header bar */
+.woo-st-header {
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  margin: -10px -20px 10px;
+}
+
+/* Floating notices */
+.woo-st-floating-notice {
+  position: fixed;
+  width: 300px;
+  height: auto;
+  top: 3rem;
+  right: 1rem;
+  z-index: 9999;
+  border: 1px solid #d6d6d6;
+  border-left: 3px solid #0073aa;
+  padding: 10px 20px;
+  background: #fff;
+  font-size: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+
+.woo-st-floating-notice.success {
+  border-left-color: #28a745;
+}
+
+.woo-st-floating-notice.error {
+  border-left-color: #dc3545;
+}
+
+.woo-st-floating-notice.info {
+  border-left-color: #0073aa;
+}
+
+/* Tabbed navigation */
+
+.toplevel_page_store-toolkit div .nav-tab {
+  font-size: 15px;
+  line-height: 20px;
+  margin-left: 0;
+  margin-right: 8px;
+  padding: 6px 12px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  border-color: #ffffff;
+  background-color: #ffffff;
+  border-width: 2px;
+}
+.toplevel_page_store-toolkit div .nav-tab:active,
+.toplevel_page_store-toolkit div .nav-tab:focus {
+  box-shadow: none;
+  outline: none;
+}
+.toplevel_page_store-toolkit div .nav-tab:hover {
+  border-bottom-color: #b3c2ff;
+  border-bottom-width: 2px;
+  color: #6c7bff;
+}
+.toplevel_page_store-toolkit div .nav-tab:first-child {
+  margin-left: 0;
+}
+.toplevel_page_store-toolkit div .nav-tab.nav-tab-active {
+  background-color: #fff;
+  border-bottom-color: #6c7bff;
+  border-bottom-width: 2px;
+}
+.toplevel_page_store-toolkit div.nav-tab-wrapper {
+  padding-left: 0;
+  padding-top: 17px;
+  border-bottom-color: #d5d5d5;
+  margin-bottom: 20px;
+}
+
+/* Store Toolkit */
+
+.toplevel_page_store-toolkit .form-table th {
+  width: 20%;
+}
+
+/* Edit Category */
+
+body.taxonomy-product_cat table.category_data th,
+body.taxonomy-product_tag table.tag_data th,
+body.taxonomy-product_brand table.brand_data th,
+body.user-edit-php table.user_data th,
+body.profile-php table.user_data th,
+body.user-edit-php table.order_data th,
+body.profile-php table.order_data th {
+  padding: 8px 10px;
+}
+body.user-edit-php table.order_data,
+body.profile-php table.order_data {
+  font-size: 13px;
+}
+body.user-edit-php table.order_data td,
+body.profile-php table.order_data td {
+  vertical-align: top;
+}
+/* Override for WooCommerce Appointments */
+#woocommerce-appointment-data #woo-appointment-post_data h2.hndle {
+  display: block;
+}
+
+/* Support - Donate / Rate */
+
+.toplevel_page_store-toolkit .support-donate_rate,
+.store-toolkit_page_store-toolkit-help .support-donate_rate,
+.store-toolkit_page_store-toolkit-about .support-donate_rate {
+  display: block;
+  float: right;
+}
+.toplevel_page_store-toolkit .support-donate_rate p,
+.store-toolkit_page_store-toolkit-help .support-donate_rate p,
+.store-toolkit_page_store-toolkit-about .support-donate_rate p {
+  margin-top: 16px;
+}
+
+.toplevel_page_store-toolkit p.submit {
+  padding: 0;
+  margin: 0;
+}
+.toplevel_page_store-toolkit table.form-table {
+  margin-bottom: 0.7em;
+}
+.toplevel_page_store-toolkit .form-table th,
+.toplevel_page_store-toolkit .form-table td {
+  padding: 0;
+}
+
+/* Dashboard widgets */
+.sales-snapshot-widget {
+  padding: 5px !important;
+}
+
+.store-snapshot-widget {
+  padding: 5px !important;
+}
+
+.woo-st-growth-tools-prompt {
+  margin: 10px -10px -10px -10px;
+  background-color: #f9f9f9;
+  padding: 5px 10px;
+}
+
+.woo-st-growth-tools-prompt p {
+  margin: 0;
+  font-style: italic;
+}

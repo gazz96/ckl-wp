@@ -1,0 +1,1757 @@
+# Copyright (C) 2025 Visser Labs
+# This file is distributed under the GPL2.
+msgid ""
+msgstr ""
+"Project-Id-Version: Store Toolkit for WooCommerce 2.4.3\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woocommerce-store-toolkit\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-11-19T06:22:03+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: woocommerce-store-toolkit\n"
+
+#. Plugin Name of the plugin
+#: store-toolkit.php
+msgid "Store Toolkit for WooCommerce"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: store-toolkit.php
+msgid "https://wordpress.org/plugins/woocommerce-store-toolkit/"
+msgstr ""
+
+#. Description of the plugin
+#: store-toolkit.php
+msgid "Store Toolkit includes a growing set of commonly-used WooCommerce administration tools aimed at web developers and store maintainers."
+msgstr ""
+
+#. Author of the plugin
+#: store-toolkit.php
+msgid "Visser Labs"
+msgstr ""
+
+#. Author URI of the plugin
+#: store-toolkit.php
+msgid "https://visser.com.au/"
+msgstr ""
+
+#: includes/admin.php:91
+msgid "Docs"
+msgstr ""
+
+#: includes/admin.php:92
+#: includes/functions.php:39
+#: templates/admin/tabs.php:77
+msgid "Settings"
+msgstr ""
+
+#: includes/admin.php:174
+msgid "Permanently delete this product"
+msgstr ""
+
+#: includes/admin.php:184
+msgid "No product to permanently delete has been supplied!"
+msgstr ""
+
+#: includes/admin.php:261
+msgid "No products to permanently delete have been supplied!"
+msgstr ""
+
+#: includes/admin.php:349
+msgid "All billing countries"
+msgstr ""
+
+#: includes/admin.php:368
+msgid "All shipping countries"
+msgstr ""
+
+#: includes/admin.php:386
+msgid "All payment methods"
+msgstr ""
+
+#: includes/admin.php:581
+#: includes/admin.php:582
+msgid "Other"
+msgstr ""
+
+#: includes/admin.php:597
+msgid "Stopwatch"
+msgstr ""
+
+#: includes/admin.php:597
+msgid "seconds"
+msgstr ""
+
+#: includes/admin.php:656
+#, php-format
+msgid "It looks like a previous nuke failed to clear that dataset, this is common in large catalogues and is likely due to WordPress hitting a memory limit or server timeout. Don't stress, <a href=\"%1$s\">retry %2$s nuke?</a>"
+msgstr ""
+
+#: includes/admin.php:794
+#, php-format
+msgid "We couldn't load the export template file <code>%1$s</code> within <code>%2$s</code>, this file should be present."
+msgstr ""
+
+#: includes/admin.php:798
+#: includes/admin/meta_box.php:183
+#: includes/admin/meta_box.php:226
+#: includes/admin/meta_box.php:273
+#: includes/admin/meta_box.php:308
+#: includes/admin/meta_box.php:372
+#: includes/admin/meta_box.php:402
+#: includes/admin/meta_box.php:433
+#: includes/admin/meta_box.php:494
+#: includes/admin/meta_box.php:515
+#: includes/admin/meta_box.php:544
+#: includes/admin/meta_box.php:573
+#: includes/admin/meta_box.php:601
+#: includes/admin/meta_box.php:643
+#: includes/admin/meta_box.php:671
+#: includes/admin/meta_box.php:702
+#: includes/admin/meta_box.php:733
+#: includes/admin/meta_box.php:764
+#: includes/admin/meta_box.php:795
+#: includes/admin/meta_box.php:826
+#: includes/admin/meta_box.php:857
+#: includes/admin/meta_box.php:888
+msgid "You can see this error for one of a few common reasons"
+msgstr ""
+
+#: includes/admin.php:800
+#: includes/admin/meta_box.php:185
+#: includes/admin/meta_box.php:228
+#: includes/admin/meta_box.php:275
+#: includes/admin/meta_box.php:310
+#: includes/admin/meta_box.php:374
+#: includes/admin/meta_box.php:404
+#: includes/admin/meta_box.php:435
+#: includes/admin/meta_box.php:496
+#: includes/admin/meta_box.php:517
+#: includes/admin/meta_box.php:546
+#: includes/admin/meta_box.php:575
+#: includes/admin/meta_box.php:603
+#: includes/admin/meta_box.php:645
+#: includes/admin/meta_box.php:673
+#: includes/admin/meta_box.php:704
+#: includes/admin/meta_box.php:735
+#: includes/admin/meta_box.php:766
+#: includes/admin/meta_box.php:797
+#: includes/admin/meta_box.php:828
+#: includes/admin/meta_box.php:859
+#: includes/admin/meta_box.php:890
+msgid "WordPress was unable to create this file when the Plugin was installed or updated"
+msgstr ""
+
+#: includes/admin.php:801
+#: includes/admin/meta_box.php:186
+#: includes/admin/meta_box.php:229
+#: includes/admin/meta_box.php:276
+#: includes/admin/meta_box.php:311
+#: includes/admin/meta_box.php:375
+#: includes/admin/meta_box.php:405
+#: includes/admin/meta_box.php:436
+#: includes/admin/meta_box.php:497
+#: includes/admin/meta_box.php:518
+#: includes/admin/meta_box.php:547
+#: includes/admin/meta_box.php:576
+#: includes/admin/meta_box.php:604
+#: includes/admin/meta_box.php:646
+#: includes/admin/meta_box.php:674
+#: includes/admin/meta_box.php:705
+#: includes/admin/meta_box.php:736
+#: includes/admin/meta_box.php:767
+#: includes/admin/meta_box.php:798
+#: includes/admin/meta_box.php:829
+#: includes/admin/meta_box.php:860
+#: includes/admin/meta_box.php:891
+msgid "The Plugin files have been recently changed and there has been a file conflict"
+msgstr ""
+
+#: includes/admin.php:802
+#: includes/admin/meta_box.php:187
+#: includes/admin/meta_box.php:230
+#: includes/admin/meta_box.php:277
+#: includes/admin/meta_box.php:312
+#: includes/admin/meta_box.php:376
+#: includes/admin/meta_box.php:406
+#: includes/admin/meta_box.php:437
+#: includes/admin/meta_box.php:498
+#: includes/admin/meta_box.php:519
+#: includes/admin/meta_box.php:548
+#: includes/admin/meta_box.php:577
+#: includes/admin/meta_box.php:605
+#: includes/admin/meta_box.php:647
+#: includes/admin/meta_box.php:675
+#: includes/admin/meta_box.php:706
+#: includes/admin/meta_box.php:737
+#: includes/admin/meta_box.php:768
+#: includes/admin/meta_box.php:799
+#: includes/admin/meta_box.php:830
+#: includes/admin/meta_box.php:861
+#: includes/admin/meta_box.php:892
+msgid "The Plugin file has been locked and cannot be opened by WordPress"
+msgstr ""
+
+#: includes/admin.php:804
+#: includes/admin/meta_box.php:189
+#: includes/admin/meta_box.php:232
+#: includes/admin/meta_box.php:279
+#: includes/admin/meta_box.php:314
+#: includes/admin/meta_box.php:378
+#: includes/admin/meta_box.php:408
+#: includes/admin/meta_box.php:439
+#: includes/admin/meta_box.php:500
+#: includes/admin/meta_box.php:521
+#: includes/admin/meta_box.php:550
+#: includes/admin/meta_box.php:579
+#: includes/admin/meta_box.php:607
+#: includes/admin/meta_box.php:649
+#: includes/admin/meta_box.php:677
+#: includes/admin/meta_box.php:708
+#: includes/admin/meta_box.php:739
+#: includes/admin/meta_box.php:770
+#: includes/admin/meta_box.php:801
+#: includes/admin/meta_box.php:832
+#: includes/admin/meta_box.php:863
+#: includes/admin/meta_box.php:894
+msgid "Jump onto our website and download a fresh copy of this Plugin as it might be enough to fix this issue. If this persists get in touch with us."
+msgstr ""
+
+#: includes/admin.php:818
+msgid "User ID"
+msgstr ""
+
+#: includes/admin.php:854
+#: templates/admin/tabs-nuke.php:70
+#: templates/admin/user_orders.php:8
+msgid "Orders"
+msgstr ""
+
+#: includes/admin.php:897
+msgid "Image Sizes"
+msgstr ""
+
+#: includes/admin.php:951
+msgid "No Image Sizes were available."
+msgstr ""
+
+#: includes/admin/dashboard.php:15
+msgid "Store Snapshot"
+msgstr ""
+
+#: includes/admin/dashboard.php:19
+msgid "Sales Snapshot"
+msgstr ""
+
+#: includes/admin/meta_box.php:17
+#: includes/admin/meta_box.php:21
+msgid "Product Post Meta"
+msgstr ""
+
+#: includes/admin/meta_box.php:32
+msgid "Order Data"
+msgstr ""
+
+#: includes/admin/meta_box.php:33
+msgid "Order Items Data"
+msgstr ""
+
+#: includes/admin/meta_box.php:34
+msgid "Refunds Data"
+msgstr ""
+
+#: includes/admin/meta_box.php:36
+msgid "Order Post Meta"
+msgstr ""
+
+#: includes/admin/meta_box.php:37
+msgid "Order Items Meta"
+msgstr ""
+
+#: includes/admin/meta_box.php:38
+msgid "Refunds Post Meta"
+msgstr ""
+
+#: includes/admin/meta_box.php:57
+msgid "Related Orders"
+msgstr ""
+
+#: includes/admin/meta_box.php:63
+msgid "Coupon Post Meta"
+msgstr ""
+
+#: includes/admin/meta_box.php:69
+msgid "Attachment Post Meta"
+msgstr ""
+
+#: includes/admin/meta_box.php:78
+msgid "Subscription Post Meta"
+msgstr ""
+
+#: includes/admin/meta_box.php:86
+msgid "Scheduled Export Post Meta"
+msgstr ""
+
+#: includes/admin/meta_box.php:93
+msgid "Export Template Post Meta"
+msgstr ""
+
+#: includes/admin/meta_box.php:100
+msgid "Scheduled Import Post Meta"
+msgstr ""
+
+#: includes/admin/meta_box.php:108
+msgid "Event Post Meta"
+msgstr ""
+
+#: includes/admin/meta_box.php:116
+msgid "Booking Post Meta"
+msgstr ""
+
+#: includes/admin/meta_box.php:124
+msgid "User Membership Post Meta"
+msgstr ""
+
+#: includes/admin/meta_box.php:128
+msgid "Membership Plan Post Meta"
+msgstr ""
+
+#: includes/admin/meta_box.php:138
+msgid "Appointment Post Meta"
+msgstr ""
+
+#: includes/admin/meta_box.php:151
+msgid "ACF Post Meta"
+msgstr ""
+
+#: includes/admin/meta_box.php:180
+#: includes/admin/meta_box.php:223
+#: includes/admin/meta_box.php:241
+#: includes/admin/meta_box.php:267
+#: includes/admin/meta_box.php:305
+#: includes/admin/meta_box.php:369
+#: includes/admin/meta_box.php:399
+#: includes/admin/meta_box.php:430
+#: includes/admin/meta_box.php:491
+#: includes/admin/meta_box.php:512
+#: includes/admin/meta_box.php:541
+#: includes/admin/meta_box.php:570
+#: includes/admin/meta_box.php:598
+#: includes/admin/meta_box.php:640
+#: includes/admin/meta_box.php:668
+#: includes/admin/meta_box.php:699
+#: includes/admin/meta_box.php:730
+#: includes/admin/meta_box.php:761
+#: includes/admin/meta_box.php:792
+#: includes/admin/meta_box.php:823
+#: includes/admin/meta_box.php:854
+#: includes/admin/meta_box.php:885
+#, php-format
+msgid "We couldn't load the template file <code>%1$s</code> within <code>%2$s</code>, this file should be present."
+msgstr ""
+
+#: includes/class-woo-st-unit-pricing.php:47
+msgid "Milliliter (mL)"
+msgstr ""
+
+#: includes/class-woo-st-unit-pricing.php:48
+msgid "Liter (L)"
+msgstr ""
+
+#: includes/class-woo-st-unit-pricing.php:49
+msgid "Fluid Ounce (fl oz)"
+msgstr ""
+
+#: includes/class-woo-st-unit-pricing.php:50
+msgid "Pint (pt)"
+msgstr ""
+
+#: includes/class-woo-st-unit-pricing.php:51
+msgid "Quart (qt)"
+msgstr ""
+
+#: includes/class-woo-st-unit-pricing.php:52
+msgid "Gallon (gal)"
+msgstr ""
+
+#: includes/class-woo-st-unit-pricing.php:53
+msgid "Gram (g)"
+msgstr ""
+
+#: includes/class-woo-st-unit-pricing.php:54
+msgid "Kilogram (kg)"
+msgstr ""
+
+#: includes/class-woo-st-unit-pricing.php:55
+msgid "Ounce (oz)"
+msgstr ""
+
+#: includes/class-woo-st-unit-pricing.php:56
+msgid "Pound (lb)"
+msgstr ""
+
+#: includes/class-woo-st-unit-pricing.php:83
+msgid "Display Unit Pricing"
+msgstr ""
+
+#: includes/class-woo-st-unit-pricing.php:84
+msgid "Check this box to display unit pricing for this product."
+msgstr ""
+
+#: includes/class-woo-st-unit-pricing.php:91
+msgid "Unit Name"
+msgstr ""
+
+#: includes/class-woo-st-unit-pricing.php:93
+msgid "Select the unit name for the product volume."
+msgstr ""
+
+#: includes/class-woo-st-unit-pricing.php:101
+msgid "Show Total Volume"
+msgstr ""
+
+#: includes/class-woo-st-unit-pricing.php:102
+msgid "Check this box to show the total volume of the product."
+msgstr ""
+
+#: includes/class-woo-st-unit-pricing.php:111
+#: includes/class-woo-st-unit-pricing.php:185
+msgid "Total Volume"
+msgstr ""
+
+#: includes/class-woo-st-unit-pricing.php:113
+msgid "Enter the total volume of the product."
+msgstr ""
+
+#: includes/class-woo-st-unit-pricing.php:186
+msgid "Enter the total volume of this variation."
+msgstr ""
+
+#: includes/formatting.php:9
+msgid "Publish"
+msgstr ""
+
+#: includes/formatting.php:13
+msgid "Draft"
+msgstr ""
+
+#: includes/formatting.php:17
+#: includes/functions.php:505
+msgid "Pending"
+msgstr ""
+
+#: includes/formatting.php:21
+msgid "Private"
+msgstr ""
+
+#: includes/formatting.php:25
+msgid "Trash"
+msgstr ""
+
+#: includes/formatting.php:43
+#: includes/functions.php:493
+msgid "Cancelled"
+msgstr ""
+
+#: includes/formatting.php:55
+msgid "N/A"
+msgstr ""
+
+#: includes/functions.php:27
+#: includes/functions.php:62
+msgid "Store Toolkit"
+msgstr ""
+
+#: includes/functions.php:30
+msgid "Enhancements"
+msgstr ""
+
+#: includes/functions.php:30
+#: templates/admin/tabs-quick-enhancements.php:8
+#: templates/admin/tabs.php:35
+msgid "Quick Enhancements"
+msgstr ""
+
+#: includes/functions.php:33
+#: templates/admin/tabs-tools.php:1
+#: templates/admin/tabs.php:49
+msgid "Handy Tools"
+msgstr ""
+
+#: includes/functions.php:36
+#: templates/admin/tabs-growth-tools.php:9
+#: templates/admin/tabs.php:63
+msgid "Growth Tools"
+msgstr ""
+
+#: includes/functions.php:42
+msgid "About"
+msgstr ""
+
+#: includes/functions.php:45
+msgid "Help"
+msgstr ""
+
+#: includes/functions.php:112
+msgid "Like this Plugin?"
+msgstr ""
+
+#: includes/functions.php:114
+msgid "Rate us 5-stars"
+msgstr ""
+
+#: includes/functions.php:116
+msgid "on WordPress.org"
+msgstr ""
+
+#: includes/functions.php:139
+msgid "The Term ID for the Simple Product Type could not be found within the WordPress Terms table (wp_terms), please de-activate and re-activate WooCommerce to resolve this."
+msgstr ""
+
+#: includes/functions.php:183
+#, php-format
+msgid "Some Products would not take the Simple Product Type or WordPress returned an error, we managed to update %1$d of %2$d"
+msgstr ""
+
+#: includes/functions.php:185
+#, php-format
+msgid "We managed to update %d Products with the Simple Product Type, happy days!"
+msgstr ""
+
+#: includes/functions.php:187
+#: includes/functions.php:190
+msgid "No existing Products had the Simple Product Type assigned to them"
+msgstr ""
+
+#: includes/functions.php:497
+msgid "Completed"
+msgstr ""
+
+#: includes/functions.php:501
+msgid "On-Hold"
+msgstr ""
+
+#: includes/functions.php:509
+msgid "Processing"
+msgstr ""
+
+#: includes/functions.php:513
+msgid "Refunded"
+msgstr ""
+
+#: includes/functions.php:517
+msgid "Failed"
+msgstr ""
+
+#: includes/functions.php:821
+#, php-format
+msgid "CRON support has been %s."
+msgstr ""
+
+#: includes/functions.php:821
+msgid "enabled"
+msgstr ""
+
+#: includes/functions.php:821
+msgid "disabled"
+msgstr ""
+
+#: includes/functions.php:827
+msgid "Changes have been saved."
+msgstr ""
+
+#: includes/functions.php:933
+msgid "Cart is already empty."
+msgstr ""
+
+#: includes/functions.php:958
+msgid "Auto-complete Order Status"
+msgstr ""
+
+#: includes/functions.php:994
+msgid "Empty Cart"
+msgstr ""
+
+#: includes/functions.php:2656
+msgid "No dataset type was provided"
+msgstr ""
+
+#: includes/functions.php:2661
+msgid "An invalid export type was provided"
+msgstr ""
+
+#: includes/plugin-installer.php:65
+msgid "You do not have sufficient permissions to install and activate plugins."
+msgstr ""
+
+#: includes/plugin-installer.php:70
+msgid "The plugin is not valid."
+msgstr ""
+
+#: includes/plugin-installer.php:89
+msgid "The plugin is already installed."
+msgstr ""
+
+#: store-toolkit.php:105
+msgid "A required $_POST element was not detected so the requested nuke will not proceed"
+msgstr ""
+
+#: store-toolkit.php:249
+msgid "No rogue Products were detected."
+msgstr ""
+
+#: store-toolkit.php:266
+msgid "Corrupt Product Variations have been deleted."
+msgstr ""
+
+#: store-toolkit.php:283
+msgid "Product transients have been refreshed."
+msgstr ""
+
+#: store-toolkit.php:300
+msgid "All Subscriptions have been recalculated."
+msgstr ""
+
+#: store-toolkit.php:322
+msgid "Sample Products have been generated."
+msgstr ""
+
+#: store-toolkit.php:337
+msgid "Sample Orders have been generated."
+msgstr ""
+
+#: store-toolkit.php:431
+msgid "The selected WooCommerce and/or WordPress details from the previous screen have been permanently erased from your store. <strong>Ta da!</strong>"
+msgstr ""
+
+#: store-toolkit.php:483
+msgid "Quick Enhancement setting saved."
+msgstr ""
+
+#: store-toolkit.php:486
+msgid "Quick Enhancement setting could not be saved."
+msgstr ""
+
+#: store-toolkit.php:522
+msgid "Failed CRON access, CRON is disabled"
+msgstr ""
+
+#. translators: %s: IP address of the failed CRON attempt.
+#: store-toolkit.php:530
+#, php-format
+msgid "Failed CRON attempt from %s, incorrect secret key"
+msgstr ""
+
+#. translators: %s: IP address of the failed CRON attempt.
+#: store-toolkit.php:539
+#, php-format
+msgid "Failed CRON attempt from %s, did not match IP whitelist"
+msgstr ""
+
+#: templates/admin/about.php:11
+msgid "About The Makers - Rymera Web Co"
+msgstr ""
+
+#: templates/admin/about.php:14
+msgid "Over the years, we've worked with thousands of smart store owners who were frustrated by the complexities of managing their online stores."
+msgstr ""
+
+#: templates/admin/about.php:15
+msgid "That's where Store Toolkit comes in - a collection of quick enhancements and handy tools that we feels should have been in WooCommerce all along."
+msgstr ""
+
+#: templates/admin/about.php:16
+msgid "This plugin is brought to you by the same dedicated team that has been at the forefront of WooCommerce solutions for over a decade. We're passionate about helping you achieve the best results with our tools. We're thrilled you're using our tool and invite you to try our other plugins as well!"
+msgstr ""
+
+#: templates/admin/about.php:26
+msgid "Other Tools By Rymera"
+msgstr ""
+
+#: templates/admin/about.php:30
+#: templates/admin/tabs-growth-tools.php:40
+msgid "Advanced Coupons"
+msgstr ""
+
+#: templates/admin/about.php:31
+#: templates/admin/tabs-growth-tools.php:41
+msgid "Advanced Coupons for WooCommerce (Free Plugin)"
+msgstr ""
+
+#: templates/admin/about.php:34
+#: templates/admin/tabs-growth-tools.php:44
+msgid "Extends your coupon features so you can market your store better. Adds cart conditions (coupon rules), buy one get one (BOGO) deals, url coupons, coupon categories and loads more."
+msgstr ""
+
+#: templates/admin/about.php:39
+#: templates/admin/about.php:79
+#: templates/admin/about.php:99
+#: templates/admin/about.php:119
+#: templates/admin/about.php:139
+#: templates/admin/tabs-growth-tools.php:49
+#: templates/admin/tabs-growth-tools.php:69
+#: templates/admin/tabs-growth-tools.php:89
+#: templates/admin/tabs-growth-tools.php:109
+#: templates/admin/tabs-growth-tools.php:129
+#: templates/admin/tabs-growth-tools.php:149
+#: templates/admin/tabs-growth-tools.php:169
+#: templates/admin/tabs-growth-tools.php:189
+#: templates/admin/tabs-growth-tools.php:209
+#: templates/admin/tabs-growth-tools.php:229
+#: templates/admin/tabs-growth-tools.php:249
+#: templates/admin/tabs-growth-tools.php:269
+#: templates/admin/tabs-growth-tools.php:289
+#: templates/admin/tabs-growth-tools.php:309
+#: templates/admin/tabs-growth-tools.php:329
+#: templates/admin/tabs-growth-tools.php:349
+#: templates/admin/tabs-growth-tools.php:369
+#: templates/admin/tabs-growth-tools.php:389
+msgid "Status:"
+msgstr ""
+
+#: templates/admin/about.php:40
+#: templates/admin/about.php:60
+#: templates/admin/about.php:80
+#: templates/admin/about.php:100
+#: templates/admin/about.php:120
+#: templates/admin/about.php:140
+#: templates/admin/tabs-growth-tools.php:50
+#: templates/admin/tabs-growth-tools.php:70
+#: templates/admin/tabs-growth-tools.php:90
+#: templates/admin/tabs-growth-tools.php:110
+#: templates/admin/tabs-growth-tools.php:130
+#: templates/admin/tabs-growth-tools.php:150
+#: templates/admin/tabs-growth-tools.php:170
+#: templates/admin/tabs-growth-tools.php:190
+#: templates/admin/tabs-growth-tools.php:210
+#: templates/admin/tabs-growth-tools.php:230
+#: templates/admin/tabs-growth-tools.php:250
+#: templates/admin/tabs-growth-tools.php:270
+#: templates/admin/tabs-growth-tools.php:290
+#: templates/admin/tabs-growth-tools.php:310
+#: templates/admin/tabs-growth-tools.php:330
+#: templates/admin/tabs-growth-tools.php:350
+#: templates/admin/tabs-growth-tools.php:370
+#: templates/admin/tabs-growth-tools.php:390
+msgid "Installed"
+msgstr ""
+
+#: templates/admin/about.php:40
+#: templates/admin/about.php:60
+#: templates/admin/about.php:80
+#: templates/admin/about.php:100
+#: templates/admin/about.php:120
+#: templates/admin/about.php:140
+#: templates/admin/tabs-growth-tools.php:50
+#: templates/admin/tabs-growth-tools.php:70
+#: templates/admin/tabs-growth-tools.php:90
+#: templates/admin/tabs-growth-tools.php:110
+#: templates/admin/tabs-growth-tools.php:130
+#: templates/admin/tabs-growth-tools.php:150
+#: templates/admin/tabs-growth-tools.php:170
+#: templates/admin/tabs-growth-tools.php:190
+#: templates/admin/tabs-growth-tools.php:210
+#: templates/admin/tabs-growth-tools.php:230
+#: templates/admin/tabs-growth-tools.php:250
+#: templates/admin/tabs-growth-tools.php:270
+#: templates/admin/tabs-growth-tools.php:290
+#: templates/admin/tabs-growth-tools.php:310
+#: templates/admin/tabs-growth-tools.php:330
+#: templates/admin/tabs-growth-tools.php:350
+#: templates/admin/tabs-growth-tools.php:370
+#: templates/admin/tabs-growth-tools.php:390
+msgid "Not installed"
+msgstr ""
+
+#: templates/admin/about.php:43
+#: templates/admin/about.php:63
+#: templates/admin/about.php:83
+#: templates/admin/about.php:103
+#: templates/admin/about.php:123
+#: templates/admin/about.php:143
+#: templates/admin/tabs-growth-tools.php:53
+#: templates/admin/tabs-growth-tools.php:73
+#: templates/admin/tabs-growth-tools.php:93
+#: templates/admin/tabs-growth-tools.php:113
+#: templates/admin/tabs-growth-tools.php:133
+#: templates/admin/tabs-growth-tools.php:153
+#: templates/admin/tabs-growth-tools.php:173
+#: templates/admin/tabs-growth-tools.php:193
+#: templates/admin/tabs-growth-tools.php:213
+#: templates/admin/tabs-growth-tools.php:233
+#: templates/admin/tabs-growth-tools.php:253
+#: templates/admin/tabs-growth-tools.php:273
+#: templates/admin/tabs-growth-tools.php:293
+#: templates/admin/tabs-growth-tools.php:313
+#: templates/admin/tabs-growth-tools.php:333
+#: templates/admin/tabs-growth-tools.php:353
+#: templates/admin/tabs-growth-tools.php:373
+#: templates/admin/tabs-growth-tools.php:393
+msgid "Install Plugin"
+msgstr ""
+
+#: templates/admin/about.php:50
+#: templates/admin/tabs-growth-tools.php:60
+msgid "WC Vendors"
+msgstr ""
+
+#: templates/admin/about.php:51
+#: templates/admin/tabs-growth-tools.php:61
+msgid "WC Vendors (Free Plugin)"
+msgstr ""
+
+#: templates/admin/about.php:54
+#: templates/admin/tabs-growth-tools.php:64
+msgid "Easiest way to create your multivendor marketplace and earn commission from every sale. Create a WooCommerce marketplace with multi-seller, product vendor & multi vendor commissions."
+msgstr ""
+
+#: templates/admin/about.php:70
+#: templates/admin/tabs-growth-tools.php:80
+msgid "WooCommerce Wholesale Prices"
+msgstr ""
+
+#: templates/admin/about.php:71
+#: templates/admin/tabs-growth-tools.php:81
+msgid "WooCommerce Wholesale Prices (Free Plugin)"
+msgstr ""
+
+#: templates/admin/about.php:74
+#: templates/admin/tabs-growth-tools.php:84
+msgid "The #1 WooCommerce wholesale plugin for adding wholesale prices & managing B2B customers. Trusted by over 25k store owners for managing wholesale orders, pricing, visibility, user roles, and more."
+msgstr ""
+
+#: templates/admin/about.php:90
+#: templates/admin/tabs-growth-tools.php:100
+msgid "Invoice Gateway for WooCommerce"
+msgstr ""
+
+#: templates/admin/about.php:91
+#: templates/admin/tabs-growth-tools.php:101
+msgid "Invoice Gateway for WooCommerce (Free Plugin)"
+msgstr ""
+
+#: templates/admin/about.php:94
+#: templates/admin/tabs-growth-tools.php:104
+msgid "Accept orders via a special invoice payment gateway method which lets your customer enter their order without upfront payment. Then just issue an invoice from your accounting system and paste in the number."
+msgstr ""
+
+#: templates/admin/about.php:110
+#: templates/admin/tabs-growth-tools.php:120
+msgid "Store Exporter for WooCommerce"
+msgstr ""
+
+#: templates/admin/about.php:111
+#: templates/admin/tabs-growth-tools.php:121
+msgid "Store Exporter for WooCommerce (Free Plugin)"
+msgstr ""
+
+#: templates/admin/about.php:114
+#: templates/admin/tabs-growth-tools.php:124
+msgid "Easily export Orders, Subscriptions, Coupons, Products, Categories, Tags to a variety of formats. The deluxe version also adds scheduled exporting for easy reporting and syncing with other systems."
+msgstr ""
+
+#: templates/admin/about.php:130
+#: templates/admin/tabs-growth-tools.php:140
+msgid "Product Feed Pro by AdTribes"
+msgstr ""
+
+#: templates/admin/about.php:131
+#: templates/admin/tabs-growth-tools.php:141
+msgid "Product Feed Pro (Free Plugin)"
+msgstr ""
+
+#: templates/admin/about.php:134
+#: templates/admin/tabs-growth-tools.php:144
+msgid "Helps you generate and manage product feeds for various marketing channels, such as Google Shopping, Facebook, and more, to optimize your eCommerce store's visibility and sales."
+msgstr ""
+
+#: templates/admin/brand_data.php:2
+msgid "Brand Term meta"
+msgstr ""
+
+#: templates/admin/brand_data.php:9
+#: templates/admin/product_vendor_data.php:9
+#: templates/admin/tag_data.php:9
+#: templates/admin/term_data.php:12
+#: templates/admin/user_data.php:13
+msgid "Meta key"
+msgstr ""
+
+#: templates/admin/brand_data.php:10
+#: templates/admin/product_vendor_data.php:10
+#: templates/admin/tag_data.php:10
+#: templates/admin/term_data.php:13
+#: templates/admin/user_data.php:14
+msgid "Meta value"
+msgstr ""
+
+#: templates/admin/brand_data.php:44
+#: templates/admin/product_vendor_data.php:41
+#: templates/admin/tag_data.php:44
+msgid "No Term meta has been saved."
+msgstr ""
+
+#: templates/admin/category_data.php:3
+msgid "Category heirachy"
+msgstr ""
+
+#: templates/admin/category_data.php:10
+msgid "Category heirachy depth"
+msgstr ""
+
+#: templates/admin/category_data.php:12
+#, php-format
+msgid "%d level(s) deep"
+msgstr ""
+
+#: templates/admin/help.php:9
+msgid "Getting Help"
+msgstr ""
+
+#: templates/admin/help.php:10
+msgid "We're here to help you get the most out of your WooCommerce store."
+msgstr ""
+
+#: templates/admin/help.php:16
+msgid "Knowledge Base"
+msgstr ""
+
+#: templates/admin/help.php:19
+msgid "Access our self-service help documentation via the Knowledge Base. You'll find answers and solutions for a wide range of well know situations . You'll also find a Getting Started guide here for the plugin."
+msgstr ""
+
+#: templates/admin/help.php:20
+msgid "Open Knowledge Base"
+msgstr ""
+
+#: templates/admin/help.php:25
+msgid "Free Version WordPress.org Help Forums"
+msgstr ""
+
+#: templates/admin/help.php:28
+msgid "Our support staff regularly check and help our free users at the official plugin WordPress.org help forums. Submit a post there with your question and we'll get back to you as soon as possible."
+msgstr ""
+
+#: templates/admin/help.php:29
+msgid "Visit WordPress.org Forums"
+msgstr ""
+
+#: templates/admin/orders/order-preview-popup-coupons-list.php:11
+#: templates/admin/tabs-nuke.php:97
+msgid "Coupons"
+msgstr ""
+
+#: templates/admin/orders/order-preview-popup-coupons-list.php:15
+msgid "No coupons used"
+msgstr ""
+
+#: templates/admin/order_item_data.php:29
+msgid "Extra Product Options"
+msgstr ""
+
+#: templates/admin/order_item_data.php:85
+msgid "No order items are associated with this Order."
+msgstr ""
+
+#: templates/admin/order_refund_data.php:40
+msgid "No refund items are associated with this Order."
+msgstr ""
+
+#. translators: %s is the matching criteria.
+#: templates/admin/order_related_orders.php:14
+#, php-format
+msgid "Orders matched by <code>%s</code>"
+msgstr ""
+
+#: templates/admin/order_related_orders.php:17
+msgid "No other Orders were found."
+msgstr ""
+
+#: templates/admin/post_data.php:79
+msgid "No custom Post meta is associated with this Post."
+msgstr ""
+
+#: templates/admin/product_vendor_data.php:2
+msgid "Product Vendor Term meta"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:20
+msgid "By Our Team"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:21
+msgid "Payments"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:22
+msgid "AI Tools"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:23
+msgid "Coupon Marketing"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:24
+msgid "Analytics"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:25
+msgid "Email Marketing"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:26
+msgid "Form Builders"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:27
+msgid "Offers & Discounts"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:28
+msgid "Bulk Sales"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:29
+msgid "Automation"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:30
+msgid "Data Management"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:31
+msgid "Reviews"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:32
+msgid "Giveaways"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:33
+msgid "SEO"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:160
+msgid "StoreAgent AI for WooCommerce"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:161
+msgid "StoreAgent AI for WooCommerce (Free Plugin)"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:164
+msgid "Get AI Agents for WooCommerce with StoreAgent.ai, the free AI-powered plugin designed to automate tasks, personalize customer interactions, and optimize your eCommerce operations."
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:180
+#: templates/admin/tabs-growth-tools.php:181
+msgid "FunnelKit Stripe Woo Payment Gateway"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:184
+msgid "Enable secure and efficient payment processing on your WooCommerce store with Stripe integration."
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:200
+#: templates/admin/tabs-growth-tools.php:201
+msgid "Funnel Builder by FunnelKit"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:204
+msgid "Create high-converting sales funnels to optimize your WooCommerce store’s revenue."
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:220
+#: templates/admin/tabs-growth-tools.php:221
+msgid "WPForms Lite"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:224
+msgid "Easily create forms for your website with this user-friendly drag-and-drop form builder."
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:240
+#: templates/admin/tabs-growth-tools.php:241
+msgid "Formidable Forms"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:244
+msgid "Create advanced forms and manage form entries with this powerful form builder."
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:260
+#: templates/admin/tabs-growth-tools.php:261
+msgid "Google Analytics for WordPress by MonsterInsights"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:264
+msgid "Integrate Google Analytics with your WordPress site and get insights into your visitors and content."
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:280
+#: templates/admin/tabs-growth-tools.php:281
+msgid "OptinMonster"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:284
+msgid "Create high-converting popups and forms to boost your email list and grow your leads."
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:300
+#: templates/admin/tabs-growth-tools.php:301
+msgid "Uncanny Automator"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:304
+msgid "Automate your WordPress workflows by connecting plugins, apps, and sites with ease."
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:320
+msgid "Metorik Helper"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:321
+msgid "Metorik"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:324
+msgid "Enhance your WooCommerce store analytics and reporting with Metorik."
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:340
+#: templates/admin/tabs-growth-tools.php:341
+msgid "Reviews Feed"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:344
+msgid "Display reviews from multiple platforms on your WordPress site to boost credibility."
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:360
+#: templates/admin/tabs-growth-tools.php:361
+msgid "RafflePress"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:364
+msgid "Create viral giveaways and contests to grow your email list and social media following."
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:380
+#: templates/admin/tabs-growth-tools.php:381
+msgid "All in One SEO Pack"
+msgstr ""
+
+#: templates/admin/tabs-growth-tools.php:384
+msgid "Optimize your WordPress site for SEO with this comprehensive and user-friendly plugin."
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:2
+#: templates/admin/tabs-nuke.php:16
+msgid "Empty WooCommerce Tables"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:3
+#: templates/admin/tabs-nuke.php:252
+msgid "Delete Products by Product Status"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:4
+#: templates/admin/tabs-nuke.php:280
+msgid "Delete Products by Product Category"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:5
+#: templates/admin/tabs-nuke.php:305
+msgid "Delete Orders by Order Status"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:6
+#: templates/admin/tabs-nuke.php:334
+msgid "Delete Orders by Order Date"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:7
+#: templates/admin/tabs-nuke.php:368
+msgid "Empty WordPress Tables"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:10
+msgid "Nuke WooCommerce"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:11
+msgid "Select the WooCommerce tables you wish to empty then click Remove to permanently remove WooCommerce generated details from your WordPress database."
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:18
+msgid "Permanently remove WooCommerce details."
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:19
+#: templates/admin/tabs-nuke.php:371
+msgid "Check All"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:19
+#: templates/admin/tabs-nuke.php:371
+msgid "Uncheck All"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:25
+msgid "Products"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:34
+msgid "Product Categories"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:43
+msgid "Product Tags"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:52
+msgid "Product Images"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:61
+msgid "Product Attributes"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:79
+msgid "Tax Rates"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:88
+msgid "Product Download Permissions"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:88
+msgid "Download Permissions"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:106
+msgid "Shipping Classes"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:115
+msgid "WooCommerce Logs"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:125
+msgid "Credit Cards"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:129
+#: templates/admin/tabs-nuke.php:141
+#: templates/admin/tabs-nuke.php:153
+#: templates/admin/tabs-nuke.php:165
+#: templates/admin/tabs-nuke.php:177
+#: templates/admin/tabs-nuke.php:189
+#: templates/admin/tabs-nuke.php:201
+#: templates/admin/tabs-nuke.php:213
+#: templates/admin/tabs-nuke.php:225
+#: templates/admin/tabs-nuke.php:237
+#, php-format
+msgid "via %s"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:129
+msgid "Offline Credit Card Processing"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:137
+msgid "Store Exports (CSV)"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:141
+#: templates/admin/tabs-nuke.php:153
+#: templates/admin/tabs-nuke.php:165
+#: templates/admin/tabs-nuke.php:177
+#: templates/admin/tabs-nuke.php:189
+#: templates/admin/tabs-nuke.php:201
+msgid "Store Exporter Deluxe"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:149
+msgid "Store Exports (TSV)"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:161
+msgid "Store Exports (XLS)"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:173
+msgid "Store Exports (RSS)"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:185
+msgid "Store Exports (XLSX)"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:197
+msgid "Store Exports (XML)"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:209
+msgid "Product Brands"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:213
+msgid "WooCommerce Brands"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:221
+#: templates/admin/tabs-nuke.php:225
+msgid "Product Vendors"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:233
+#: templates/admin/tabs-nuke.php:237
+msgid "Advanced Google Product Feed"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:245
+#: templates/admin/tabs-nuke.php:271
+#: templates/admin/tabs-nuke.php:295
+#: templates/admin/tabs-nuke.php:324
+#: templates/admin/tabs-nuke.php:358
+#: templates/admin/tabs-nuke.php:432
+msgid "Remove"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:255
+msgid "Remove Products based on the Product Status by selecting the the Product Status below, then click Remove to permanently remove those Products."
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:267
+msgid "No Product Status's were found."
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:271
+msgid "This will permanently remove Products matching the selected Product Status. Are you sure you want to proceed?"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:274
+msgid "No Products were found."
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:283
+msgid "Remove Products from specific Product Categories by selecting the Product Categories below, then click Remove to permanently remove those Products."
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:295
+msgid "This will permanently remove Products associated to the selected Product Categories. Are you sure you want to proceed?"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:298
+msgid "No Categories have been created."
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:308
+msgid "Remove Orders based on the Order Status by selecting the the Order Status below, then click Remove to permanently remove those Orders."
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:320
+msgid "No Order Status's were found."
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:324
+msgid "This will permanently remove Orders matching the selected Order Status. Are you sure you want to proceed?"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:327
+#: templates/admin/tabs-nuke.php:361
+msgid "No Orders were found."
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:337
+msgid "Remove Orders based on the Order Date by selecting the required date filter, then click Remove to permanently remove those Orders."
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:340
+msgid "All dates"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:343
+msgid "Today"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:346
+msgid "This month"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:349
+msgid "Fixed date"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:358
+msgid "This will permanently remove Orders within the selected Order date range. Are you sure you want to proceed?"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:370
+msgid "Permanently remove WordPress details."
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:377
+msgid "Posts"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:386
+msgid "Post Categories"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:395
+msgid "Post Tags"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:404
+msgid "Links"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:413
+msgid "Comments"
+msgstr ""
+
+#: templates/admin/tabs-nuke.php:422
+msgid "Media: Images"
+msgstr ""
+
+#: templates/admin/tabs-post_types.php:10
+msgid "Post Types"
+msgstr ""
+
+#: templates/admin/tabs-post_types.php:49
+msgid "No Post Types were detected, weird."
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:10
+msgid "Quick Enhancements are small tweaks to the WooCommerce admin area that can help improve your workflow."
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:11
+msgid "These enhancements are designed to be lightweight and easy to use."
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:12
+msgid "If you have any suggestions for new enhancements, "
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:13
+msgid "please let us know!"
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:16
+msgid "Product Enhancements"
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:25
+msgid "Change the Add to Cart button text on the Edit Product screen."
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:26
+msgid "Add to Cart"
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:27
+msgid "Leave blank to use the default text."
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:38
+msgid "Adjust the number of products displayed on the Shop and Archive pages."
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:40
+msgid "Leave blank to use the default."
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:51
+msgid "Delete product images when a product is deleted."
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:52
+msgid "This is useful if you have a lot of products and want to keep your media library clean, but be warned, if your image is attached to multiple images it will be deleted for those products too."
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:63
+msgid "Allow editing individual product variations with the Edit Product screen."
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:74
+msgid "Display unit pricing (e.g., $1.30 per 100mL) on product pages."
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:75
+msgid "You can set the unit pricing in the product metabox on the product page."
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:80
+msgid "Order Enhancements"
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:89
+msgid "If an order total is zero mark it completed automatically."
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:100
+msgid "View a related orders meta box within the Edit Order screen."
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:111
+msgid "Display used coupons on the order preview popup."
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:116
+msgid "Cart & Checkout Enhancements"
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:125
+msgid "Add an Empty Cart button to the cart page. Compatible with both legacy cart & the cart block."
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:136
+msgid "Change the Place Order button text on the Checkout page. Compatible with both legacy checkout & the checkout block."
+msgstr ""
+
+#: templates/admin/tabs-quick-enhancements.php:137
+msgid "Place Order"
+msgstr ""
+
+#: templates/admin/tabs-settings.php:2
+#: templates/admin/tabs-settings.php:14
+msgid "General Settings"
+msgstr ""
+
+#: templates/admin/tabs-settings.php:3
+#: templates/admin/tabs-settings.php:34
+msgid "CRON Nuke"
+msgstr ""
+
+#: templates/admin/tabs-settings.php:15
+msgid "Manage options across Store Toolkit from this screen."
+msgstr ""
+
+#: templates/admin/tabs-settings.php:27
+msgid "Store Toolkit adds a Delete Permanently button and Bulk actions menu item to the Products screen. By default this option is turned on."
+msgstr ""
+
+#: templates/admin/tabs-settings.php:36
+msgid "CRON Nuke is enabled"
+msgstr ""
+
+#: templates/admin/tabs-settings.php:38
+#, php-format
+msgid "Store Toolkit supports nuking via a command line request, to do this you need to prepare a specific URL and pass it the following required inline parameters. For sample CRON requests and supported arguments consult our <a href=\"%s\" target=\"_blank\">online documentation</a>."
+msgstr ""
+
+#: templates/admin/tabs-settings.php:42
+msgid "Enable CRON"
+msgstr ""
+
+#: templates/admin/tabs-settings.php:45
+msgid "Yes"
+msgstr ""
+
+#: templates/admin/tabs-settings.php:46
+msgid "No"
+msgstr ""
+
+#: templates/admin/tabs-settings.php:48
+msgid "Enabling CRON allows developers to schedule automated nukes and connect with Store Toolkit remotely."
+msgstr ""
+
+#: templates/admin/tabs-settings.php:53
+msgid "CRON secret key"
+msgstr ""
+
+#: templates/admin/tabs-settings.php:57
+msgid "This secret key (can be left empty to allow unrestricted access) limits access to authorised developers who provide a matching key when working with Store Toolkit."
+msgstr ""
+
+#: templates/admin/tabs-settings.php:65
+msgid "Save Changes"
+msgstr ""
+
+#: templates/admin/tabs-tools.php:7
+msgid "Re-link rogue Products to the Simple Product Type"
+msgstr ""
+
+#: templates/admin/tabs-tools.php:8
+msgid "Scan the WooCommerce Products catalogue for Products that do not have any Product Type assigned to them and assign them to the default Simple Product Type."
+msgstr ""
+
+#: templates/admin/tabs-tools.php:20
+#: templates/admin/tabs-tools.php:40
+#: templates/admin/tabs-tools.php:60
+#: templates/admin/tabs-tools.php:83
+msgid "Run Tool"
+msgstr ""
+
+#: templates/admin/tabs-tools.php:27
+msgid "Delete corrupt Product Variations"
+msgstr ""
+
+#: templates/admin/tabs-tools.php:28
+msgid "Scan the WooCommerce Products catalogue for Variations that are obviously corrupt. Corrupt Variations are identified as having no Post Title and an invalid array of duplicate values set for the Stock Status detail."
+msgstr ""
+
+#: templates/admin/tabs-tools.php:47
+msgid "Refresh Product Transients"
+msgstr ""
+
+#: templates/admin/tabs-tools.php:48
+msgid "Clear the Product transients for all WooCommerce Products."
+msgstr ""
+
+#: templates/admin/tabs-tools.php:70
+msgid "Recalculate All Subscriptions"
+msgstr ""
+
+#: templates/admin/tabs-tools.php:93
+msgid "Generate Sample Orders"
+msgstr ""
+
+#: templates/admin/tabs-tools.php:94
+msgid "Generates a random set of sample Orders for testing purposes. Uses random customers, dates, and products."
+msgstr ""
+
+#: templates/admin/tabs-tools.php:96
+msgid "Number of Orders to generate"
+msgstr ""
+
+#: templates/admin/tabs-tools.php:97
+msgid "Generate Orders"
+msgstr ""
+
+#: templates/admin/tabs-tools.php:107
+msgid "Nuking Tools"
+msgstr ""
+
+#: templates/admin/tabs-tools.php:108
+msgid "Need to delete some data from your WooCommerce install? Use these nuking tools to pinpoint the data you want to delete and remove it in 1-click. Use these tools with caution. They are designed to remove data from your WooCommerce store."
+msgstr ""
+
+#: templates/admin/tabs-tools.php:119
+msgid "View Nuking Tools"
+msgstr ""
+
+#: templates/admin/tabs.php:21
+msgid "Overview"
+msgstr ""
+
+#: templates/admin/tabs.php:86
+msgid "Chosen WooCommerce details are being nuked, this process can take awhile. Time for a beer?"
+msgstr ""
+
+#: templates/admin/tabs.php:89
+msgid "Just to clarify..."
+msgstr ""
+
+#: templates/admin/tabs.php:90
+msgid "Just to clarify what's going on behind the progress bar in case the dredded 'white screen' appears or a a 500 Internal Server Error is returned:"
+msgstr ""
+
+#: templates/admin/tabs.php:92
+msgid "First we enter a loop that checks if any records for the selected dataset exist"
+msgstr ""
+
+#: templates/admin/tabs.php:93
+msgid "Then we ask WordPress (via WP_Query) for a list of 100 ID's from the selected dataset (e.g. 100 Product ID's/Product Category ID's/Order ID's, etc.)"
+msgstr ""
+
+#: templates/admin/tabs.php:94
+msgid "We enter a second loop that permanently deletes each ID that WordPress gave us"
+msgstr ""
+
+#: templates/admin/tabs.php:95
+msgid "When that first 100 records are no more we ask for the next 100, rinse and repeat, rinse and repeat, ..."
+msgstr ""
+
+#: templates/admin/tabs.php:96
+msgid "Once we've nuked every record for the selected datasets we can finally show the success screen notice <strong>:)</strong>"
+msgstr ""
+
+#: templates/admin/tabs.php:98
+msgid "Where things can go wrong during this process is:"
+msgstr ""
+
+#: templates/admin/tabs.php:100
+msgid "We hit the 30 second server timeout configured on some hosting server's that kills the active process (ours), or"
+msgstr ""
+
+#: templates/admin/tabs.php:101
+msgid "WordPress maxes out its memory allocation looping through each batch of 100 ID's"
+msgstr ""
+
+#: templates/admin/tabs.php:103
+msgid "Re-opening Store Toolkit from the WordPress Administration and hitting continue will resolve most issues. Happy nuking! <strong>:)</strong>"
+msgstr ""
+
+#: templates/admin/tag_data.php:2
+msgid "Tag Term meta"
+msgstr ""
+
+#: templates/admin/term_data.php:4
+msgid "Term meta"
+msgstr ""
+
+#: templates/admin/term_data.php:59
+msgid "No Term meta is assocated with this Term."
+msgstr ""
+
+#: templates/admin/user_data.php:5
+msgid "User Meta"
+msgstr ""
+
+#: templates/admin/user_data.php:15
+msgid "Actions"
+msgstr ""
+
+#: templates/admin/user_data.php:56
+msgid "No custom User meta is associated with this User."
+msgstr ""
+
+#: templates/admin/user_orders.php:4
+msgid "User Orders"
+msgstr ""
+
+#: templates/admin/user_orders.php:16
+msgid "Order"
+msgstr ""
+
+#: templates/admin/user_orders.php:17
+msgid "Date"
+msgstr ""
+
+#: templates/admin/user_orders.php:18
+#: templates/admin/user_orders.php:69
+msgid "Status"
+msgstr ""
+
+#: templates/admin/user_orders.php:19
+msgid "Total"
+msgstr ""
+
+#: templates/admin/user_orders.php:86
+msgid "No Orders are associated with this User."
+msgstr ""
+
+#: templates/admin/user_orders.php:98
+#, php-format
+msgid "%d items"
+msgstr ""
+
+#: templates/admin/user_orders.php:106
+msgid "Current Page"
+msgstr ""
+
+#: templates/admin/widgets/dashboard-growth-tools-prompt.php:10
+msgid "Unlock powerful features that will help you grow your store."
+msgstr ""
+
+#: templates/admin/widgets/dashboard-growth-tools-prompt.php:11
+msgid "View Growth Tools"
+msgstr ""

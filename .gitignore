@@ -3,6 +3,15 @@ web/app/plugins/*
 !web/app/plugins/.gitkeep
 !web/app/plugins/ckl-car-rental/
 !web/app/plugins/woo-xendit-virtual-accounts/
+!web/app/plugins/woocommerce/
+!web/app/plugins/woocommerce-bookings/
+!web/app/plugins/woocommerce-accommodation-bookings/
+!web/app/plugins/woocommerce-store-toolkit/
+!web/app/plugins/yith-woocommerce-product-add-ons/
+!web/app/plugins/quickswap/
+!web/app/plugins/tawkto-live-chat/
+!web/app/plugins/windpress/
+!web/app/plugins/wp-mail-smtp/
 web/app/plugins/*/node_modules/
 web/app/mu-plugins/*/
 web/app/themes/*/node_modules/

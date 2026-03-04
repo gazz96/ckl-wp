@@ -47,8 +47,8 @@ function ckl_add_cklangkawi_menu() {
     // Add Pricing Rules submenu
     add_submenu_page(
         'cklangkawi-settings',
-        __('Pricing Rules', 'ckl-car-rental'),
-        __('Pricing Rules', 'ckl-car-rental'),
+        __('Dynamic Pricing Rules', 'ckl-car-rental'),
+        __('Dynamic Pricing Rules', 'ckl-car-rental'),
         'manage_options',
         'ckl-pricing-rules',
         'ckl_pricing_rules_page_html'
@@ -64,3 +64,25 @@ function ckl_load_admin_page_files() {
     require_once get_template_directory() . '/admin/pricing-rules.php';
 }
 add_action('admin_menu', 'ckl_load_admin_page_files', 10);
+
+/**
+ * Load vehicle services initialization
+ */
+add_action('admin_init', function() {
+    if (current_user_can('manage_options')) {
+        require_once dirname(__FILE__) . '/vehicle-services-init.php';
+    }
+});
+
+/**
+ * Load peak calendar AJAX handlers early (before admin_menu)
+ *
+ * AJAX requests happen independently of admin page loading and don't trigger
+ * the admin_menu hook. We need to load the AJAX handlers on admin_init to ensure
+ * the wp_ajax_* actions are registered before the AJAX request is processed.
+ */
+add_action('admin_init', function() {
+    if (current_user_can('manage_options')) {
+        require_once dirname(__FILE__) . '/peak-calendar-ajax.php';
+    }
+});

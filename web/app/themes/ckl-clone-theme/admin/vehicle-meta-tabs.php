@@ -49,7 +49,6 @@ add_action('admin_enqueue_scripts', 'ckl_enqueue_vehicle_tabs_scripts');
  */
 function ckl_remove_default_vehicle_meta_boxes() {
     remove_meta_box('vehicle_special_pricing', 'vehicle', 'normal');
-    remove_meta_box('vehicle_amenities', 'vehicle', 'normal');
     remove_meta_box('vehicle_pricing_details', 'vehicle', 'side');
 }
 add_action('add_meta_boxes_vehicle', 'ckl_remove_default_vehicle_meta_boxes', 99);
@@ -77,16 +76,8 @@ function ckl_render_tabbed_vehicle_meta_box($post) {
 
     // Get all vehicle meta
     $meta = ckl_get_vehicle_meta($post->ID);
-    $amenities = ckl_get_vehicle_amenities($post->ID); // Legacy, kept for reference
     $special_pricing = ckl_get_vehicle_special_pricing($post->ID);
     $availability = get_post_meta($post->ID, '_vehicle_availability', true);
-
-    // Get vehicle's current amenity terms
-    $vehicle_amenity_terms = wp_get_post_terms($post->ID, 'vehicle_amenity', array('fields' => 'ids'));
-    $all_amenity_terms = get_terms(array(
-        'taxonomy' => 'vehicle_amenity',
-        'hide_empty' => false,
-    ));
 
     // Get vehicle categories
     $categories = get_terms(array(
@@ -98,9 +89,6 @@ function ckl_render_tabbed_vehicle_meta_box($post) {
     // Get selected vehicle category
     $selected_categories = wp_get_object_terms($post->ID, 'vehicle_category', array('fields' => 'ids'));
     $selected_category = !empty($selected_categories) ? $selected_categories[0] : '';
-
-    // Get global amenities list
-    $global_amenities = get_option('ckl_amenities_list', ckl_get_default_amenities());
 
     ?>
     <div class="ckl-tabs-container">
@@ -114,9 +102,6 @@ function ckl_render_tabbed_vehicle_meta_box($post) {
             </button>
             <button type="button" class="ckl-tab-button" data-tab="tab-inventory">
                 <?php _e('Inventory', 'ckl-car-rental'); ?>
-            </button>
-            <button type="button" class="ckl-tab-button" data-tab="tab-amenities">
-                <?php _e('Amenities', 'ckl-car-rental'); ?>
             </button>
             <button type="button" class="ckl-tab-button" data-tab="tab-services">
                 <?php _e('Services', 'ckl-car-rental'); ?>
@@ -255,7 +240,9 @@ function ckl_render_tabbed_vehicle_meta_box($post) {
                 </tr>
             </table>
 
-            <h3><?php _e('Special Pricing Offers', 'ckl-car-rental'); ?></h3>
+            <h3><?php _e('Promotional Pricing', 'ckl-car-rental'); ?></h3>
+            <p class="description"><?php _e('Set special discounted prices for specific date ranges (e.g., early bird offers, last-minute deals).', 'ckl-car-rental'); ?></p>
+
             <div class="ckl-repeater-container" id="special-pricing-container">
                 <?php foreach ($special_pricing as $i => $pricing) : ?>
                     <div class="ckl-repeater-item">
@@ -292,8 +279,156 @@ function ckl_render_tabbed_vehicle_meta_box($post) {
                 'end_date' => '',
                 'price' => ''
             ))); ?>">
-                <?php _e('+ Add Pricing Offer', 'ckl-car-rental'); ?>
+                <?php _e('+ Add Promotional Offer', 'ckl-car-rental'); ?>
             </button>
+
+            <h3><?php _e('Peak Period Overrides', 'ckl-car-rental'); ?></h3>
+            <p class="description"><?php _e('Select global peak periods to apply to this vehicle. You can override the default pricing adjustment for each period.', 'ckl-car-rental'); ?></p>
+
+            <?php
+            $global_periods = get_option('ckl_global_peak_prices', array());
+            $vehicle_overrides = get_post_meta($post->ID, '_peak_pricing', true);
+            if (!is_array($vehicle_overrides)) {
+                $vehicle_overrides = array();
+            }
+
+            // Build a lookup for existing overrides by global_period_id
+            $overrides_by_period = array();
+            $custom_periods = array();
+            foreach ($vehicle_overrides as $override) {
+                if (isset($override['global_period_id']) && $override['global_period_id']) {
+                    $overrides_by_period[$override['global_period_id']] = $override;
+                } else {
+                    $custom_periods[] = $override;
+                }
+            }
+            ?>
+
+            <?php if (!empty($global_periods)): ?>
+                <h4><?php _e('Global Peak Periods', 'ckl-car-rental'); ?></h4>
+                <table class="form-table">
+                    <?php foreach ($global_periods as $period): ?>
+                        <?php
+                        $period_id = $period['id'];
+                        $has_override = isset($overrides_by_period[$period_id]);
+                        $override = $has_override ? $overrides_by_period[$period_id] : array();
+                        $override_pricing = isset($override['override_pricing']) ? $override['override_pricing'] : false;
+                        ?>
+                        <tr>
+                            <th>
+                                <label>
+                                    <input type="checkbox" name="peak_pricing[<?php echo $period_id; ?>][enabled]" value="1" <?php checked($has_override || $period['active']); ?>>
+                                    <?php echo esc_html($period['name']); ?>
+                                </label>
+                                <br>
+                                <small class="description">
+                                    <?php printf(__('%s to %s', 'ckl-car-rental'), esc_html($period['start_date']), esc_html($period['end_date'])); ?>
+                                    <?php if ($period['recurring'] !== 'none'): ?>
+                                        <br><?php echo esc_html(ucfirst($period['recurring'])); ?>
+                                    <?php endif; ?>
+                                    <br>
+                                    <strong><?php _e('Default:', 'ckl-car-rental'); ?></strong>
+                                    <?php if ($period['adjustment_type'] === 'percentage'): ?>
+                                        +<?php echo esc_html($period['amount']); ?>%
+                                    <?php else: ?>
+                                        +RM<?php echo esc_html(number_format($period['amount'], 2)); ?>
+                                    <?php endif; ?>
+                                </small>
+                            </th>
+                            <td>
+                                <input type="hidden" name="peak_pricing[<?php echo $period_id; ?>][global_period_id]" value="<?php echo $period_id; ?>">
+                                <label>
+                                    <input type="checkbox" name="peak_pricing[<?php echo $period_id; ?>][override_pricing]" value="1" <?php checked($override_pricing); ?> class="ckl-override-toggle">
+                                    <?php _e('Override default pricing', 'ckl-car-rental'); ?>
+                                </label>
+
+                                <div class="ckl-override-fields" style="<?php echo !$override_pricing ? 'display: none;' : ''; ?> margin-top: 10px;">
+                                    <select name="peak_pricing[<?php echo $period_id; ?>][adjustment_type]">
+                                        <option value="percentage" <?php selected(isset($override['adjustment_type']) ? $override['adjustment_type'] : 'percentage', 'percentage'); ?>>
+                                            <?php _e('Percentage', 'ckl-car-rental'); ?>
+                                        </option>
+                                        <option value="fixed" <?php selected(isset($override['adjustment_type']) ? $override['adjustment_type'] : 'percentage', 'fixed'); ?>>
+                                            <?php _e('Fixed Amount (RM)', 'ckl-car-rental'); ?>
+                                        </option>
+                                    </select>
+                                    <input type="number" name="peak_pricing[<?php echo $period_id; ?>][amount]" value="<?php echo esc_attr(isset($override['amount']) ? $override['amount'] : ($period['amount'] ?? 0)); ?>" step="0.01" min="0" class="small-text">
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            <?php else: ?>
+                <p class="description">
+                    <?php _e('No global peak periods defined. Go to CKLANGKAWI > Peak Periods Calendar to create peak periods.', 'ckl-car-rental'); ?>
+                </p>
+            <?php endif; ?>
+
+            <h4><?php _e('Vehicle-Only Peak Periods', 'ckl-car-rental'); ?></h4>
+            <p class="description"><?php _e('Add custom peak periods that only apply to this vehicle.', 'ckl-car-rental'); ?></p>
+
+            <div class="ckl-repeater-container" id="custom-peak-pricing-container">
+                <?php foreach ($custom_periods as $i => $pricing): ?>
+                    <div class="ckl-repeater-item">
+                        <div class="ckl-repeater-header">
+                            <span class="ckl-repeater-title"><?php echo esc_html($pricing['name']); ?></span>
+                            <button type="button" class="button ckl-remove-repeater" data-confirm="<?php _e('Remove this peak pricing?', 'ckl-car-rental'); ?>">
+                                <?php _e('Remove', 'ckl-car-rental'); ?>
+                            </button>
+                        </div>
+                        <table class="form-table">
+                            <tr>
+                                <th><?php _e('Period Name', 'ckl-car-rental'); ?></th>
+                                <td><input type="text" name="custom_peak_pricing[<?php echo $i; ?>][name]" value="<?php echo esc_attr($pricing['name']); ?>" class="regular-text" placeholder="<?php _e('e.g., Special Event', 'ckl-car-rental'); ?>"></td>
+                            </tr>
+                            <tr>
+                                <th><?php _e('Start Date', 'ckl-car-rental'); ?></th>
+                                <td><input type="date" name="custom_peak_pricing[<?php echo $i; ?>][start_date]" value="<?php echo esc_attr($pricing['start_date']); ?>"></td>
+                            </tr>
+                            <tr>
+                                <th><?php _e('End Date', 'ckl-car-rental'); ?></th>
+                                <td><input type="date" name="custom_peak_pricing[<?php echo $i; ?>][end_date]" value="<?php echo esc_attr($pricing['end_date']); ?>"></td>
+                            </tr>
+                            <tr>
+                                <th><?php _e('Adjustment Type', 'ckl-car-rental'); ?></th>
+                                <td>
+                                    <select name="custom_peak_pricing[<?php echo $i; ?>][adjustment_type]">
+                                        <option value="percentage" <?php selected($pricing['adjustment_type'], 'percentage'); ?>><?php _e('Percentage', 'ckl-car-rental'); ?></option>
+                                        <option value="fixed" <?php selected($pricing['adjustment_type'], 'fixed'); ?>><?php _e('Fixed Amount (RM)', 'ckl-car-rental'); ?></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><?php _e('Amount', 'ckl-car-rental'); ?></th>
+                                <td>
+                                    <input type="number" name="custom_peak_pricing[<?php echo $i; ?>][amount]" value="<?php echo esc_attr($pricing['amount']); ?>" step="0.01" min="0">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <button type="button" class="button ckl-add-repeater" data-template="<?php echo esc_attr(json_encode(array(
+                'name' => '',
+                'start_date' => '',
+                'end_date' => '',
+                'adjustment_type' => 'percentage',
+                'amount' => ''
+            ))); ?>" data-target="custom-peak-pricing-container">
+                <?php _e('+ Add Custom Peak Period', 'ckl-car-rental'); ?>
+            </button>
+
+            <script>
+            jQuery(document).ready(function($) {
+                $('.ckl-override-toggle').on('change', function() {
+                    var $fields = $(this).closest('td').find('.ckl-override-fields');
+                    if ($(this).is(':checked')) {
+                        $fields.slideDown();
+                    } else {
+                        $fields.slideUp();
+                    }
+                });
+            });
+            </script>
         </div>
 
         <!-- Tab 3: Inventory -->
@@ -336,32 +471,7 @@ function ckl_render_tabbed_vehicle_meta_box($post) {
             </table>
         </div>
 
-        <!-- Tab 4: Amenities -->
-        <div id="tab-amenities" class="ckl-tab-content">
-            <?php if (!empty($all_amenity_terms)) : ?>
-                <div class="ckl-amenities-grid">
-                    <?php foreach ($all_amenity_terms as $term) : ?>
-                        <div class="ckl-amenity-item">
-                            <input type="checkbox" name="vehicle_amenities[]" value="<?php echo esc_attr($term->term_id); ?>"
-                                <?php checked(in_array($term->term_id, $vehicle_amenity_terms)); ?>>
-                            <label for="amenity-<?php echo esc_attr($term->slug); ?>"><?php echo esc_html($term->name); ?></label>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-                <p class="description">
-                    <?php _e('Select the amenities available for this vehicle.', 'ckl-car-rental'); ?>
-                    <a href="<?php echo admin_url('edit-tags.php?taxonomy=vehicle_amenity&post_type=vehicle'); ?>">
-                        <?php _e('Manage Amenities', 'ckl-car-rental'); ?>
-                    </a>
-                </p>
-            <?php else : ?>
-                <p class="description">
-                    <?php _e('No amenities configured yet.', 'ckl-car-rental'); ?>
-                </p>
-            <?php endif; ?>
-        </div>
-
-        <!-- Tab 5: Services -->
+        <!-- Tab 4: Services -->
         <div id="tab-services" class="ckl-tab-content">
             <?php
             $all_services = ckl_get_vehicle_services();
@@ -854,16 +964,49 @@ function ckl_save_tabbed_vehicle_meta($post_id) {
         update_post_meta($post_id, '_special_pricing', $sanitized);
     }
 
+    // Save peak pricing (global period overrides and custom periods)
+    $peak_pricing = array();
+
+    // Save global period overrides
+    if (isset($_POST['peak_pricing']) && is_array($_POST['peak_pricing'])) {
+        foreach ($_POST['peak_pricing'] as $period_id => $pricing_data) {
+            // Only save if enabled or has override
+            if (isset($pricing_data['enabled']) || isset($pricing_data['override_pricing'])) {
+                $override = array(
+                    'global_period_id' => intval($period_id),
+                );
+
+                if (isset($pricing_data['override_pricing']) && $pricing_data['override_pricing']) {
+                    $override['override_pricing'] = true;
+                    $override['adjustment_type'] = sanitize_text_field($pricing_data['adjustment_type']);
+                    $override['amount'] = floatval($pricing_data['amount']);
+                }
+
+                $peak_pricing[] = $override;
+            }
+        }
+    }
+
+    // Save custom vehicle-only peak periods
+    if (isset($_POST['custom_peak_pricing']) && is_array($_POST['custom_peak_pricing'])) {
+        foreach ($_POST['custom_peak_pricing'] as $pricing) {
+            if (!empty($pricing['name']) && !empty($pricing['start_date']) && !empty($pricing['end_date']) && isset($pricing['amount'])) {
+                $peak_pricing[] = array(
+                    'name' => sanitize_text_field($pricing['name']),
+                    'start_date' => sanitize_text_field($pricing['start_date']),
+                    'end_date' => sanitize_text_field($pricing['end_date']),
+                    'adjustment_type' => sanitize_text_field($pricing['adjustment_type']),
+                    'amount' => floatval($pricing['amount']),
+                );
+            }
+        }
+    }
+
+    update_post_meta($post_id, '_peak_pricing', $peak_pricing);
+
     // Save inventory
     if (isset($_POST['vehicle_units_available'])) {
         update_post_meta($post_id, '_vehicle_units_available', intval($_POST['vehicle_units_available']));
-    }
-
-    // Save amenities (taxonomy)
-    if (isset($_POST['vehicle_amenities']) && is_array($_POST['vehicle_amenities'])) {
-        wp_set_post_terms($post_id, $_POST['vehicle_amenities'], 'vehicle_amenity', false);
-    } else {
-        wp_set_post_terms($post_id, array(), 'vehicle_amenity', false);
     }
 
     // Save services

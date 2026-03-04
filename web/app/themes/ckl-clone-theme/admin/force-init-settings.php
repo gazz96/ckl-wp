@@ -56,10 +56,6 @@ function ckl_force_init_settings_page() {
     update_option('ckl_global_pricing', ckl_get_default_pricing_settings());
     $result[] = 'Pricing settings initialized';
 
-    // Initialize amenities
-    update_option('ckl_amenities_list', ckl_get_default_amenities());
-    $result[] = 'Amenities initialized';
-
     // Initialize reviews (empty array)
     update_option('ckl_manual_reviews', array());
     $result[] = 'Manual reviews initialized';

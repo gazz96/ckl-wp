@@ -22,6 +22,11 @@ require_once get_template_directory() . '/includes/class-admin-order-qr.php';
 require_once get_template_directory() . '/includes/class-booking-qr.php';
 
 /**
+ * Vehicle pricing helper functions
+ */
+require_once get_template_directory() . '/includes/vehicle-pricing-helpers.php';
+
+/**
  * Theme setup and configuration
  */
 function ckl_clone_theme_setup() {
@@ -895,55 +900,6 @@ function ckl_register_vehicle_category_taxonomy() {
 }
 add_action('init', 'ckl_register_vehicle_category_taxonomy');
 
-/**
- * Register Vehicle Amenity Taxonomy
- */
-function ckl_register_vehicle_amenity_taxonomy() {
-    $labels = array(
-        'name'              => __('Amenities', 'ckl-car-rental'),
-        'singular_name'     => __('Amenity', 'ckl-car-rental'),
-        'search_items'      => __('Search Amenities', 'ckl-car-rental'),
-        'all_items'         => __('All Amenities', 'ckl-car-rental'),
-        'parent_item'       => __('Parent Amenity', 'ckl-car-rental'),
-        'parent_item_colon' => __('Parent Amenity:', 'ckl-car-rental'),
-        'edit_item'         => __('Edit Amenity', 'ckl-car-rental'),
-        'update_item'       => __('Update Amenity', 'ckl-car-rental'),
-        'add_new_item'      => __('Add New Amenity', 'ckl-car-rental'),
-        'new_item_name'     => __('New Amenity Name', 'ckl-car-rental'),
-        'menu_name'         => __('Amenities', 'ckl-car-rental'),
-    );
-
-    $args = array(
-        'hierarchical'      => false,
-        'labels'            => $labels,
-        'show_ui'           => true,
-        'show_admin_column' => true,
-        'show_in_nav_menus' => false,
-        'show_tagcloud'     => false,
-        'show_in_rest'      => true,
-        'query_var'         => true,
-        'rewrite'           => array('slug' => 'vehicle-amenity'),
-    );
-
-    register_taxonomy('vehicle_amenity', array('vehicle'), $args);
-}
-add_action('init', 'ckl_register_vehicle_amenity_taxonomy');
-
-/**
- * Insert Default Amenity Terms
- */
-function ckl_insert_default_amenity_terms() {
-    $default_amenities = ckl_get_default_amenities();
-
-    foreach ($default_amenities as $key => $amenity) {
-        if ($amenity['enabled'] && !term_exists($amenity['label'], 'vehicle_amenity')) {
-            wp_insert_term($amenity['label'], 'vehicle_amenity', array(
-                'slug' => $key
-            ));
-        }
-    }
-}
-add_action('init', 'ckl_insert_default_amenity_terms');
 
 /**
  * Register Vehicle Service Custom Post Type
@@ -1020,10 +976,6 @@ function ckl_initialize_theme_settings() {
         update_option('ckl_global_pricing', ckl_get_default_pricing_settings());
     }
 
-    if (false === get_option('ckl_amenities_list', false)) {
-        update_option('ckl_amenities_list', ckl_get_default_amenities());
-    }
-
     if (false === get_option('ckl_manual_reviews', false)) {
         update_option('ckl_manual_reviews', array());
     }
@@ -1047,7 +999,6 @@ function ckl_ensure_settings_initialized() {
         update_option('ckl_hero_settings', ckl_get_default_hero_settings());
         update_option('ckl_vehicle_display_settings', ckl_get_default_vehicle_display_settings());
         update_option('ckl_global_pricing', ckl_get_default_pricing_settings());
-        update_option('ckl_amenities_list', ckl_get_default_amenities());
         update_option('ckl_manual_reviews', array());
     }
 }
@@ -2005,62 +1956,6 @@ function ckl_get_default_pricing_settings() {
             'scooter' => 0.3,
             'moped' => 0.25,
             'sports_bike' => 0.5,
-        ),
-    );
-}
-
-/**
- * Get default amenities
- */
-function ckl_get_default_amenities() {
-    return array(
-        'music_system' => array(
-            'label' => __('Music System', 'ckl-car-rental'),
-            'icon' => 'dashicons-format-audio',
-            'enabled' => true,
-            'order' => 1
-        ),
-        'abs' => array(
-            'label' => __('ABS', 'ckl-car-rental'),
-            'icon' => 'dashicons-shield',
-            'enabled' => true,
-            'order' => 2
-        ),
-        'bluetooth' => array(
-            'label' => __('Bluetooth', 'ckl-car-rental'),
-            'icon' => 'dashicons-share',
-            'enabled' => true,
-            'order' => 3
-        ),
-        'usb_charger' => array(
-            'label' => __('USB Charger', 'ckl-car-rental'),
-            'icon' => 'dashicons-smartphone',
-            'enabled' => true,
-            'order' => 4
-        ),
-        'gps_navigation' => array(
-            'label' => __('GPS Navigation', 'ckl-car-rental'),
-            'icon' => 'dashicons-location',
-            'enabled' => true,
-            'order' => 5
-        ),
-        'rear_camera' => array(
-            'label' => __('Rear Camera', 'ckl-car-rental'),
-            'icon' => 'dashicons-camera',
-            'enabled' => true,
-            'order' => 6
-        ),
-        'child_seat' => array(
-            'label' => __('Child Seat', 'ckl-car-rental'),
-            'icon' => 'dashicons-admin-users',
-            'enabled' => true,
-            'order' => 7
-        ),
-        'sunroof' => array(
-            'label' => __('Sunroof', 'ckl-car-rental'),
-            'icon' => 'dashicons-sos',
-            'enabled' => true,
-            'order' => 8
         ),
     );
 }

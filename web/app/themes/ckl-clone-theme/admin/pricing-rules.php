@@ -36,7 +36,7 @@ function ckl_pricing_rules_page_html() {
     <div class="wrap ckl-pricing-rules">
         <h1>
             <span class="dashicons dashicons-list-view" style="margin-top: 4px;"></span>
-            <?php _e('Pricing Rules Management', 'ckl-car-rental'); ?>
+            <?php _e('Dynamic Pricing Rules', 'ckl-car-rental'); ?>
         </h1>
 
         <h2 class="nav-tab-wrapper">

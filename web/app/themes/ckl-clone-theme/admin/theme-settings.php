@@ -53,13 +53,6 @@ function ckl_register_settings() {
         'sanitize_callback' => 'ckl_sanitize_pricing_settings'
     ));
 
-    // Amenities List
-    register_setting('ckl_amenities', 'ckl_amenities_list', array(
-        'type' => 'array',
-        'default' => ckl_get_default_amenities(),
-        'sanitize_callback' => 'ckl_sanitize_amenities_list'
-    ));
-
     // Manual Reviews
     register_setting('ckl_reviews', 'ckl_manual_reviews', array(
         'type' => 'array',
@@ -193,31 +186,6 @@ function ckl_sanitize_pricing_settings($input) {
 }
 
 /**
- * Sanitize amenities list
- */
-function ckl_sanitize_amenities_list($input) {
-    $sanitized = array();
-
-    if (isset($input) && is_array($input)) {
-        foreach ($input as $key => $amenity) {
-            // Use the key from the form (allows dynamic keys)
-            $amenity_key = isset($amenity['key']) ? sanitize_key($amenity['key']) : sanitize_key($key);
-
-            if (isset($amenity['label']) && !empty($amenity['label'])) {
-                $sanitized[$amenity_key] = array(
-                    'label' => sanitize_text_field($amenity['label']),
-                    'icon' => sanitize_text_field($amenity['icon'] ?? 'dashicons-flag'),
-                    'enabled' => isset($amenity['enabled']) ? (bool) $amenity['enabled'] : true,
-                    'order' => isset($amenity['order']) ? intval($amenity['order']) : 0,
-                );
-            }
-        }
-    }
-
-    return $sanitized;
-}
-
-/**
  * Sanitize manual reviews
  */
 function ckl_sanitize_manual_reviews($input) {
@@ -258,14 +226,12 @@ function ckl_sanitize_peak_prices($input) {
 
     if (isset($input) && is_array($input)) {
         foreach ($input as $peak) {
-            if (!empty($peak['name']) && !empty($peak['start_date']) && !empty($peak['end_date']) && isset($peak['amount'])) {
+            if (!empty($peak['name']) && !empty($peak['start_date']) && !empty($peak['end_date'])) {
                 $sanitized[] = array(
                     'id' => isset($peak['id']) ? intval($peak['id']) : uniqid(),
                     'name' => sanitize_text_field($peak['name']),
                     'start_date' => sanitize_text_field($peak['start_date']),
                     'end_date' => sanitize_text_field($peak['end_date']),
-                    'adjustment_type' => sanitize_text_field($peak['adjustment_type'] ?? 'percentage'),
-                    'amount' => floatval($peak['amount']),
                     'recurring' => sanitize_text_field($peak['recurring'] ?? 'none'),
                     'active' => isset($peak['active']) ? (bool) $peak['active'] : true,
                     'priority' => isset($peak['priority']) ? intval($peak['priority']) : 100,
@@ -363,9 +329,6 @@ function ckl_settings_page_html() {
             <a href="?page=ckl-theme-settings&tab=pricing" class="nav-tab <?php echo $active_tab === 'pricing' ? 'nav-tab-active' : ''; ?>">
                 <?php _e('Pricing', 'ckl-car-rental'); ?>
             </a>
-            <a href="?page=ckl-theme-settings&tab=amenities" class="nav-tab <?php echo $active_tab === 'amenities' ? 'nav-tab-active' : ''; ?>">
-                <?php _e('Amenities', 'ckl-car-rental'); ?>
-            </a>
             <a href="?page=ckl-theme-settings&tab=reviews" class="nav-tab <?php echo $active_tab === 'reviews' ? 'nav-tab-active' : ''; ?>">
                 <?php _e('Reviews', 'ckl-car-rental'); ?>
             </a>
@@ -387,9 +350,6 @@ function ckl_settings_page_html() {
                     break;
                 case 'pricing':
                     ckl_render_pricing_tab();
-                    break;
-                case 'amenities':
-                    ckl_render_amenities_tab();
                     break;
                 case 'reviews':
                     ckl_render_reviews_tab();
@@ -697,200 +657,6 @@ function ckl_render_pricing_tab() {
         <?php endforeach; ?>
     </div>
     <button type="button" class="button" id="add-seasonal-pricing"><?php _e('Add Seasonal Pricing', 'ckl-car-rental'); ?></button>
-    <?php
-}
-
-/**
- * Render Amenities tab
- */
-function ckl_render_amenities_tab() {
-    $amenities = get_option('ckl_amenities_list', ckl_get_default_amenities());
-    settings_fields('ckl_amenities');
-
-    // Sort by order
-    uasort($amenities, function($a, $b) {
-        $order_a = isset($a['order']) ? intval($a['order']) : 999;
-        $order_b = isset($b['order']) ? intval($b['order']) : 999;
-        return $order_a - $order_b;
-    });
-
-    // Default amenities that cannot be deleted
-    $default_amenities = array_keys(ckl_get_default_amenities());
-    ?>
-    <div id="ckl-amenities-container">
-        <?php foreach ($amenities as $key => $amenity) :
-            $is_default = in_array($key, $default_amenities);
-        ?>
-            <div class="ckl-repeater-item ckl-amenity-item" data-amenity-key="<?php echo esc_attr($key); ?>">
-                <div class="ckl-repeater-header">
-                    <span class="ckl-repeater-title">
-                        <span class="dashicons <?php echo esc_attr($amenity['icon']); ?>"></span>
-                        <?php echo esc_html($amenity['label']); ?>
-                    </span>
-                    <?php if (!$is_default) : ?>
-                        <button type="button" class="button ckl-remove-repeater ckl-remove-amenity">
-                            <?php _e('Remove', 'ckl-car-rental'); ?>
-                        </button>
-                    <?php else : ?>
-                        <span class="description"><?php _e('Default', 'ckl-car-rental'); ?></span>
-                    <?php endif; ?>
-                </div>
-                <table class="form-table">
-                    <tr>
-                        <th><?php _e('Amenity Key', 'ckl-car-rental'); ?></th>
-                        <td>
-                            <?php if ($is_default) : ?>
-                                <input type="text" value="<?php echo esc_attr($key); ?>" class="regular-text" disabled>
-                                <input type="hidden" name="ckl_amenities_list[<?php echo $key; ?>][key]" value="<?php echo esc_attr($key); ?>">
-                                <p class="description"><?php _e('Default amenity keys cannot be changed', 'ckl-car-rental'); ?></p>
-                            <?php else : ?>
-                                <input type="text" name="ckl_amenities_list[<?php echo $key; ?>][key]" value="<?php echo esc_attr($key); ?>" class="regular-text ckl-amenity-key-input">
-                                <p class="description"><?php _e('Unique identifier (lowercase, underscores only)', 'ckl-car-rental'); ?></p>
-                            <?php endif; ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th><?php _e('Label', 'ckl-car-rental'); ?></th>
-                        <td>
-                            <input type="text" name="ckl_amenities_list[<?php echo $key; ?>][label]" value="<?php echo esc_attr($amenity['label']); ?>" class="regular-text" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th><?php _e('Icon', 'ckl-car-rental'); ?></th>
-                        <td>
-                            <input type="text" name="ckl_amenities_list[<?php echo $key; ?>][icon]" value="<?php echo esc_attr($amenity['icon']); ?>" class="regular-text ckl-icon-input" placeholder="dashicons-format-audio">
-                            <p class="description">
-                                <?php _e('Dashicon class (e.g., dashicons-format-audio)', 'ckl-car-rental'); ?>
-                                <a href="https://developer.wordpress.org/resource/dashicons/" target="_blank"><?php _e('Browse icons', 'ckl-car-rental'); ?></a>
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th><?php _e('Enabled', 'ckl-car-rental'); ?></th>
-                        <td>
-                            <label>
-                                <input type="checkbox" name="ckl_amenities_list[<?php echo $key; ?>][enabled]" value="1" <?php checked($amenity['enabled']); ?>>
-                                <?php _e('Show this amenity in vehicle lists', 'ckl-car-rental'); ?>
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th><?php _e('Order', 'ckl-car-rental'); ?></th>
-                        <td>
-                            <input type="number" name="ckl_amenities_list[<?php echo $key; ?>][order]" value="<?php echo $amenity['order']; ?>" min="0" max="100">
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        <?php endforeach; ?>
-    </div>
-    <button type="button" class="button" id="ckl-add-amenity">
-        <?php _e('+ Add New Amenity', 'ckl-car-rental'); ?>
-    </button>
-
-    <script>
-    jQuery(document).ready(function($) {
-        var amenityIndex = Date.now();
-
-        // Add new amenity
-        $('#ckl-add-amenity').on('click', function() {
-            var template = `
-                <div class="ckl-repeater-item ckl-amenity-item" data-amenity-key="new_${amenityIndex}">
-                    <div class="ckl-repeater-header">
-                        <span class="ckl-repeater-title">
-                            <span class="dashicons dashicons-flag"></span>
-                            <?php _e('New Amenity', 'ckl-car-rental'); ?>
-                        </span>
-                        <button type="button" class="button ckl-remove-repeater ckl-remove-amenity">
-                            <?php _e('Remove', 'ckl-car-rental'); ?>
-                        </button>
-                    </div>
-                    <table class="form-table">
-                        <tr>
-                            <th><?php _e('Amenity Key', 'ckl-car-rental'); ?></th>
-                            <td>
-                                <input type="text" name="ckl_amenities_list[new_${amenityIndex}][key]" value="new_${amenityIndex}" class="regular-text ckl-amenity-key-input">
-                                <p class="description"><?php _e('Unique identifier (lowercase, underscores only)', 'ckl-car-rental'); ?></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php _e('Label', 'ckl-car-rental'); ?></th>
-                            <td>
-                                <input type="text" name="ckl_amenities_list[new_${amenityIndex}][label]" value="" class="regular-text" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php _e('Icon', 'ckl-car-rental'); ?></th>
-                            <td>
-                                <input type="text" name="ckl_amenities_list[new_${amenityIndex}][icon]" value="dashicons-flag" class="regular-text ckl-icon-input" placeholder="dashicons-format-audio">
-                                <p class="description">
-                                    <?php _e('Dashicon class (e.g., dashicons-format-audio)', 'ckl-car-rental'); ?>
-                                    <a href="https://developer.wordpress.org/resource/dashicons/" target="_blank"><?php _e('Browse icons', 'ckl-car-rental'); ?></a>
-                                </p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php _e('Enabled', 'ckl-car-rental'); ?></th>
-                            <td>
-                                <label>
-                                    <input type="checkbox" name="ckl_amenities_list[new_${amenityIndex}][enabled]" value="1" checked>
-                                    <?php _e('Show this amenity in vehicle lists', 'ckl-car-rental'); ?>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><?php _e('Order', 'ckl-car-rental'); ?></th>
-                            <td>
-                                <input type="number" name="ckl_amenities_list[new_${amenityIndex}][order]" value="99" min="0" max="100">
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            `;
-
-            $('#ckl-amenities-container').append(template);
-            amenityIndex++;
-        });
-
-        // Remove amenity
-        $(document).on('click', '.ckl-remove-amenity', function() {
-            if (confirm('<?php _e('Are you sure you want to remove this amenity?', 'ckl-car-rental'); ?>')) {
-                $(this).closest('.ckl-amenity-item').remove();
-            }
-        });
-
-        // Update title preview when label changes
-        $(document).on('input', '.ckl-amenity-item input[name*="[label]"]', function() {
-            var $item = $(this).closest('.ckl-amenity-item');
-            var label = $(this).val() || '<?php _e('Amenity', 'ckl-car-rental'); ?>';
-            $item.find('.ckl-repeater-title').text(label);
-        });
-
-        // Update icon preview when icon changes
-        $(document).on('input', '.ckl-amenity-item input[name*="[icon]"]', function() {
-            var $item = $(this).closest('.ckl-amenity-item');
-            var iconClass = $(this).val() || 'dashicons-flag';
-            $item.find('.ckl-repeater-title .dashicons').attr('class', 'dashicons ' + iconClass);
-        });
-    });
-    </script>
-
-    <style>
-        .ckl-amenity-item {
-            margin-bottom: 15px;
-        }
-        .ckl-repeater-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 600;
-        }
-        .ckl-repeater-title .dashicons {
-            font-size: 20px;
-            width: 20px;
-            height: 20px;
-        }
-    </style>
     <?php
 }
 

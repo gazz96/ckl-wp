@@ -42,7 +42,6 @@ function ckl_render_init_settings_page() {
         update_option('ckl_hero_settings', ckl_get_default_hero_settings());
         update_option('ckl_vehicle_display_settings', ckl_get_default_vehicle_display_settings());
         update_option('ckl_global_pricing', ckl_get_default_pricing_settings());
-        update_option('ckl_amenities_list', ckl_get_default_amenities());
         update_option('ckl_manual_reviews', array());
 
         $message = '<div class="notice notice-success"><p>All theme settings have been initialized to their default values!</p></div>';

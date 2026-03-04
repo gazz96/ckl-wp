@@ -48,7 +48,7 @@
     }
 
     /**
-     * Initialize repeater fields (special pricing, etc.)
+     * Initialize repeater fields (special pricing, peak pricing, etc.)
      */
     function initRepeaterFields() {
         // Add repeater item
@@ -57,11 +57,99 @@
 
             const $button = $(this);
             const template = $button.data('template');
-            const $container = $button.prev('.ckl-repeater-container');
+
+            // Check if there's a data-target attribute
+            let $container;
+            if ($button.data('target')) {
+                $container = $('#' + $button.data('target'));
+            } else {
+                $container = $button.prev('.ckl-repeater-container');
+            }
+
+            if (!$container.length) {
+                console.error('Repeater container not found');
+                return;
+            }
+
             const index = Date.now();
 
             let html = template.replace(/\{index\}/g, index);
-            $container.append(html);
+
+            // Build the new repeater item HTML
+            let newItemHtml = '<div class="ckl-repeater-item">';
+
+            if (template.adjustment_type !== undefined) {
+                // Peak pricing template
+                newItemHtml += `
+                    <div class="ckl-repeater-header">
+                        <span class="ckl-repeater-title">${template.name || 'New Peak Pricing'}</span>
+                        <button type="button" class="button ckl-remove-repeater" data-confirm="Remove this peak pricing?">
+                            Remove
+                        </button>
+                    </div>
+                    <table class="form-table">
+                        <tr>
+                            <th>Period Name</th>
+                            <td><input type="text" name="peak_pricing[${index}][name]" value="${template.name || ''}" class="regular-text" placeholder="e.g., Hari Raya 2026"></td>
+                        </tr>
+                        <tr>
+                            <th>Start Date</th>
+                            <td><input type="date" name="peak_pricing[${index}][start_date]" value="${template.start_date || ''}"></td>
+                        </tr>
+                        <tr>
+                            <th>End Date</th>
+                            <td><input type="date" name="peak_pricing[${index}][end_date]" value="${template.end_date || ''}"></td>
+                        </tr>
+                        <tr>
+                            <th>Adjustment Type</th>
+                            <td>
+                                <select name="peak_pricing[${index}][adjustment_type]">
+                                    <option value="percentage" ${template.adjustment_type === 'percentage' ? 'selected' : ''}>Percentage</option>
+                                    <option value="fixed" ${template.adjustment_type === 'fixed' ? 'selected' : ''}>Fixed Amount (RM)</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Amount</th>
+                            <td>
+                                <input type="number" name="peak_pricing[${index}][amount]" value="${template.amount || ''}" step="0.01" min="0" placeholder="e.g., 50 for 50% or RM50">
+                                <p class="description">Percentage increase (e.g., 50 = 50% more) or fixed RM amount per day</p>
+                            </td>
+                        </tr>
+                    </table>
+                `;
+            } else {
+                // Special pricing template
+                newItemHtml += `
+                    <div class="ckl-repeater-header">
+                        <span class="ckl-repeater-title">${template.name || 'New Pricing Offer'}</span>
+                        <button type="button" class="button ckl-remove-repeater" data-confirm="Remove this pricing offer?">
+                            Remove
+                        </button>
+                    </div>
+                    <table class="form-table">
+                        <tr>
+                            <th>Offer Name</th>
+                            <td><input type="text" name="special_pricing[${index}][name]" value="${template.name || ''}" class="regular-text"></td>
+                        </tr>
+                        <tr>
+                            <th>Start Date</th>
+                            <td><input type="date" name="special_pricing[${index}][start_date]" value="${template.start_date || ''}"></td>
+                        </tr>
+                        <tr>
+                            <th>End Date</th>
+                            <td><input type="date" name="special_pricing[${index}][end_date]" value="${template.end_date || ''}"></td>
+                        </tr>
+                        <tr>
+                            <th>Special Price (RM/day)</th>
+                            <td><input type="number" name="special_pricing[${index}][price]" value="${template.price || ''}" step="0.01" min="0"></td>
+                        </tr>
+                    </table>
+                `;
+            }
+
+            newItemHtml += '</div>';
+            $container.append(newItemHtml);
 
             // Initialize any new elements
             $container.find('.ckl-repeater-item:last').find(':input').first().focus();
@@ -74,15 +162,21 @@
             const $item = $(this).closest('.ckl-repeater-item');
 
             // Confirm before removing
-            if ($item.data('confirm')) {
-                if (!confirm($item.data('confirm'))) {
-                    return;
-                }
+            const confirmMsg = $item.find('.ckl-remove-repeater').data('confirm') || 'Are you sure?';
+            if (!confirm(confirmMsg)) {
+                return;
             }
 
             $item.fadeOut(300, function() {
                 $(this).remove();
             });
+        });
+
+        // Update repeater title when name input changes
+        $(document).on('input', '.ckl-repeater-item input[name*="[name]"]', function() {
+            const $item = $(this).closest('.ckl-repeater-item');
+            const name = $(this).val() || 'New Entry';
+            $item.find('.ckl-repeater-title').text(name);
         });
     }
 

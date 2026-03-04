@@ -148,7 +148,7 @@ if (strpos($path, $my_account_path) === 0) {
                 ?>
                 <li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--<?php echo esc_attr($endpoint); ?>">
                     <a href="<?php echo esc_url($url); ?>"
-                       class="flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 <?php echo $is_active ? 'bg-[#cc2e28] text-white shadow-md' : 'text-gray-700 hover:bg-gray-100 hover:text-[#cc2e28]'; ?>">
+                       class="flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 <?php echo $is_active ? 'bg-primary text-white shadow-md' : 'text-foreground hover:bg-accent hover:text-primary'; ?>">
                         <?php echo $icon; ?>
                         <span class="font-medium"><?php echo esc_html($label); ?></span>
                         <?php if ($is_active) : ?>

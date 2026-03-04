@@ -1,6 +1,8 @@
 # Application
 web/app/plugins/*
 !web/app/plugins/.gitkeep
+!web/app/plugins/ckl-car-rental/
+!web/app/plugins/woo-xendit-virtual-accounts/
 web/app/plugins/*/node_modules/
 web/app/mu-plugins/*/
 web/app/themes/*/node_modules/

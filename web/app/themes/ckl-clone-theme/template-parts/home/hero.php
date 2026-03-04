@@ -13,33 +13,33 @@ if (!isset($homepage_sections['hero']['enabled']) || !$homepage_sections['hero']
     return;
 }
 
-$background_images = $hero_settings['background_images'];
-$has_slideshow = !empty($background_images);
+// Default background images (from provided HTML)
+$default_background_images = array(
+    'https://storage.baharihari.com/bahari/ck-langkawi/eirik-skarstein-6yotiQwW0Gs-unsplash.jpg',
+    'https://storage.baharihari.com/bahari/ck-langkawi/jay-tun-0dF2fJjTHCw-unsplash.jpg',
+    'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=1920'
+);
 
-// Default gradient if no images
-$background_style = '';
-if ($has_slideshow) {
-    $background_style = 'style="background-image: url(\'' . esc_url($background_images[0]) . '\');"';
-}
+// Use admin settings if configured, otherwise use defaults
+$background_images = !empty($hero_settings['background_images']) ? $hero_settings['background_images'] : $default_background_images;
+$has_slideshow = !empty($background_images);
 ?>
 
-<section class="hero-section relative bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20 overflow-hidden" <?php echo $background_style; ?>>
-    <!-- Overlay -->
-    <?php if (!empty($hero_settings['overlay_opacity'])) : ?>
-        <div class="absolute inset-0 bg-black" style="opacity: <?php echo $hero_settings['overlay_opacity'] / 100; ?>;"></div>
-    <?php endif; ?>
-
+<section class="hero-section relative min-h-[70vh] md:min-h-[500px] bg-gradient-to-r from-blue-600 to-blue-800 text-white overflow-hidden">
     <!-- Background Slideshow -->
-    <?php if ($has_slideshow && count($background_images) > 1) : ?>
+    <?php if ($has_slideshow) : ?>
         <div class="hero-slideshow absolute inset-0">
             <?php foreach ($background_images as $i => $image) : ?>
-                <div class="hero-slide absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
-                     style="background-image: url('<?php echo esc_url($image); ?>'); opacity: <?php echo $i === 0 ? '1' : '0'; ?>;"
+                <img src="<?php echo esc_url($image); ?>"
+                     alt=""
+                     class="hero-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 <?php echo $i === 0 ? 'opacity-100' : 'opacity-0'; ?>"
                      data-slide="<?php echo $i; ?>">
-                </div>
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
+
+    <!-- Gradient Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-br from-accent/70 via-accent/60 to-accent/50"></div>
 
     <div class="container mx-auto px-4 relative z-10">
         <div class="max-w-4xl mx-auto text-center">
@@ -55,172 +55,159 @@ if ($has_slideshow) {
 
             <!-- Search Form -->
             <?php if (isset($hero_settings['show_search_form']) && $hero_settings['show_search_form']) : ?>
-                <div class="bg-white rounded-xl shadow-2xl max-w-5xl mx-auto overflow-hidden text-gray-800 animate-slide-up">
-                    <!-- Category Tabs -->
-                    <div class="category-tabs-container grid grid-cols-2 border-b">
-                        <button type="button"
-                                class="hero-category-tab relative flex flex-col items-center justify-center py-4 px-2 transition-all border-b-2 border-secondary bg-white text-foreground cursor-pointer"
-                                data-category="cars"
-                                role="tab">
-                            <svg class="h-5 w-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/>
-                                <circle cx="7" cy="17" r="2"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17h6"/>
-                                <circle cx="17" cy="17" r="2"/>
-                            </svg>
-                            <span class="text-xs font-medium">Car Rental</span>
-                        </button>
+                <div class="mt-8 md:mt-12 hidden md:block">
+                    <div class="bg-white rounded-xl shadow-2xl max-w-5xl mx-auto overflow-hidden text-gray-800 animate-slide-up">
+                        <!-- Category Tabs -->
+                        <div class="category-tabs-container grid grid-cols-5 border-b">
+                            <button type="button"
+                                    class="hero-category-tab relative flex flex-col items-center justify-center py-4 px-2 transition-all border-b-2 border-secondary bg-white text-foreground cursor-pointer"
+                                    data-category="cars"
+                                    role="tab">
+                                <svg class="h-5 w-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/>
+                                    <circle cx="7" cy="17" r="2"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17h6"/>
+                                    <circle cx="17" cy="17" r="2"/>
+                                </svg>
+                                <span class="text-xs font-medium">Car Rental</span>
+                            </button>
 
-                        <button type="button"
-                                class="hero-category-tab relative flex flex-col items-center justify-center py-4 px-2 transition-all bg-gray-50 text-foreground/60 hover:bg-gray-100 cursor-pointer"
-                                data-category="motorcycles"
-                                role="tab">
-                            <svg class="h-5 w-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <circle cx="18.5" cy="17.5" r="2.5" stroke-width="2"/>
-                                <circle cx="5.5" cy="17.5" r="2.5" stroke-width="2"/>
-                                <circle cx="15" cy="5" r="1"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.5V14l-3-3 4-3 2 3h2"/>
-                            </svg>
-                            <span class="text-xs font-medium">Bike</span>
-                        </button>
+                            <button type="button"
+                                    class="hero-category-tab relative flex flex-col items-center justify-center py-4 px-2 transition-all bg-gray-50 text-foreground/60 hover:bg-gray-100 cursor-pointer"
+                                    data-category="motorcycles"
+                                    role="tab">
+                                <svg class="h-5 w-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <circle cx="18.5" cy="17.5" r="2.5" stroke-width="2"/>
+                                    <circle cx="5.5" cy="17.5" r="2.5" stroke-width="2"/>
+                                    <circle cx="15" cy="5" r="1"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.5V14l-3-3 4-3 2 3h2"/>
+                                </svg>
+                                <span class="text-xs font-medium">Bike</span>
+                            </button>
+                        </div>
+
+                        <form id="hero-search-form" class="p-6">
+                            <!-- Hidden category input -->
+                            <input type="hidden" name="category" id="hero-category" value="cars">
+
+                            <div class="flex flex-col lg:flex-row gap-3 items-end">
+                                <!-- Pickup Location -->
+                                <div class="flex-1 min-w-[200px]">
+                                    <label class="block text-sm font-medium mb-2" for="pickup-location">
+                                        <?php _e('Pick-up Location', 'ckl-car-rental'); ?>
+                                    </label>
+                                    <button type="button"
+                                            id="location-selector-btn"
+                                            class="location-selector w-full px-4 py-2 border rounded-md h-12 text-sm border-border/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 flex items-center gap-2 bg-white text-left"
+                                            role="combobox"
+                                            aria-haspopup="listbox"
+                                            aria-expanded="false">
+                                        <svg class="h-4 w-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                        </svg>
+                                        <span id="selected-location" class="truncate flex-1"><?php _e('Select location', 'ckl-car-rental'); ?></span>
+                                        <svg class="h-4 w-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/>
+                                        </svg>
+                                    </button>
+                                    <select name="pickup_location" id="pickup-location" class="sr-only">
+                                        <option value=""><?php _e('Select location', 'ckl-car-rental'); ?></option>
+                                        <?php if (class_exists('CKL_Hero_Search_Locations')) : ?>
+                                            <?php
+                                            $all_locations = CKL_Hero_Search_Locations::get_all_locations();
+                                            if (isset($all_locations['free'])) :
+                                                foreach ($all_locations['free'] as $slug => $loc) :
+                                            ?>
+                                                <option value="<?php echo esc_attr($slug); ?>">
+                                                    <?php echo esc_html($loc['name']); ?>
+                                                </option>
+                                            <?php
+                                                endforeach;
+                                            endif;
+                                            if (isset($all_locations['custom'])) :
+                                                foreach ($all_locations['custom'] as $slug => $loc) :
+                                            ?>
+                                                <option value="<?php echo esc_attr($slug); ?>">
+                                                    <?php echo esc_html($loc['name']); ?> (+RM<?php echo $loc['fee']; ?>)
+                                                </option>
+                                            <?php
+                                                endforeach;
+                                            endif;
+                                            ?>
+                                        <?php endif; ?>
+                                    </select>
+                                </div>
+
+                                <!-- Pickup Date -->
+                                <div class="flex-1 min-w-[140px]">
+                                    <label class="block text-sm font-medium mb-2" for="pickup-date">
+                                        <?php _e('Pick-up Date', 'ckl-car-rental'); ?>
+                                    </label>
+                                    <input type="date"
+                                           name="pickup_date"
+                                           id="pickup-date"
+                                           class="w-full px-3 py-2 border rounded-md h-12 text-sm border-border/50 focus:border-secondary">
+                                </div>
+
+                                <!-- Pickup Time -->
+                                <div class="flex-1 min-w-[100px]">
+                                    <label class="block text-sm font-medium mb-2" for="pickup-time">
+                                        <?php _e('Time', 'ckl-car-rental'); ?>
+                                    </label>
+                                    <input type="time"
+                                           name="pickup_time"
+                                           id="pickup-time"
+                                           value="06:00"
+                                           class="w-full px-3 py-2 border rounded-md h-12 text-sm border-border/50 focus:border-secondary">
+                                </div>
+
+                                <!-- Return Date -->
+                                <div class="flex-1 min-w-[140px]">
+                                    <label class="block text-sm font-medium mb-2" for="return-date">
+                                        <?php _e('Return Date', 'ckl-car-rental'); ?>
+                                    </label>
+                                    <input type="date"
+                                           name="return_date"
+                                           id="return-date"
+                                           class="w-full px-3 py-2 border rounded-md h-12 text-sm border-border/50 focus:border-secondary">
+                                </div>
+
+                                <!-- Return Time -->
+                                <div class="flex-1 min-w-[100px]">
+                                    <label class="block text-sm font-medium mb-2" for="return-time">
+                                        <?php _e('Time', 'ckl-car-rental'); ?>
+                                    </label>
+                                    <input type="time"
+                                           name="return_time"
+                                           id="return-time"
+                                           value="06:00"
+                                           class="w-full px-3 py-2 border rounded-md h-12 text-sm border-border/50 focus:border-secondary">
+                                </div>
+
+                                <!-- Search Button -->
+                                <div class="flex-shrink-0">
+                                    <button type="submit"
+                                            class="inline-flex items-center justify-center gap-2 bg-secondary hover:bg-secondary/90 text-white h-12 px-6 text-sm font-semibold rounded-md transition-all">
+                                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-4.34-4.34"/>
+                                            <circle cx="11" cy="11" r="8"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Return to Different Location -->
+                            <div class="mt-4 flex items-center gap-2">
+                                <input type="checkbox"
+                                       id="return-location"
+                                       class="w-4 h-4 rounded border-gray-300 accent-secondary">
+                                <label for="return-location" class="text-sm text-foreground/70">
+                                    <?php _e('Return to another location', 'ckl-car-rental'); ?>
+                                </label>
+                            </div>
+                        </form>
                     </div>
-
-                    <form id="hero-search-form" class="p-6">
-                        <!-- Hidden category input -->
-                        <input type="hidden" name="category" id="hero-category" value="cars">
-
-                        <div class="flex flex-col lg:flex-row gap-3 items-end">
-                            <!-- Pickup Location -->
-                            <div class="flex-1 min-w-[200px]">
-                                <label class="block text-sm font-medium mb-2" for="pickup-location">
-                                    <?php _e('Pick-up Location', 'ckl-car-rental'); ?>
-                                </label>
-                                <select name="pickup_location" id="pickup-location"
-                                        class="w-full px-4 py-2 border rounded-md h-10 text-sm border-border/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20">
-                                    <optgroup label="<?php _e('Free Locations', 'ckl-car-rental'); ?>">
-                                        <?php if (class_exists('CKL_Hero_Search_Locations')) : ?>
-                                            <?php foreach (CKL_Hero_Search_Locations::get_all_locations()['free'] as $slug => $loc): ?>
-                                                <option value="<?php echo esc_attr($slug); ?>">
-                                                    <?php echo esc_html($loc['name']); ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        <?php endif; ?>
-                                    </optgroup>
-                                    <optgroup label="<?php _e('Custom Locations (+Fee)', 'ckl-car-rental'); ?>">
-                                        <?php if (class_exists('CKL_Hero_Search_Locations')) : ?>
-                                            <?php foreach (CKL_Hero_Search_Locations::get_all_locations()['custom'] as $slug => $loc): ?>
-                                                <option value="<?php echo esc_attr($slug); ?>">
-                                                    <?php echo esc_html($loc['name']); ?> (+RM<?php echo $loc['fee']; ?>)
-                                                </option>
-                                            <?php endforeach; ?>
-                                        <?php endif; ?>
-                                    </optgroup>
-                                </select>
-                            </div>
-
-                            <!-- Pickup Date -->
-                            <div class="flex-1 min-w-[140px]">
-                                <label class="block text-sm font-medium mb-2" for="pickup-date">
-                                    <?php _e('Pick-up Date', 'ckl-car-rental'); ?>
-                                </label>
-                                <input type="date"
-                                       name="pickup_date"
-                                       id="pickup-date"
-                                       class="w-full px-3 py-2 border rounded-md h-10 text-sm border-border/50 focus:border-secondary">
-                            </div>
-
-                            <!-- Pickup Time -->
-                            <div class="flex-1 min-w-[100px]">
-                                <label class="block text-sm font-medium mb-2" for="pickup-time">
-                                    <?php _e('Time', 'ckl-car-rental'); ?>
-                                </label>
-                                <input type="time"
-                                       name="pickup_time"
-                                       id="pickup-time"
-                                       value="06:00"
-                                       class="w-full px-3 py-2 border rounded-md h-10 text-sm border-border/50 focus:border-secondary">
-                            </div>
-
-                            <!-- Return Date -->
-                            <div class="flex-1 min-w-[140px]">
-                                <label class="block text-sm font-medium mb-2" for="return-date">
-                                    <?php _e('Return Date', 'ckl-car-rental'); ?>
-                                </label>
-                                <input type="date"
-                                       name="return_date"
-                                       id="return-date"
-                                       class="w-full px-3 py-2 border rounded-md h-10 text-sm border-border/50 focus:border-secondary">
-                            </div>
-
-                            <!-- Return Time -->
-                            <div class="flex-1 min-w-[100px]">
-                                <label class="block text-sm font-medium mb-2" for="return-time">
-                                    <?php _e('Time', 'ckl-car-rental'); ?>
-                                </label>
-                                <input type="time"
-                                       name="return_time"
-                                       id="return-time"
-                                       value="06:00"
-                                       class="w-full px-3 py-2 border rounded-md h-10 text-sm border-border/50 focus:border-secondary">
-                            </div>
-
-                            <!-- Search Button -->
-                            <div class="flex-shrink-0">
-                                <button type="submit"
-                                        class="inline-flex items-center justify-center gap-2 bg-secondary hover:bg-secondary/90 text-white h-10 px-6 text-sm font-semibold rounded-md transition-all">
-                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-4.34-4.34"/>
-                                        <circle cx="11" cy="11" r="8"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Return to Different Location -->
-                        <div class="mt-4 flex items-center gap-2">
-                            <input type="checkbox"
-                                   id="different-return-location"
-                                   class="w-4 h-4 rounded border-gray-300 accent-secondary">
-                            <label for="different-return-location" class="text-sm text-foreground/70">
-                                <?php _e('Return to another location', 'ckl-car-rental'); ?>
-                            </label>
-                        </div>
-
-                        <!-- Return Location Dropdown (Hidden by default) -->
-                        <div id="return-location-container" class="mt-3 hidden">
-                            <div class="flex-1 min-w-[200px]">
-                                <label class="block text-sm font-medium mb-2" for="return-location">
-                                    <?php _e('Return Location', 'ckl-car-rental'); ?>
-                                </label>
-                                <select name="return_location" id="return-location"
-                                        class="w-full px-4 py-2 border rounded-md h-10 text-sm border-border/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20">
-                                    <optgroup label="<?php _e('Free Locations', 'ckl-car-rental'); ?>">
-                                        <?php if (class_exists('CKL_Hero_Search_Locations')) : ?>
-                                            <?php foreach (CKL_Hero_Search_Locations::get_all_locations()['free'] as $slug => $loc): ?>
-                                                <option value="<?php echo esc_attr($slug); ?>">
-                                                    <?php echo esc_html($loc['name']); ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        <?php endif; ?>
-                                    </optgroup>
-                                    <optgroup label="<?php _e('Custom Locations (+Fee)', 'ckl-car-rental'); ?>">
-                                        <?php if (class_exists('CKL_Hero_Search_Locations')) : ?>
-                                            <?php foreach (CKL_Hero_Search_Locations::get_all_locations()['custom'] as $slug => $loc): ?>
-                                                <option value="<?php echo esc_attr($slug); ?>">
-                                                    <?php echo esc_html($loc['name']); ?> (+RM<?php echo $loc['fee']; ?>)
-                                                </option>
-                                            <?php endforeach; ?>
-                                        <?php endif; ?>
-                                    </optgroup>
-                                </select>
-                            </div>
-
-                            <!-- Drop-off Fee Display -->
-                            <div id="dropoff-fee-display" class="mt-2 text-sm text-orange-600 hidden">
-                                <?php _e('Drop-off fee: RM', 'ckl-car-rental'); ?> <span id="fee-amount">0</span>
-                            </div>
-                        </div>
-                    </form>
                 </div>
             <?php endif; ?>
         </div>
@@ -236,16 +223,18 @@ if ($has_slideshow) {
 
 <?php if ($has_slideshow && count($background_images) > 1) : ?>
     <script>
-    // Background slideshow
+    // Background slideshow with img tags
     (function() {
         const slides = document.querySelectorAll('.hero-slide');
         let currentSlide = 0;
         const interval = 5000; // 5 seconds
 
         function nextSlide() {
-            slides[currentSlide].style.opacity = '0';
+            slides[currentSlide].classList.remove('opacity-100');
+            slides[currentSlide].classList.add('opacity-0');
             currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].style.opacity = '1';
+            slides[currentSlide].classList.remove('opacity-0');
+            slides[currentSlide].classList.add('opacity-100');
         }
 
         setInterval(nextSlide, interval);
@@ -278,6 +267,26 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Location selector button sync with hidden select
+    const locationBtn = document.getElementById('location-selector-btn');
+    const locationSelect = document.getElementById('pickup-location');
+    const selectedLocationSpan = document.getElementById('selected-location');
+
+    // Button click opens select
+    if (locationBtn && locationSelect) {
+        locationBtn.addEventListener('click', function() {
+            locationSelect.click();
+        });
+    }
+
+    // Update button text when select changes
+    if (locationSelect && selectedLocationSpan) {
+        locationSelect.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            selectedLocationSpan.textContent = selectedOption.text;
+        });
+    }
+
     // Initialize date pickers
     const today = new Date().toISOString().split('T')[0];
     const pickupDate = document.getElementById('pickup-date');
@@ -292,67 +301,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Different return location checkbox
-    const differentLocationCheckbox = document.getElementById('different-return-location');
-    const returnLocationContainer = document.getElementById('return-location-container');
-    const returnLocationSelect = document.getElementById('return-location');
-    const pickupLocationSelect = document.getElementById('pickup-location');
-    const feeDisplay = document.getElementById('dropoff-fee-display');
-    const feeAmount = document.getElementById('fee-amount');
-
-    if (differentLocationCheckbox && returnLocationContainer) {
-        differentLocationCheckbox.addEventListener('change', function() {
-            if (this.checked) {
-                returnLocationContainer.classList.remove('hidden');
-                // Copy pickup location to return location by default
-                if (pickupLocationSelect && returnLocationSelect) {
-                    returnLocationSelect.value = pickupLocationSelect.value;
-                }
-                // Trigger fee calculation
-                updateDropoffFee();
-            } else {
-                returnLocationContainer.classList.add('hidden');
-                if (feeDisplay) {
-                    feeDisplay.classList.add('hidden');
-                }
-            }
-        });
-    }
-
-    // Calculate drop-off fee on location change
-    function updateDropoffFee() {
-        if (!pickupLocationSelect || !returnLocationSelect || !feeDisplay || !feeAmount) return;
-
-        const pickup = pickupLocationSelect.value;
-        const returnLoc = returnLocationSelect.value;
-
-        // AJAX call to calculate fee
-        fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: 'action=ckl_calculate_dropoff_fee&pickup=' + encodeURIComponent(pickup) + '&return=' + encodeURIComponent(returnLoc) + '&nonce=<?php echo wp_create_nonce('ckl_dropoff_fee'); ?>'
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success && data.data.fee > 0) {
-                feeAmount.textContent = data.data.fee;
-                feeDisplay.classList.remove('hidden');
-            } else {
-                feeDisplay.classList.add('hidden');
-            }
-        })
-        .catch(error => {
-            console.error('Error calculating fee:', error);
-        });
-    }
-
-    if (pickupLocationSelect) {
-        pickupLocationSelect.addEventListener('change', updateDropoffFee);
-    }
-    if (returnLocationSelect) {
-        returnLocationSelect.addEventListener('change', updateDropoffFee);
-    }
-
     // Form submission
     const searchForm = document.getElementById('hero-search-form');
     if (searchForm) {
@@ -363,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const params = new URLSearchParams();
 
             for (const [key, value] of formData.entries()) {
-                if (value && value !== 'different-return-location') {
+                if (value && value !== 'return-location') {
                     params.append(key, value);
                 }
             }
@@ -393,15 +341,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Pre-fill locations
-    if (urlParams.has('pickup_location') && pickupLocationSelect) {
-        pickupLocationSelect.value = urlParams.get('pickup_location');
-    }
-    if (urlParams.has('return_location') && returnLocationSelect) {
-        returnLocationSelect.value = urlParams.get('return_location');
-        differentLocationCheckbox.checked = true;
-        returnLocationContainer.classList.remove('hidden');
-        updateDropoffFee();
+    // Pre-fill location
+    if (urlParams.has('pickup_location') && locationSelect && selectedLocationSpan) {
+        locationSelect.value = urlParams.get('pickup_location');
+        const selectedOption = locationSelect.options[locationSelect.selectedIndex];
+        selectedLocationSpan.textContent = selectedOption.text;
     }
 
     // Pre-fill dates

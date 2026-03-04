@@ -22,81 +22,67 @@ $blog_posts = get_posts(array(
 ));
 ?>
 
-<section class="news-section py-16 bg-gray-50">
+<section class="news-section py-20 bg-white">
     <div class="container mx-auto px-4">
-        <div class="flex justify-between items-center mb-12">
-            <div>
-                <h2 class="text-3xl md:text-4xl font-bold mb-2">
-                    <?php _e('Latest News & Tips', 'ckl-car-rental'); ?>
-                </h2>
-                <p class="text-gray-600">
-                    <?php _e('Discover Langkawi travel tips and updates from our team.', 'ckl-car-rental'); ?>
-                </p>
-            </div>
-            <a href="<?php echo home_url('/blog/'); ?>"
-               class="hidden md:inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold">
-                <?php _e('View All Posts', 'ckl-car-rental'); ?>
-                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                </svg>
-            </a>
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary">
+                <?php _e('News & Promotions', 'ckl-car-rental'); ?>
+            </h2>
         </div>
 
         <?php if (!empty($blog_posts)) : ?>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <?php foreach ($blog_posts as $post) : ?>
-                    <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                    <article class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col h-full">
                         <!-- Featured Image -->
                         <?php if (has_post_thumbnail($post->ID)) : ?>
-                            <a href="<?php echo get_permalink($post->ID); ?>" class="block">
-                                <img src="<?php echo get_the_post_thumbnail_url($post->ID, 'medium'); ?>"
-                                     alt="<?php echo esc_attr($post->post_title); ?>"
-                                     class="w-full h-48 object-cover">
+                            <a href="<?php echo get_permalink($post->ID); ?>" class="block relative aspect-video">
+                                <?php echo get_the_post_thumbnail($post->ID, 'medium', array('class' => 'w-full h-full object-cover')); ?>
                             </a>
                         <?php else : ?>
-                            <div class="w-full h-48 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-                                <span class="text-white text-6xl">📰</span>
+                            <div class="w-full aspect-video bg-gradient-to-br from-secondary/20 to-secondary/10 flex items-center justify-center">
+                                <span class="text-6xl">📰</span>
                             </div>
                         <?php endif; ?>
 
                         <!-- Content -->
-                        <div class="p-6">
+                        <div class="p-5 flex flex-col flex-1">
                             <!-- Categories -->
                             <?php
                             $categories = get_the_category($post->ID);
                             if (!empty($categories)) :
                                 ?>
                                 <div class="mb-3">
-                                    <span class="inline-block px-3 py-1 text-xs font-semibold bg-blue-100 text-blue-600 rounded-full">
+                                    <span class="inline-block px-3 py-1 text-xs font-semibold bg-secondary/10 text-secondary rounded-full">
                                         <?php echo esc_html($categories[0]->name); ?>
                                     </span>
                                 </div>
                             <?php endif; ?>
 
                             <!-- Title -->
-                            <h3 class="text-xl font-bold mb-3 line-clamp-2">
+                            <h3 class="text-lg font-bold mb-3 line-clamp-2">
                                 <a href="<?php echo get_permalink($post->ID); ?>"
-                                   class="hover:text-blue-600 transition">
+                                   class="hover:text-primary transition">
                                     <?php echo esc_html($post->post_title); ?>
                                 </a>
                             </h3>
 
                             <!-- Excerpt -->
-                            <p class="text-gray-600 mb-4 line-clamp-3">
+                            <p class="text-muted-foreground mb-4 line-clamp-3 text-sm flex-1">
                                 <?php echo wp_trim_words($post->post_excerpt ?: $post->post_content, 15); ?>
                             </p>
 
                             <!-- Meta -->
-                            <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-                                <div class="flex items-center text-sm text-gray-500">
+                            <div class="flex items-center justify-between pt-4 border-t border-border mt-auto">
+                                <div class="flex items-center text-sm text-muted-foreground">
                                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
                                     <?php echo get_the_date('', $post->ID); ?>
                                 </div>
                                 <a href="<?php echo get_permalink($post->ID); ?>"
-                                   class="text-blue-600 hover:text-blue-700 font-medium text-sm">
-                                    <?php _e('Read More', 'ckl-car-rental'); ?>
+                                   class="text-primary hover:text-primary/80 font-medium text-sm inline-flex items-center">
+                                    <?php _e('Read', 'ckl-car-rental'); ?>
                                     <svg class="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                     </svg>
@@ -106,28 +92,30 @@ $blog_posts = get_posts(array(
                     </article>
                 <?php endforeach; ?>
             </div>
-
-            <!-- Mobile View All Button -->
-            <div class="mt-10 text-center md:hidden">
-                <a href="<?php echo home_url('/blog/'); ?>"
-                   class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-                    <?php _e('View All Posts', 'ckl-car-rental'); ?>
-                </a>
-            </div>
         <?php else : ?>
             <!-- Placeholder when no blog posts exist -->
-            <div class="text-center py-16 bg-white rounded-lg border-2 border-dashed border-gray-200">
-                <div class="text-6xl mb-4">📝</div>
-                <h3 class="text-2xl font-bold mb-2">
-                    <?php _e('No Articles Yet', 'ckl-car-rental'); ?>
-                </h3>
-                <p class="text-gray-600 mb-6 max-w-md mx-auto">
-                    <?php _e('We\'re working on creating helpful content about Langkawi travel tips and car rental advice.', 'ckl-car-rental'); ?>
-                </p>
-                <a href="<?php echo home_url('/contact/'); ?>"
-                   class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-                    <?php _e('Contact Us', 'ckl-car-rental'); ?>
-                </a>
+            <div class="text-center py-16">
+                <div class="max-w-md mx-auto">
+                    <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-muted flex items-center justify-center">
+                        <svg class="w-12 h-12 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">
+                        <?php _e('No Articles Yet', 'ckl-car-rental'); ?>
+                    </h3>
+                    <p class="text-muted-foreground mb-6">
+                        <?php _e('We\'re working on bringing you great content about car rentals, travel tips, and Langkawi attractions. Check back soon!', 'ckl-car-rental'); ?>
+                    </p>
+                    <a class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border bg-background h-10 px-4 py-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                       href="<?php echo home_url('/blog/'); ?>">
+                        <?php _e('Browse All News', 'ckl-car-rental'); ?>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 h-4 w-4">
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
             </div>
         <?php endif; ?>
     </div>

@@ -232,5 +232,23 @@
     background-color: #cc2e28;
     border-color: #cc2e28;
   }
+
+  /* Gradient Ocean Utility */
+  .gradient-ocean {
+    background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+  }
+
+  /* Auth Page Tab Navigation */
+  .auth-tab {
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .auth-tab[data-state="active"] {
+    @apply bg-background text-foreground shadow-sm;
+  }
+
+  .auth-tab[data-state="inactive"] {
+    @apply text-muted-foreground hover:text-foreground;
+  }
 }
 

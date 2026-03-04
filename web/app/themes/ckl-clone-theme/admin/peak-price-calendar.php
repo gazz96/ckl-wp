@@ -1,8 +1,8 @@
 <?php
 /**
- * Peak Price Calendar Admin Page
+ * Peak Periods Calendar Admin Page
  *
- * Visual calendar interface for managing GLOBAL peak prices that apply to ALL vehicles
+ * Visual calendar interface for managing GLOBAL peak periods that apply to ALL vehicles
  */
 
 // Prevent direct access

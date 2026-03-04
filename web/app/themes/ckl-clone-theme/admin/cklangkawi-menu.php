@@ -34,11 +34,11 @@ function ckl_add_cklangkawi_menu() {
         'ckl_settings_page_html'
     );
 
-    // Add Peak Price Calendar submenu
+    // Add Peak Periods Calendar submenu
     add_submenu_page(
         'cklangkawi-settings',
-        __('Peak Price Calendar', 'ckl-car-rental'),
-        __('Peak Price Calendar', 'ckl-car-rental'),
+        __('Peak Periods Calendar', 'ckl-car-rental'),
+        __('Peak Periods Calendar', 'ckl-car-rental'),
         'manage_options',
         'ckl-peak-calendar',
         'ckl_peak_price_calendar_page_html'

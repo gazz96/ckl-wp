@@ -27,65 +27,62 @@ $column_classes = array(
 $grid_class = isset($column_classes[$grid_columns]) ? $column_classes[$grid_columns] : $column_classes[4];
 ?>
 
-<section class="vehicle-grid py-16">
+<section class="vehicle-grid py-20 bg-white">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
-            <?php _e('Our Vehicles', 'ckl-car-rental'); ?>
-        </h2>
-        <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            <?php _e('Choose from our wide selection of well-maintained vehicles perfect for exploring Langkawi.', 'ckl-car-rental'); ?>
-        </p>
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-primary">
+                <?php _e('Our Vehicles', 'ckl-car-rental'); ?>
+            </h2>
+        </div>
 
         <!-- Category Tabs -->
         <?php if ($show_tabs) : ?>
-            <div class="flex justify-center mb-10">
-                <div class="inline-flex flex-wrap rounded-lg border border-gray-200 p-1 bg-white gap-1" role="tablist">
-                    <button class="vehicle-tab px-4 py-2 rounded-md text-sm font-medium transition <?php echo !isset($_GET['type']) ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-gray-100'; ?>"
-                            data-type="all"
-                            role="tab">
-                        <?php _e('All', 'ckl-car-rental'); ?>
-                    </button>
-                    <button class="vehicle-tab px-4 py-2 rounded-md text-sm font-medium transition <?php echo isset($_GET['type']) && $_GET['type'] === 'sedan' ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-gray-100'; ?>"
-                            data-type="sedan"
-                            role="tab">
-                        <?php _e('Sedan', 'ckl-car-rental'); ?>
-                    </button>
-                    <button class="vehicle-tab px-4 py-2 rounded-md text-sm font-medium transition <?php echo isset($_GET['type']) && $_GET['type'] === 'compact' ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-gray-100'; ?>"
-                            data-type="compact"
-                            role="tab">
-                        <?php _e('Compact', 'ckl-car-rental'); ?>
-                    </button>
-                    <button class="vehicle-tab px-4 py-2 rounded-md text-sm font-medium transition <?php echo isset($_GET['type']) && $_GET['type'] === 'mpv' ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-gray-100'; ?>"
-                            data-type="mpv"
-                            role="tab">
-                        <?php _e('MPV', 'ckl-car-rental'); ?>
-                    </button>
-                    <button class="vehicle-tab px-4 py-2 rounded-md text-sm font-medium transition <?php echo isset($_GET['type']) && $_GET['type'] === 'luxury-mpv' ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-gray-100'; ?>"
-                            data-type="luxury-mpv"
-                            role="tab">
-                        <?php _e('Luxury MPV', 'ckl-car-rental'); ?>
-                    </button>
-                    <button class="vehicle-tab px-4 py-2 rounded-md text-sm font-medium transition <?php echo isset($_GET['type']) && $_GET['type'] === 'suv' ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-gray-100'; ?>"
-                            data-type="suv"
-                            role="tab">
-                        <?php _e('SUV', 'ckl-car-rental'); ?>
-                    </button>
-                    <button class="vehicle-tab px-4 py-2 rounded-md text-sm font-medium transition <?php echo isset($_GET['type']) && $_GET['type'] === '4x4' ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-gray-100'; ?>"
-                            data-type="4x4"
-                            role="tab">
-                        <?php _e('4x4', 'ckl-car-rental'); ?>
-                    </button>
-                    <button class="vehicle-tab px-4 py-2 rounded-md text-sm font-medium transition <?php echo isset($_GET['type']) && $_GET['type'] === 'motorcycle' ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-gray-100'; ?>"
-                            data-type="motorcycle"
-                            role="tab">
-                        <?php _e('Motorcycle', 'ckl-car-rental'); ?>
-                    </button>
-                </div>
+            <div class="flex justify-center gap-4 mb-8 flex-wrap" role="tablist">
+                <button class="vehicle-tab px-6 py-2 rounded-full text-sm font-medium transition-all <?php echo !isset($_GET['type']) ? 'bg-gray-100 text-foreground border-b-2 border-secondary' : 'text-foreground/60 hover:text-foreground hover:bg-gray-50'; ?>"
+                        data-type="all"
+                        role="tab">
+                    <?php _e('All', 'ckl-car-rental'); ?>
+                </button>
+                <button class="vehicle-tab px-6 py-2 rounded-full text-sm font-medium transition-all <?php echo isset($_GET['type']) && $_GET['type'] === 'sedan' ? 'bg-gray-100 text-foreground border-b-2 border-secondary' : 'text-foreground/60 hover:text-foreground hover:bg-gray-50'; ?>"
+                        data-type="sedan"
+                        role="tab">
+                    <?php _e('Sedan', 'ckl-car-rental'); ?>
+                </button>
+                <button class="vehicle-tab px-6 py-2 rounded-full text-sm font-medium transition-all <?php echo isset($_GET['type']) && $_GET['type'] === 'compact' ? 'bg-gray-100 text-foreground border-b-2 border-secondary' : 'text-foreground/60 hover:text-foreground hover:bg-gray-50'; ?>"
+                        data-type="compact"
+                        role="tab">
+                    <?php _e('Compact', 'ckl-car-rental'); ?>
+                </button>
+                <button class="vehicle-tab px-6 py-2 rounded-full text-sm font-medium transition-all <?php echo isset($_GET['type']) && $_GET['type'] === 'mpv' ? 'bg-gray-100 text-foreground border-b-2 border-secondary' : 'text-foreground/60 hover:text-foreground hover:bg-gray-50'; ?>"
+                        data-type="mpv"
+                        role="tab">
+                    <?php _e('MPV', 'ckl-car-rental'); ?>
+                </button>
+                <button class="vehicle-tab px-6 py-2 rounded-full text-sm font-medium transition-all <?php echo isset($_GET['type']) && $_GET['type'] === 'luxury-mpv' ? 'bg-gray-100 text-foreground border-b-2 border-secondary' : 'text-foreground/60 hover:text-foreground hover:bg-gray-50'; ?>"
+                        data-type="luxury-mpv"
+                        role="tab">
+                    <?php _e('Luxury MPV', 'ckl-car-rental'); ?>
+                </button>
+                <button class="vehicle-tab px-6 py-2 rounded-full text-sm font-medium transition-all <?php echo isset($_GET['type']) && $_GET['type'] === 'suv' ? 'bg-gray-100 text-foreground border-b-2 border-secondary' : 'text-foreground/60 hover:text-foreground hover:bg-gray-50'; ?>"
+                        data-type="suv"
+                        role="tab">
+                    <?php _e('SUV', 'ckl-car-rental'); ?>
+                </button>
+                <button class="vehicle-tab px-6 py-2 rounded-full text-sm font-medium transition-all <?php echo isset($_GET['type']) && $_GET['type'] === '4x4' ? 'bg-gray-100 text-foreground border-b-2 border-secondary' : 'text-foreground/60 hover:text-foreground hover:bg-gray-50'; ?>"
+                        data-type="4x4"
+                        role="tab">
+                    <?php _e('4x4', 'ckl-car-rental'); ?>
+                </button>
+                <button class="vehicle-tab px-6 py-2 rounded-full text-sm font-medium transition-all <?php echo isset($_GET['type']) && $_GET['type'] === 'motorcycle' ? 'bg-gray-100 text-foreground border-b-2 border-secondary' : 'text-foreground/60 hover:text-foreground hover:bg-gray-50'; ?>"
+                        data-type="motorcycle"
+                        role="tab">
+                    <?php _e('Motorcycle', 'ckl-car-rental'); ?>
+                </button>
             </div>
         <?php endif; ?>
 
         <!-- Vehicle Grid -->
-        <div class="grid <?php echo $grid_class; ?> gap-6" id="vehicle-grid-container">
+        <div class="grid <?php echo $grid_class; ?> gap-6 max-w-6xl mx-auto" id="vehicle-grid-container">
             <?php
             // Define categories to query
             $vehicle_categories = array('sedan', 'compact', 'mpv', 'luxury-mpv', 'suv', '4x4', 'motorcycle');
@@ -127,11 +124,17 @@ $grid_class = isset($column_classes[$grid_columns]) ? $column_classes[$grid_colu
             // Get current active type for filtering
             $current_type = isset($_GET['type']) ? sanitize_text_field($_GET['type']) : 'all';
 
+            // Staggered animation delay counter
+            $delay_counter = 0;
+
             if (!empty($all_vehicles)) :
                 foreach ($all_vehicles as $post) :
                     setup_postdata($post);
+                    $delay = $delay_counter * 100; // 0ms, 100ms, 200ms, etc.
+                    $delay_counter++;
+                    if ($delay_counter > 2) $delay_counter = 0; // Reset after 3 cards
                     ?>
-                    <div class="vehicle-card group" data-type="<?php echo ckl_get_vehicle_type_slug(get_the_ID()); ?>">
+                    <div class="vehicle-card group" data-type="<?php echo ckl_get_vehicle_type_slug(get_the_ID()); ?>" style="transition-delay: <?php echo $delay; ?>ms;">
                         <?php get_template_part('template-parts/content', 'vehicle-card'); ?>
                     </div>
                     <?php
@@ -150,17 +153,6 @@ $grid_class = isset($column_classes[$grid_columns]) ? $column_classes[$grid_colu
                 </div>
             <?php endif; ?>
         </div>
-
-        <!-- View All Button -->
-        <div class="text-center mt-12">
-            <a href="<?php echo get_post_type_archive_link('vehicle'); ?>"
-               class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-                <?php _e('View All Vehicles', 'ckl-car-rental'); ?>
-                <svg class="inline-block w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                </svg>
-            </a>
-        </div>
     </div>
 </section>
 
@@ -174,13 +166,13 @@ document.addEventListener('DOMContentLoaded', function() {
         tab.addEventListener('click', function() {
             const type = this.getAttribute('data-type');
 
-            // Update active tab
+            // Update active tab styling for rounded-full pills
             tabs.forEach(function(t) {
-                t.classList.remove('bg-blue-600', 'text-white');
-                t.classList.add('text-gray-700', 'hover:bg-gray-100');
+                t.classList.remove('bg-gray-100', 'text-foreground', 'border-b-2', 'border-secondary');
+                t.classList.add('text-foreground/60', 'hover:text-foreground', 'hover:bg-gray-50');
             });
-            this.classList.remove('text-gray-700', 'hover:bg-gray-100');
-            this.classList.add('bg-blue-600', 'text-white');
+            this.classList.remove('text-foreground/60', 'hover:text-foreground', 'hover:bg-gray-50');
+            this.classList.add('bg-gray-100', 'text-foreground', 'border-b-2', 'border-secondary');
 
             // Filter vehicles
             vehicleCards.forEach(function(card) {

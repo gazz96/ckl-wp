@@ -10,6 +10,8 @@ require_once get_template_directory() . '/admin/additional-services.php';
  * Load shortcodes
  */
 require_once get_template_directory() . '/shortcodes/guest-booking-lookup.php';
+require_once get_template_directory() . '/shortcodes/auth-form-shortcode.php';
+require_once get_template_directory() . '/shortcodes/homepage-sections.php';
 
 /**
  * Load includes
@@ -68,7 +70,6 @@ function ckl_load_admin_files() {
         require_once get_template_directory() . '/admin/theme-settings.php';
         require_once get_template_directory() . '/admin/cklangkawi-menu.php';
         require_once get_template_directory() . '/admin/migrate-vehicle-types.php';
-        require_once get_template_directory() . '/admin/migrate-amenities-to-taxonomy.php';
         require_once get_template_directory() . '/admin/vehicle-meta-tabs.php';
         require_once get_template_directory() . '/admin/init-settings.php';
         require_once get_template_directory() . '/admin/force-init-settings.php';
@@ -99,6 +100,20 @@ function ckl_fix_wc_bookings_script_error() {
     }
 }
 add_action('wp_enqueue_scripts', 'ckl_fix_wc_bookings_script_error', 5);
+
+/**
+ * Enqueue Google Fonts - Inter and Outfit font families
+ * Loaded before main stylesheets with priority 5
+ */
+function ckl_clone_theme_fonts() {
+    wp_enqueue_style(
+        'ckl-google-fonts',
+        'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap',
+        array(),
+        null
+    );
+}
+add_action('wp_enqueue_scripts', 'ckl_clone_theme_fonts', 5);
 
 /**
  * Enqueue theme scripts and styles.

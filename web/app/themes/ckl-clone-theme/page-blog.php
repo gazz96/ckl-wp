@@ -31,11 +31,20 @@ $blog_query = new WP_Query($blog_args);
         <div class="mx-auto px-4 h-full">
             <div class="relative h-full overflow-hidden">
                 <!-- Background Image -->
-                <img
-                    src="https://img.baharihari.com/insecure/q:80/f:webp/plain/s3://bahari/ck-langkawi/niels-baars-TQRnZev3OkQ-unsplash.jpg"
-                    alt="Blog"
-                    class="absolute inset-0 w-full h-full object-cover"
-                />
+                <?php if (file_exists(get_template_directory() . '/assets/images/blog-hero.jpg')) : ?>
+                    <img
+                        src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/blog-hero.jpg"
+                        alt="<?php esc_attr_e('Blog', 'ckl-car-rental'); ?>"
+                        class="absolute inset-0 w-full h-full object-cover"
+                    />
+                <?php else : ?>
+                    <!-- Fallback to external URL -->
+                    <img
+                        src="https://storage.baharihari.com/bahari/ck-langkawi/niels-baars-TQRnZev3OkQ-unsplash.jpg"
+                        alt="<?php esc_attr_e('Blog', 'ckl-car-rental'); ?>"
+                        class="absolute inset-0 w-full h-full object-cover"
+                    />
+                <?php endif; ?>
 
                 <!-- Dark Overlay -->
                 <div class="absolute inset-0 bg-black/60"></div>

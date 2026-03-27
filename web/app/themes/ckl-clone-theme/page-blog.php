@@ -30,17 +30,17 @@ $blog_query = new WP_Query($blog_args);
     <section class="relative h-[400px] overflow-hidden">
         <div class="mx-auto px-4 h-full">
             <div class="relative h-full overflow-hidden">
-                <?php if (file_exists(get_template_directory() . '/assets/images/blog-hero.jpg')) : ?>
-                    <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/blog-hero.jpg"
-                         alt="<?php esc_attr_e('Blog', 'ckl-car-rental'); ?>"
-                         class="absolute inset-0 w-full h-full object-cover">
-                <?php else : ?>
-                    <!-- Fallback background -->
-                    <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 to-blue-800"></div>
-                <?php endif; ?>
+                <!-- Background Image -->
+                <img
+                    src="https://img.baharihari.com/insecure/q:80/f:webp/plain/s3://bahari/ck-langkawi/niels-baars-TQRnZev3OkQ-unsplash.jpg"
+                    alt="Blog"
+                    class="absolute inset-0 w-full h-full object-cover"
+                />
 
+                <!-- Dark Overlay -->
                 <div class="absolute inset-0 bg-black/60"></div>
 
+                <!-- Content -->
                 <div class="relative h-full flex flex-col items-center justify-center text-white">
                     <h1 class="text-5xl md:text-6xl font-bold mb-4">
                         <?php _e('Blog', 'ckl-car-rental'); ?>

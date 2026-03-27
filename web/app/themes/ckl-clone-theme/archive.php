@@ -8,35 +8,66 @@ get_header();
 ?>
 
 <!-- Hero Section -->
-<section class="hero-section relative bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
-    <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto text-center">
-            <h1 class="text-4xl font-bold mb-4">
-                <?php
-                if (is_category()) {
-                    single_cat_title();
-                } elseif (is_tag()) {
-                    single_tag_title();
-                } elseif (is_author()) {
-                    printf(__('All Posts by %s', 'ckl-car-rental'), get_the_author());
-                } elseif (is_date()) {
-                    if (is_day()) {
-                        printf(__('Daily Archives: %s', 'ckl-car-rental'), get_the_date());
-                    } elseif (is_month()) {
-                        printf(__('Monthly Archives: %s', 'ckl-car-rental'), get_the_date('F Y'));
-                    } elseif (is_year()) {
-                        printf(__('Yearly Archives: %s', 'ckl-car-rental'), get_the_date('Y'));
+<section class="relative h-[400px] overflow-hidden">
+    <div class="mx-auto px-4 h-full">
+        <div class="relative h-full overflow-hidden">
+            <!-- Background Image -->
+            <img
+                src="https://img.baharihari.com/insecure/q:80/f:webp/plain/s3://bahari/ck-langkawi/niels-baars-TQRnZev3OkQ-unsplash.jpg"
+                alt="Blog"
+                class="absolute inset-0 w-full h-full object-cover"
+            />
+
+            <!-- Dark Overlay -->
+            <div class="absolute inset-0 bg-black/60"></div>
+
+            <!-- Content -->
+            <div class="relative h-full flex flex-col items-center justify-center text-white">
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">
+                    <?php
+                    if (is_category()) {
+                        single_cat_title();
+                    } elseif (is_tag()) {
+                        single_tag_title();
+                    } elseif (is_author()) {
+                        printf(__('All Posts by %s', 'ckl-car-rental'), get_the_author());
+                    } elseif (is_date()) {
+                        if (is_day()) {
+                            printf(__('Daily Archives: %s', 'ckl-car-rental'), get_the_date());
+                        } elseif (is_month()) {
+                            printf(__('Monthly Archives: %s', 'ckl-car-rental'), get_the_date('F Y'));
+                        } elseif (is_year()) {
+                            printf(__('Yearly Archives: %s', 'ckl-car-rental'), get_the_date('Y'));
+                        }
+                    } else {
+                        _e('Blog', 'ckl-car-rental');
                     }
-                } else {
-                    _e('Blog', 'ckl-car-rental');
-                }
-                ?>
-            </h1>
-            <?php if (category_description() || tag_description()) : ?>
-                <p class="text-lg opacity-90 mt-4">
-                    <?php echo category_description() ?: tag_description(); ?>
-                </p>
-            <?php endif; ?>
+                    ?>
+                </h1>
+
+                <!-- Breadcrumb -->
+                <div class="flex items-center gap-2 text-lg">
+                    <a href="<?php echo home_url('/'); ?>" class="hover:text-primary transition-colors">
+                        Home
+                    </a>
+                    <span class="text-primary">/</span>
+                    <span class="text-primary">
+                        <?php
+                        if (is_category()) {
+                            single_cat_title();
+                        } elseif (is_tag()) {
+                            single_tag_title();
+                        } elseif (is_author()) {
+                            echo get_the_author();
+                        } elseif (is_date()) {
+                            _e('Archives', 'ckl-car-rental');
+                        } else {
+                            _e('Blog', 'ckl-car-rental');
+                        }
+                        ?>
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
 </section>

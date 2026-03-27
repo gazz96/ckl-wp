@@ -34,9 +34,10 @@ get_header();
         </div>
     </section>
 
-    <!-- 4-Step Process Section -->
+    <!-- Main Steps Section - Simplified -->
     <section class="py-20 bg-gradient-to-b from-white to-gray-50">
         <div class="container mx-auto px-4">
+            <!-- Header -->
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold mb-4">
                     <?php _e('Simple 4-Step', 'ckl-car-rental'); ?> <span class="text-primary"><?php _e('Process', 'ckl-car-rental'); ?></span>
@@ -46,26 +47,36 @@ get_header();
                 </p>
             </div>
 
+            <!-- Steps Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
                 <!-- Step 1 -->
                 <div class="relative group">
+                    <!-- Connector Line (Desktop Only) -->
                     <div class="hidden lg:block absolute top-12 left-[60%] w-full h-0.5 bg-gradient-to-r from-primary/30 to-primary/10 z-0"></div>
+
                     <div class="rounded-lg border text-card-foreground relative border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white z-10">
                         <div class="p-8 text-center">
+                            <!-- Step Number -->
                             <div class="absolute -top-4 left-1/2 -translate-x-1/2">
                                 <div class="gradient-ocean w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md">
                                     1
                                 </div>
                             </div>
+
+                            <!-- Icon -->
                             <div class="gradient-ocean w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-10 h-10 text-white">
                                     <path d="m21 21-4.34-4.34"></path>
                                     <circle cx="11" cy="11" r="8"></circle>
                                 </svg>
                             </div>
+
+                            <!-- Title -->
                             <h3 class="text-xl font-bold mb-3">
                                 <?php _e('Search & Select', 'ckl-car-rental'); ?>
                             </h3>
+
+                            <!-- Description -->
                             <p class="text-muted-foreground text-sm leading-relaxed">
                                 <?php _e('Choose your desired pick-up and drop-off dates, times, and locations, then search for available vehicles.', 'ckl-car-rental'); ?>
                             </p>
@@ -75,14 +86,19 @@ get_header();
 
                 <!-- Step 2 -->
                 <div class="relative group">
+                    <!-- Connector Line (Desktop Only) -->
                     <div class="hidden lg:block absolute top-12 left-[60%] w-full h-0.5 bg-gradient-to-r from-primary/30 to-primary/10 z-0"></div>
+
                     <div class="rounded-lg border text-card-foreground relative border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white z-10">
                         <div class="p-8 text-center">
+                            <!-- Step Number -->
                             <div class="absolute -top-4 left-1/2 -translate-x-1/2">
                                 <div class="gradient-tropical w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md">
                                     2
                                 </div>
                             </div>
+
+                            <!-- Icon -->
                             <div class="gradient-tropical w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-10 h-10 text-white">
                                     <path d="M8 2v4"></path>
@@ -91,9 +107,13 @@ get_header();
                                     <path d="M3 10h18"></path>
                                 </svg>
                             </div>
+
+                            <!-- Title -->
                             <h3 class="text-xl font-bold mb-3">
                                 <?php _e('Book Your Vehicle', 'ckl-car-rental'); ?>
                             </h3>
+
+                            <!-- Description -->
                             <p class="text-muted-foreground text-sm leading-relaxed">
                                 <?php _e('Browse the catalogue of available vehicles and select the one that suits your needs.', 'ckl-car-rental'); ?>
                             </p>
@@ -103,14 +123,19 @@ get_header();
 
                 <!-- Step 3 -->
                 <div class="relative group">
+                    <!-- Connector Line (Desktop Only) -->
                     <div class="hidden lg:block absolute top-12 left-[60%] w-full h-0.5 bg-gradient-to-r from-primary/30 to-primary/10 z-0"></div>
+
                     <div class="rounded-lg border text-card-foreground relative border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white z-10">
                         <div class="p-8 text-center">
+                            <!-- Step Number -->
                             <div class="absolute -top-4 left-1/2 -translate-x-1/2">
                                 <div class="gradient-sunset w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md">
                                     3
                                 </div>
                             </div>
+
+                            <!-- Icon -->
                             <div class="gradient-sunset w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-10 h-10 text-white">
                                     <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
@@ -120,9 +145,13 @@ get_header();
                                     <path d="M16 17H8"></path>
                                 </svg>
                             </div>
+
+                            <!-- Title -->
                             <h3 class="text-xl font-bold mb-3">
                                 <?php _e('Enter Details', 'ckl-car-rental'); ?>
                             </h3>
+
+                            <!-- Description -->
                             <p class="text-muted-foreground text-sm leading-relaxed">
                                 <?php _e('Fill in your driver\'s details and any necessary booking information (e.g., flight number).', 'ckl-car-rental'); ?>
                             </p>
@@ -134,20 +163,27 @@ get_header();
                 <div class="relative group">
                     <div class="rounded-lg border text-card-foreground relative border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white z-10">
                         <div class="p-8 text-center">
+                            <!-- Step Number -->
                             <div class="absolute -top-4 left-1/2 -translate-x-1/2">
                                 <div class="gradient-ocean w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md">
                                     4
                                 </div>
                             </div>
+
+                            <!-- Icon -->
                             <div class="gradient-ocean w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-10 h-10 text-white">
                                     <rect width="20" height="14" x="2" y="5" rx="2"></rect>
                                     <line x1="2" x2="22" y1="10" y2="10"></line>
                                 </svg>
                             </div>
+
+                            <!-- Title -->
                             <h3 class="text-xl font-bold mb-3">
                                 <?php _e('Pay & Confirm', 'ckl-car-rental'); ?>
                             </h3>
+
+                            <!-- Description -->
                             <p class="text-muted-foreground text-sm leading-relaxed">
                                 <?php _e('Complete the advance payment to confirm and secure your rental order.', 'ckl-car-rental'); ?>
                             </p>
@@ -156,6 +192,7 @@ get_header();
                 </div>
             </div>
 
+            <!-- CTA Button -->
             <div class="text-center mt-12">
                 <a href="<?php echo esc_url(home_url('/vehicles/')); ?>">
                     <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary hover:bg-primary/90 h-11 rounded-md gradient-ocean text-white px-8">
@@ -262,7 +299,7 @@ get_header();
         </div>
     </section>
 
-    <!-- Final CTA Section -->
+    <!-- CTA Section -->
     <section class="py-20 bg-accent text-white">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-4xl font-bold mb-4">
@@ -282,18 +319,18 @@ get_header();
     </section>
 </main>
 
-<!-- Custom CSS for Gradients -->
+<!-- Custom CSS for Solid Colors -->
 <style>
 .gradient-ocean {
-    background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+    background: hsl(var(--accent));
 }
 
 .gradient-tropical {
-    background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+    background: var(--gradient-tropical);
 }
 
 .gradient-sunset {
-    background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
+    background: var(--gradient-sunset);
 }
 </style>
 

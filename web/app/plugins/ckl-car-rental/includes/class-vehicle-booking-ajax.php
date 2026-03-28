@@ -238,8 +238,21 @@ class CKL_Vehicle_Booking_AJAX {
         }
 
         try {
-            // Calculate pricing
+            // Calculate base pricing
             $pricing = ckl_calculate_rental_price_for_booking($vehicle_id, $pickup_timestamp, $return_timestamp);
+
+            // Apply peak pricing to base rental cost
+            $base_price = $pricing['total_price'];
+            $pickup_date = date('Y-m-d', $pickup_timestamp);
+            $return_date_for_pricing = date('Y-m-d', $return_timestamp);
+
+            // Apply peak pricing using the helper function
+            if (function_exists('ckl_calculate_peak_pricing_surcharge')) {
+                $peak_surcharge = ckl_calculate_peak_pricing_surcharge($vehicle_id, $base_price, $pickup_date, $return_date_for_pricing);
+                $pricing['peak_surcharge'] = $peak_surcharge;
+                $pricing['total_price'] = $base_price + $peak_surcharge;
+                $pricing['formatted_total'] = 'RM ' . number_format($pricing['total_price'], 2);
+            }
 
             // Calculate service costs
             $service_costs = ckl_calculate_service_costs($vehicle_id, $selected_services, $pickup_timestamp, $return_timestamp);

@@ -73,9 +73,25 @@ function ckl_load_admin_files() {
         require_once get_template_directory() . '/admin/vehicle-meta-tabs.php';
         require_once get_template_directory() . '/admin/init-settings.php';
         require_once get_template_directory() . '/admin/force-init-settings.php';
+        
+        // Load import dashboard
+        require_once get_template_directory() . '/admin/class-import-dashboard.php';
     }
 }
 add_action('after_setup_theme', 'ckl_load_admin_files');
+
+/**
+ * Load menu manager (frontend + admin)
+ */
+require_once get_template_directory() . '/admin/class-menu-manager.php';
+
+/**
+ * Initialize menu manager
+ */
+function ckl_init_menu_manager() {
+    new CKL_Menu_Manager();
+}
+add_action('after_setup_theme', 'ckl_init_menu_manager');
 
 /**
  * Fix WooCommerce Bookings script dependency error
@@ -146,6 +162,29 @@ function ckl_clone_theme_scripts() {
         true
     );
 
+    // Enqueue dropdown picker styles (used on homepage and vehicle pages)
+    wp_enqueue_style(
+        'ckl-dropdown-picker',
+        get_template_directory_uri() . '/assets/css/ckl-dropdown-picker.css',
+        array(),
+        '1.0.0'
+    );
+
+    // Enqueue dropdown picker script
+    wp_enqueue_script(
+        'ckl-dropdown-picker',
+        get_template_directory_uri() . '/assets/js/ckl-dropdown-picker.js',
+        array(),
+        '1.0.0',
+        true
+    );
+
+    // Localize dropdown picker script with AJAX URL
+    wp_localize_script('ckl-dropdown-picker', 'cklLocationPicker', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce' => wp_create_nonce('ckl_location_search'),
+    ));
+
     // Enqueue homepage-specific JavaScript
     if (is_front_page()) {
         wp_enqueue_script(
@@ -211,166 +250,30 @@ function is_ckl_account_page() {
 }
 
 /**
- * Fallback primary menu with active state support
+ * Dynamic primary menu (replaces static ckl_default_menu)
+ * Uses CKL_Menu_Manager for dynamic menu generation
  *
  * @param array $args Optional arguments to configure menu output
  *                    - 'mobile' (bool) Whether to render mobile menu layout
  */
 function ckl_default_menu($args = array()) {
-    $is_mobile = isset($args['mobile']) && $args['mobile'];
-    $current_url = esc_url(add_query_arg(NULL, NULL));
-    $home_url = home_url('/');
-
-    // Helper function to check if URL matches current page
-    $is_active = function($url) use ($current_url, $home_url) {
-        // Exact match for home page
-        if ($url === $home_url) {
-            return $current_url === $home_url;
-        }
-        // Partial match for other pages (handles sub-pages like blog posts)
-        return strpos($current_url, $url) === 0;
-    };
-
-    // Helper function to render link with proper Tailwind classes
-    $render_link = function($url, $text, $active) {
-        // Tailwind 3.4.17 compatible classes
-        $base_classes = 'font-medium transition-colors relative';
-
-        if ($active) {
-            // Active state with underline (using arbitrary values for Tailwind 3.x)
-            $classes = $base_classes . ' text-blue-600 after:content-[""] after:absolute after:bottom-[-8px] after:left-0 after:right-0 after:h-[2px] after:bg-current';
-        } else {
-            // Default state
-            $classes = $base_classes . ' text-gray-700 hover:text-blue-600';
-        }
-
-        return sprintf(
-            '<a href="%s" class="%s">%s</a>',
-            esc_url($url),
-            esc_attr($classes),
-            esc_html__($text, 'ckl-car-rental')
-        );
-    };
-
-    // Menu items array - defines structure and order
-    $menu_items = array(
-        array('url' => $home_url, 'text' => 'Home'),
-        array('url' => home_url('/vehicles/'), 'text' => 'Vehicles'),
-        array('url' => home_url('/faq/'), 'text' => 'FAQ'),
-        array('url' => home_url('/about/'), 'text' => 'About Us'),
-        array('url' => home_url('/contact/'), 'text' => 'Contact Us'),
-        array('url' => home_url('/how-to-book/'), 'text' => 'How To Book'),
-        array('url' => home_url('/blog/'), 'text' => 'Blog'),
-    );
-
-    // Render menu based on context
-    if ($is_mobile) {
-        // Mobile menu: vertical list with <ul>
-        echo '<ul class="flex flex-col space-y-4">';
-        foreach ($menu_items as $item) {
-            printf('<li>%s</li>', $render_link($item['url'], $item['text'], $is_active($item['url'])));
-        }
-        echo '</ul>';
-    } else {
-        // Desktop menu: horizontal flex container with <div>
-        echo '<div class="hidden lg:flex items-center gap-8">';
-        foreach ($menu_items as $item) {
-            echo $render_link($item['url'], $item['text'], $is_active($item['url']));
-        }
-        echo '</div>';
-    }
+    // Use the new dynamic menu system
+    CKL_Menu_Manager::get_primary_menu($args);
 }
 
 /**
- * Fallback footer menu
+ * Dynamic footer menu (replaces static ckl_default_footer_menu)
+ * Uses CKL_Menu_Manager for dynamic menu generation
  */
 function ckl_default_footer_menu() {
-    echo '<ul class="space-y-2">';
-    echo '<li><a href="' . esc_url(home_url('/')) . '">' . esc_html__('Home', 'ckl-car-rental') . '</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/about/')) . '">' . esc_html__('About Us', 'ckl-car-rental') . '</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/vehicles/')) . '">' . esc_html__('Our Vehicles', 'ckl-car-rental') . '</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/contact/')) . '">' . esc_html__('Contact Us', 'ckl-car-rental') . '</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/faq/')) . '">' . esc_html__('FAQs', 'ckl-car-rental') . '</a></li>';
-    echo '</ul>';
+    // Use the new dynamic menu system
+    CKL_Menu_Manager::get_footer_menu();
 }
 
 /**
- * Process contact form submission
+ * Contact form handling is now managed by form plugins (WPForms, Contact Form 7, etc.)
+ * No custom form handler needed - using pure Gutenberg approach
  */
-function ckl_process_contact_form() {
-    // Check if form was submitted
-    if (!isset($_POST['ckl_contact_nonce']) || !wp_verify_nonce($_POST['ckl_contact_nonce'], 'ckl_contact_form')) {
-        return;
-    }
-
-    // Sanitize and validate input
-    $name = sanitize_text_field($_POST['name'] ?? '');
-    $email = sanitize_email($_POST['email'] ?? '');
-    $phone = sanitize_text_field($_POST['phone'] ?? '');
-    $subject_raw = sanitize_text_field($_POST['subject'] ?? 'General Question');
-    $message = sanitize_textarea_field($_POST['message'] ?? '');
-
-    // Basic validation
-    if (empty($name) || empty($email) || empty($message)) {
-        return;
-    }
-
-    if (!is_email($email)) {
-        return;
-    }
-
-    // Validate subject field
-    $valid_subjects = array('General Question', 'Booking Inquiry', 'Support', 'Other');
-    if (!in_array($subject_raw, $valid_subjects)) {
-        $subject_raw = 'General Question';
-    }
-
-    // Prepare email
-    $to = get_option('admin_email', 'contact@cklangkawi.com');
-    $subject = sprintf('[CK Langkawi] %s - Contact from %s', $subject_raw, $name);
-
-    $body = sprintf(
-        "Subject: %s\n\nName: %s\n\nEmail: %s\n\nPhone: %s\n\nMessage:\n\n%s",
-        $subject_raw,
-        $name,
-        $email,
-        $phone ? $phone : 'Not provided',
-        $message
-    );
-
-    $headers = array(
-        'From: ' . $name . ' <' . $email . '>',
-        'Reply-To: ' . $email,
-        'Content-Type: text/plain; charset=UTF-8'
-    );
-
-    // Send email
-    $sent = wp_mail($to, $subject, $body, $headers);
-
-    // Store result in transient for display on page
-    if ($sent) {
-        set_transient('ckl_contact_success_' . get_current_user_id(), true, 30);
-    } else {
-        set_transient('ckl_contact_error_' . get_current_user_id(), true, 30);
-    }
-}
-add_action('init', 'ckl_process_contact_form');
-
-/**
- * Enqueue contact page scripts
- */
-function ckl_enqueue_contact_scripts() {
-    if (is_page_template('page-contact.php')) {
-        wp_enqueue_script(
-            'ckl-contact-page',
-            get_template_directory_uri() . '/assets/js/contact-page.js',
-            array(),
-            '1.0.0',
-            true
-        );
-    }
-}
-add_action('wp_enqueue_scripts', 'ckl_enqueue_contact_scripts');
 
 /**
  * Add bookmark via AJAX
@@ -1308,8 +1211,27 @@ function ckl_check_availability_ajax() {
         $current = strtotime('+1 day', $current);
     }
 
-    // Calculate pricing
+    // Calculate base pricing
     $pricing = ckl_calculate_rental_price($vehicle_id, $pickup_timestamp, $return_timestamp);
+
+    // Apply peak pricing to base rental cost
+    $base_price = $pricing['total_price'];
+    $pickup_date_for_pricing = date('Y-m-d', $pickup_timestamp);
+    $return_date_for_pricing = date('Y-m-d', $return_timestamp);
+
+    // Include peak pricing helper functions
+    $peak_helper_path = get_template_directory() . '/includes/vehicle-pricing-helpers.php';
+    if (file_exists($peak_helper_path) && !function_exists('ckl_calculate_peak_pricing_surcharge')) {
+        include_once($peak_helper_path);
+    }
+
+    // Apply peak pricing using the helper function
+    if (function_exists('ckl_calculate_peak_pricing_surcharge')) {
+        $peak_surcharge = ckl_calculate_peak_pricing_surcharge($vehicle_id, $base_price, $pickup_date_for_pricing, $return_date_for_pricing);
+        $pricing['peak_surcharge'] = $peak_surcharge;
+        $pricing['total_price'] = $base_price + $peak_surcharge;
+        $pricing['formatted_total'] = 'RM ' . number_format($pricing['total_price'], 2);
+    }
 
     // Calculate service costs
     $service_costs = array('total' => 0, 'items' => array());

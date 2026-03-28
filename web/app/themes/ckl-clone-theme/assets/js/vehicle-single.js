@@ -86,40 +86,20 @@
          * Handle location field changes
          */
         function handleLocationChanges() {
-            const pickupLocationSelect = bookingForm.find('select[name="pickup_location"]');
-            const returnLocationSelect = bookingForm.find('select[name="return_location"]');
-            const hotelField = $('#hotel-name-field');
-            const returnHotelField = $('#return-hotel-name-field');
-            const chargeWarning = $('#additional-charge-warning');
+            const returnLocationType = bookingForm.find('select[name="return_location_type"]');
+            const returnLocationPickerWrapper = $('#return-location-picker-wrapper');
 
-            // Pickup location changes
-            pickupLocationSelect.on('change', function() {
-                if ($(this).val() === 'hotel') {
-                    hotelField.removeClass('hidden');
-                } else {
-                    hotelField.addClass('hidden');
-                }
-
-                // If return location is set to "same as pickup", clear it
-                if (returnLocationSelect.val() === 'same_as_pickup') {
-                    returnLocationSelect.val('');
-                }
-            });
-
-            // Return location changes
-            returnLocationSelect.on('change', function() {
+            // Return location type change
+            returnLocationType.on('change', function() {
                 const value = $(this).val();
 
-                if (value === 'hotel') {
-                    returnHotelField.removeClass('hidden');
+                if (value === 'different') {
+                    returnLocationPickerWrapper.removeClass('hidden');
                 } else {
-                    returnHotelField.addClass('hidden');
-                }
-
-                if (value === 'other') {
-                    chargeWarning.removeClass('hidden');
-                } else {
-                    chargeWarning.addClass('hidden');
+                    returnLocationPickerWrapper.addClass('hidden');
+                    // Clear return location values when switching back to "same as pickup"
+                    bookingForm.find('input[name="return_location"]').val('');
+                    bookingForm.find('input[name="return_location_name"]').val('');
                 }
             });
         }
@@ -257,6 +237,16 @@
                 html += '</div>';
             }
 
+            // Display peak pricing surcharge if applicable
+            if (data.peak_surcharge && data.peak_surcharge > 0) {
+                html += '<div class="bg-yellow-50 border border-yellow-200 text-yellow-800 px-3 py-2 rounded mt-2">';
+                html += '<div class="flex justify-between text-sm">';
+                html += '<span class="font-medium">⚠️ Peak Season Surcharge</span>';
+                html += '<span class="font-semibold">RM ' + data.peak_surcharge.toFixed(2) + '</span>';
+                html += '</div>';
+                html += '</div>';
+            }
+
             // Display additional services
             if (data.services && data.services.length > 0) {
                 html += '<div class="border-t pt-2 mt-2">';
@@ -320,27 +310,24 @@
                 const pickupTime = bookingForm.find('input[name="pickup_time"]').val();
                 const returnDate = bookingForm.find('input[name="return_date"]').val();
                 const returnTime = bookingForm.find('input[name="return_time"]').val();
-                const pickupLocation = bookingForm.find('select[name="pickup_location"]').val();
-                const returnLocation = bookingForm.find('select[name="return_location"]').val();
+                const pickupLocation = bookingForm.find('input[name="pickup_location"]').val();
+                const pickupLocationName = bookingForm.find('input[name="pickup_location_name"]').val();
+                const returnLocationType = bookingForm.find('select[name="return_location_type"]').val();
+                const returnLocation = bookingForm.find('input[name="return_location"]').val();
 
                 if (!pickupDate || !pickupTime || !returnDate || !returnTime) {
                     showFormError('Please complete all date and time fields.');
                     return;
                 }
 
-                if (!pickupLocation || !returnLocation) {
-                    showFormError('Please select pickup and return locations.');
+                if (!pickupLocation || !pickupLocationName) {
+                    showFormError('Please select a pickup location.');
                     return;
                 }
 
-                // Check if hotel name is required
-                if (pickupLocation === 'hotel' && !bookingForm.find('input[name="hotel_name"]').val()) {
-                    showFormError('Please enter your hotel name.');
-                    return;
-                }
-
-                if (returnLocation === 'hotel' && !bookingForm.find('input[name="return_hotel_name"]').val()) {
-                    showFormError('Please enter your return hotel name.');
+                // Validate return location if "different" is selected
+                if (returnLocationType === 'different' && !returnLocation) {
+                    showFormError('Please select a return location.');
                     return;
                 }
 
@@ -388,9 +375,10 @@
                     return_date: returnDate,
                     return_time: returnTime,
                     pickup_location: pickupLocation,
-                    hotel_name: bookingForm.find('input[name="hotel_name"]').val(),
+                    pickup_location_name: pickupLocationName,
+                    return_location_type: returnLocationType,
                     return_location: returnLocation,
-                    return_hotel_name: bookingForm.find('input[name="return_hotel_name"]').val(),
+                    return_location_name: bookingForm.find('input[name="return_location_name"]').val(),
                     promo_code: bookingForm.find('input[name="promo_code"]').val(),
                     guest_email: guestEmail,
                     guest_phone: guestPhone,

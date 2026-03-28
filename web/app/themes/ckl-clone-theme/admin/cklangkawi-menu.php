@@ -62,6 +62,7 @@ add_action('admin_menu', 'ckl_add_cklangkawi_menu', 9); // Priority 9 to run bef
 function ckl_load_admin_page_files() {
     require_once get_template_directory() . '/admin/peak-price-calendar.php';
     require_once get_template_directory() . '/admin/pricing-rules.php';
+    require_once get_template_directory() . '/admin/whatsapp-settings.php';
 }
 add_action('admin_menu', 'ckl_load_admin_page_files', 10);
 

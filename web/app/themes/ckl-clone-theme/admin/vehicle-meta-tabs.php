@@ -282,24 +282,21 @@ function ckl_render_tabbed_vehicle_meta_box($post) {
                 <?php _e('+ Add Promotional Offer', 'ckl-car-rental'); ?>
             </button>
 
-            <h3><?php _e('Peak Period Overrides', 'ckl-car-rental'); ?></h3>
-            <p class="description"><?php _e('Select global peak periods to apply to this vehicle. You can override the default pricing adjustment for each period.', 'ckl-car-rental'); ?></p>
+            <h3><?php _e('Peak Period Pricing', 'ckl-car-rental'); ?></h3>
+            <p class="description"><?php _e('Set specific pricing for global peak periods. The price you set here will override the base daily rate for these dates.', 'ckl-car-rental'); ?></p>
 
             <?php
             $global_periods = get_option('ckl_global_peak_prices', array());
-            $vehicle_overrides = get_post_meta($post->ID, '_peak_pricing', true);
-            if (!is_array($vehicle_overrides)) {
-                $vehicle_overrides = array();
+            $vehicle_peak_pricing = get_post_meta($post->ID, '_peak_pricing', true);
+            if (!is_array($vehicle_peak_pricing)) {
+                $vehicle_peak_pricing = array();
             }
 
-            // Build a lookup for existing overrides by global_period_id
-            $overrides_by_period = array();
-            $custom_periods = array();
-            foreach ($vehicle_overrides as $override) {
-                if (isset($override['global_period_id']) && $override['global_period_id']) {
-                    $overrides_by_period[$override['global_period_id']] = $override;
-                } else {
-                    $custom_periods[] = $override;
+            // Build a lookup for existing pricing by global_period_id
+            $pricing_by_period = array();
+            foreach ($vehicle_peak_pricing as $pricing) {
+                if (isset($pricing['global_period_id']) && $pricing['global_period_id']) {
+                    $pricing_by_period[$pricing['global_period_id']] = $pricing;
                 }
             }
             ?>
@@ -310,14 +307,15 @@ function ckl_render_tabbed_vehicle_meta_box($post) {
                     <?php foreach ($global_periods as $period): ?>
                         <?php
                         $period_id = $period['id'];
-                        $has_override = isset($overrides_by_period[$period_id]);
-                        $override = $has_override ? $overrides_by_period[$period_id] : array();
-                        $override_pricing = isset($override['override_pricing']) ? $override['override_pricing'] : false;
+                        $has_pricing = isset($pricing_by_period[$period_id]);
+                        $pricing = $has_pricing ? $pricing_by_period[$period_id] : array();
+                        $enabled = isset($pricing['enabled']) ? $pricing['enabled'] : ($period['active'] ? 1 : 0);
+                        $peak_price = isset($pricing['peak_price']) ? $pricing['peak_price'] : '';
                         ?>
                         <tr>
                             <th>
                                 <label>
-                                    <input type="checkbox" name="peak_pricing[<?php echo $period_id; ?>][enabled]" value="1" <?php checked($has_override || $period['active']); ?>>
+                                    <input type="checkbox" name="peak_pricing[<?php echo $period_id; ?>][enabled]" value="1" <?php checked($enabled); ?> class="ckl-peak-enable">
                                     <?php echo esc_html($period['name']); ?>
                                 </label>
                                 <br>
@@ -326,32 +324,16 @@ function ckl_render_tabbed_vehicle_meta_box($post) {
                                     <?php if ($period['recurring'] !== 'none'): ?>
                                         <br><?php echo esc_html(ucfirst($period['recurring'])); ?>
                                     <?php endif; ?>
-                                    <br>
-                                    <strong><?php _e('Default:', 'ckl-car-rental'); ?></strong>
-                                    <?php if ($period['adjustment_type'] === 'percentage'): ?>
-                                        +<?php echo esc_html($period['amount']); ?>%
-                                    <?php else: ?>
-                                        +RM<?php echo esc_html(number_format($period['amount'], 2)); ?>
-                                    <?php endif; ?>
                                 </small>
                             </th>
                             <td>
                                 <input type="hidden" name="peak_pricing[<?php echo $period_id; ?>][global_period_id]" value="<?php echo $period_id; ?>">
-                                <label>
-                                    <input type="checkbox" name="peak_pricing[<?php echo $period_id; ?>][override_pricing]" value="1" <?php checked($override_pricing); ?> class="ckl-override-toggle">
-                                    <?php _e('Override default pricing', 'ckl-car-rental'); ?>
-                                </label>
-
-                                <div class="ckl-override-fields" style="<?php echo !$override_pricing ? 'display: none;' : ''; ?> margin-top: 10px;">
-                                    <select name="peak_pricing[<?php echo $period_id; ?>][adjustment_type]">
-                                        <option value="percentage" <?php selected(isset($override['adjustment_type']) ? $override['adjustment_type'] : 'percentage', 'percentage'); ?>>
-                                            <?php _e('Percentage', 'ckl-car-rental'); ?>
-                                        </option>
-                                        <option value="fixed" <?php selected(isset($override['adjustment_type']) ? $override['adjustment_type'] : 'percentage', 'fixed'); ?>>
-                                            <?php _e('Fixed Amount (RM)', 'ckl-car-rental'); ?>
-                                        </option>
-                                    </select>
-                                    <input type="number" name="peak_pricing[<?php echo $period_id; ?>][amount]" value="<?php echo esc_attr(isset($override['amount']) ? $override['amount'] : ($period['amount'] ?? 0)); ?>" step="0.01" min="0" class="small-text">
+                                <div class="ckl-peak-pricing-fields" style="<?php echo !$enabled ? 'display: none;' : ''; ?>">
+                                    <label>
+                                        <?php _e('Peak Price (RM/day):', 'ckl-car-rental'); ?>
+                                        <input type="number" name="peak_pricing[<?php echo $period_id; ?>][peak_price]" value="<?php echo esc_attr($peak_price); ?>" step="0.01" min="0" class="small-text">
+                                        <span class="description"><?php _e('Leave empty to use base daily rate', 'ckl-car-rental'); ?></span>
+                                    </label>
                                 </div>
                             </td>
                         </tr>
@@ -419,8 +401,8 @@ function ckl_render_tabbed_vehicle_meta_box($post) {
 
             <script>
             jQuery(document).ready(function($) {
-                $('.ckl-override-toggle').on('change', function() {
-                    var $fields = $(this).closest('td').find('.ckl-override-fields');
+                $('.ckl-peak-enable').on('change', function() {
+                    var $fields = $(this).closest('td').find('.ckl-peak-pricing-fields');
                     if ($(this).is(':checked')) {
                         $fields.slideDown();
                     } else {
@@ -964,25 +946,25 @@ function ckl_save_tabbed_vehicle_meta($post_id) {
         update_post_meta($post_id, '_special_pricing', $sanitized);
     }
 
-    // Save peak pricing (global period overrides and custom periods)
+    // Save peak pricing (global period pricing and custom periods)
     $peak_pricing = array();
 
-    // Save global period overrides
+    // Save global period pricing
     if (isset($_POST['peak_pricing']) && is_array($_POST['peak_pricing'])) {
         foreach ($_POST['peak_pricing'] as $period_id => $pricing_data) {
-            // Only save if enabled or has override
-            if (isset($pricing_data['enabled']) || isset($pricing_data['override_pricing'])) {
-                $override = array(
+            // Only save if enabled
+            if (isset($pricing_data['enabled']) && $pricing_data['enabled']) {
+                $period_pricing = array(
                     'global_period_id' => intval($period_id),
+                    'enabled' => true,
                 );
 
-                if (isset($pricing_data['override_pricing']) && $pricing_data['override_pricing']) {
-                    $override['override_pricing'] = true;
-                    $override['adjustment_type'] = sanitize_text_field($pricing_data['adjustment_type']);
-                    $override['amount'] = floatval($pricing_data['amount']);
+                // Save peak price if set
+                if (isset($pricing_data['peak_price']) && !empty($pricing_data['peak_price'])) {
+                    $period_pricing['peak_price'] = floatval($pricing_data['peak_price']);
                 }
 
-                $peak_pricing[] = $override;
+                $peak_pricing[] = $period_pricing;
             }
         }
     }

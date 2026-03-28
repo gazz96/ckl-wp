@@ -40,6 +40,8 @@ function ckl_get_vehicle_peak_pricing($vehicle_id, $start_date, $end_date) {
 /**
  * Calculate peak pricing surcharge for a vehicle
  *
+ * Now calculates based on vehicle-defined peak prices instead of percentage adjustments
+ *
  * @param int $vehicle_id Vehicle post ID
  * @param float $base_price Base daily price
  * @param string $start_date Start date (Y-m-d)
@@ -47,27 +49,30 @@ function ckl_get_vehicle_peak_pricing($vehicle_id, $start_date, $end_date) {
  * @return float Total surcharge amount
  */
 function ckl_calculate_peak_pricing_surcharge($vehicle_id, $base_price, $start_date, $end_date) {
-    $peak_pricing = ckl_get_vehicle_peak_pricing($vehicle_id, $start_date, $end_date);
+    $applicable_pricing = ckl_get_applicable_peak_pricing($vehicle_id, $start_date, $end_date);
 
-    if (empty($peak_pricing)) {
+    if (empty($applicable_pricing)) {
         return 0;
     }
 
     // Calculate number of days
     $days = max(1, ceil((strtotime($end_date) - strtotime($start_date)) / DAY_IN_SECONDS));
 
-    // Apply the highest peak pricing (could be changed to sum all)
-    $total_surcharge = 0;
-    foreach ($peak_pricing as $pricing) {
-        if ($pricing['adjustment_type'] === 'percentage') {
-            $total_surcharge += $base_price * ($pricing['amount'] / 100) * $days;
-        } else {
-            // Fixed amount per day
-            $total_surcharge += $pricing['amount'] * $days;
+    // Find the highest applicable peak price
+    $highest_peak_price = 0;
+    foreach ($applicable_pricing as $pricing) {
+        if (isset($pricing['peak_price']) && $pricing['peak_price'] > $highest_peak_price) {
+            $highest_peak_price = $pricing['peak_price'];
         }
     }
 
-    return $total_surcharge;
+    // Calculate surcharge as difference between peak price and base price
+    if ($highest_peak_price > 0) {
+        $surcharge_per_day = max(0, $highest_peak_price - $base_price);
+        return $surcharge_per_day * $days;
+    }
+
+    return 0;
 }
 
 /**
@@ -131,27 +136,35 @@ function ckl_is_peak_date($date) {
 /**
  * Get applicable peak pricing for a vehicle and date range
  *
- * This function merges global peak periods with vehicle-specific overrides.
- * Vehicle overrides take precedence for the same period.
+ * This function checks global peak periods and vehicle-specific pricing.
+ * Returns vehicle-defined peak prices if available.
  *
  * @param int $vehicle_id Vehicle post ID
  * @param string $start_date Start date (Y-m-d)
  * @param string $end_date End date (Y-m-d)
- * @return array Array of applicable peak pricing with global and override pricing
+ * @return array Array of applicable peak pricing with vehicle peak prices
  */
 function ckl_get_applicable_peak_pricing($vehicle_id, $start_date, $end_date) {
     // Get global peak periods
     $global_periods = get_option('ckl_global_peak_prices', array());
 
-    // Get vehicle-specific peak pricing overrides
-    $vehicle_overrides = get_post_meta($vehicle_id, '_peak_pricing', true);
-    if (!is_array($vehicle_overrides)) {
-        $vehicle_overrides = array();
+    // Get vehicle-specific peak pricing
+    $vehicle_peak_pricing = get_post_meta($vehicle_id, '_peak_pricing', true);
+    if (!is_array($vehicle_peak_pricing)) {
+        $vehicle_peak_pricing = array();
     }
 
     $applicable = array();
 
-    // First, add global periods that overlap with the date range
+    // Build lookup for vehicle pricing by global period ID
+    $vehicle_pricing_by_period = array();
+    foreach ($vehicle_peak_pricing as $pricing) {
+        if (isset($pricing['global_period_id']) && $pricing['global_period_id']) {
+            $vehicle_pricing_by_period[$pricing['global_period_id']] = $pricing;
+        }
+    }
+
+    // Check global periods that overlap with the date range
     foreach ($global_periods as $period) {
         if (!$period['active']) {
             continue;
@@ -159,45 +172,24 @@ function ckl_get_applicable_peak_pricing($vehicle_id, $start_date, $end_date) {
 
         // Check if date range overlaps
         if ($period['start_date'] <= $end_date && $period['end_date'] >= $start_date) {
-            $applicable[$period['id']] = array(
-                'period_id' => $period['id'],
+            $period_id = $period['id'];
+            $has_vehicle_pricing = isset($vehicle_pricing_by_period[$period_id]);
+
+            $applicable[$period_id] = array(
+                'period_id' => $period_id,
                 'name' => $period['name'],
                 'start_date' => $period['start_date'],
                 'end_date' => $period['end_date'],
-                'adjustment_type' => $period['adjustment_type'] ?? 'percentage',
-                'amount' => $period['amount'] ?? 0,
-                'source' => 'global',
-                'is_override' => false
+                'source' => $has_vehicle_pricing ? 'vehicle_pricing' : 'global_period',
+                'has_vehicle_pricing' => $has_vehicle_pricing
             );
-        }
-    }
 
-    // Then, apply vehicle overrides (matching by global_period_id or by name/date)
-    foreach ($vehicle_overrides as $override) {
-        // Check if this override references a global period
-        $global_period_id = isset($override['global_period_id']) ? intval($override['global_period_id']) : 0;
-
-        if ($global_period_id && isset($applicable[$global_period_id])) {
-            // This is an override of a global period
-            if (isset($override['override_pricing']) && $override['override_pricing']) {
-                $applicable[$global_period_id]['adjustment_type'] = $override['adjustment_type'];
-                $applicable[$global_period_id]['amount'] = $override['amount'];
-                $applicable[$global_period_id]['is_override'] = true;
-                $applicable[$global_period_id]['source'] = 'vehicle_override';
-            }
-        } else {
-            // This is a vehicle-specific peak period (not linked to global)
-            if ($override['start_date'] <= $end_date && $override['end_date'] >= $start_date) {
-                $applicable['vehicle_' . $override['name']] = array(
-                    'period_id' => 'vehicle_' . $override['name'],
-                    'name' => $override['name'],
-                    'start_date' => $override['start_date'],
-                    'end_date' => $override['end_date'],
-                    'adjustment_type' => $override['adjustment_type'],
-                    'amount' => $override['amount'],
-                    'source' => 'vehicle_only',
-                    'is_override' => false
-                );
+            // Add vehicle peak price if available
+            if ($has_vehicle_pricing) {
+                $vehicle_pricing = $vehicle_pricing_by_period[$period_id];
+                if (isset($vehicle_pricing['peak_price']) && !empty($vehicle_pricing['peak_price'])) {
+                    $applicable[$period_id]['peak_price'] = $vehicle_pricing['peak_price'];
+                }
             }
         }
     }

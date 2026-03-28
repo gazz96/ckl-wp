@@ -650,8 +650,8 @@ class CKL_Dynamic_Pricing {
      * Apply all pricing rules in priority order
      *
      * Priority Order (Highest to Lowest):
-     * 1. Global Peak Prices (Priority 100) - Apply to ALL vehicles
-     * 2. Global Pricing Rules (Priority 90) - Apply to ALL vehicles
+     * 1. Vehicle Peak Prices (Priority 100) - Direct pricing from vehicle meta
+     * 2. Global Peak Periods (Priority 90) - Period markers only
      * 3. Vehicle-Specific Rules (Priority 50) - Per-vehicle rules
      * 4. Theme Seasonal Pricing (Priority 10) - From theme settings (legacy)
      *
@@ -663,31 +663,20 @@ class CKL_Dynamic_Pricing {
      */
     public static function apply_all_pricing_rules($base_price, $vehicle_id, $start_date, $end_date) {
         $final_price = $base_price;
-        $applied_rule = null;
 
-        // 1. Apply global peak prices (Priority 100)
-        $peak_price = self::get_global_peak_price_for_date($start_date);
-        if ($peak_price) {
-            if ($peak_price['adjustment_type'] === 'percentage') {
-                $final_price = $final_price * (1 + ($peak_price['amount'] / 100));
-            } else {
-                $final_price = $final_price + $peak_price['amount'];
+        // 1. Apply vehicle peak prices (Priority 100)
+        if (function_exists('ckl_get_applicable_peak_pricing')) {
+            $applicable_pricing = ckl_get_applicable_peak_pricing($vehicle_id, $start_date, $end_date);
+            foreach ($applicable_pricing as $pricing) {
+                if (isset($pricing['peak_price']) && !empty($pricing['peak_price'])) {
+                    // Use vehicle-defined peak price directly
+                    return $pricing['peak_price'];
+                }
             }
-            $applied_rule = $peak_price;
-            return $final_price; // Stop after highest priority rule
         }
 
-        // 2. Apply global pricing rules (Priority 90)
-        $global_rule = self::get_global_pricing_rule_for_date($start_date);
-        if ($global_rule) {
-            if ($global_rule['adjustment_type'] === 'percentage') {
-                $final_price = $final_price * (1 + ($global_rule['amount'] / 100));
-            } else {
-                $final_price = $final_price + $global_rule['amount'];
-            }
-            $applied_rule = $global_rule;
-            return $final_price; // Stop after highest priority rule
-        }
+        // 2. Global peak periods now only serve as date markers
+        // No pricing adjustment applied at this level
 
         // 3. Apply vehicle-specific rules (Priority 50)
         $vehicle_rule = self::get_active_rule_for_date($vehicle_id, $start_date);
@@ -697,7 +686,6 @@ class CKL_Dynamic_Pricing {
             } else {
                 $final_price = $final_price + $vehicle_rule['amount'];
             }
-            $applied_rule = $vehicle_rule;
             return $final_price; // Stop after highest priority rule
         }
 

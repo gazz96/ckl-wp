@@ -27,6 +27,7 @@ require_once get_template_directory() . '/includes/class-booking-qr.php';
  * Vehicle pricing helper functions
  */
 require_once get_template_directory() . '/includes/vehicle-pricing-helpers.php';
+require_once get_template_directory() . '/includes/migration-cleanup-peak-pricing.php';
 
 /**
  * Theme setup and configuration

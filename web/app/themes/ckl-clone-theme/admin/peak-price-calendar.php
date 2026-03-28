@@ -76,10 +76,9 @@ function ckl_peak_price_calendar_page_html() {
         <table class="wp-list-table widefat fixed striped" id="ckl-peak-price-table">
             <thead>
                 <tr>
-                    <th scope="col" style="width: 25%;"><?php _e('Name', 'ckl-car-rental'); ?></th>
-                    <th scope="col" style="width: 25%;"><?php _e('Date Range', 'ckl-car-rental'); ?></th>
-                    <th scope="col" style="width: 15%;"><?php _e('Adjustment', 'ckl-car-rental'); ?></th>
-                    <th scope="col" style="width: 10%;"><?php _e('Recurring', 'ckl-car-rental'); ?></th>
+                    <th scope="col" style="width: 30%;"><?php _e('Name', 'ckl-car-rental'); ?></th>
+                    <th scope="col" style="width: 30%;"><?php _e('Date Range', 'ckl-car-rental'); ?></th>
+                    <th scope="col" style="width: 15%;"><?php _e('Recurring', 'ckl-car-rental'); ?></th>
                     <th scope="col" style="width: 10%;"><?php _e('Status', 'ckl-car-rental'); ?></th>
                     <th scope="col" style="width: 15%;"><?php _e('Actions', 'ckl-car-rental'); ?></th>
                 </tr>
@@ -87,7 +86,7 @@ function ckl_peak_price_calendar_page_html() {
             <tbody>
                 <?php if (empty($peak_prices)): ?>
                     <tr>
-                        <td colspan="6" style="text-align: center; padding: 40px;">
+                        <td colspan="5" style="text-align: center; padding: 40px;">
                             <?php _e('No peak periods found. Click "Add Peak Period" to create one.', 'ckl-car-rental'); ?>
                         </td>
                     </tr>
@@ -102,19 +101,6 @@ function ckl_peak_price_calendar_page_html() {
                                 <code><?php echo esc_html($peak['end_date']); ?></code>
                                 <?php if ($peak['recurring'] !== 'none'): ?>
                                     <br><small class="description"><?php echo esc_html(ucfirst($peak['recurring'])); ?></small>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?php
-                                $adjustment_type = isset($peak['adjustment_type']) ? $peak['adjustment_type'] : 'percentage';
-                                $amount = isset($peak['amount']) ? $peak['amount'] : 0;
-                                if ($adjustment_type === 'percentage' && $amount > 0):
-                                ?>
-                                    <span style="color: #d63638; font-weight: 600;">+<?php echo esc_html($amount); ?>%</span>
-                                <?php elseif ($adjustment_type === 'fixed' && $amount > 0): ?>
-                                    <span style="color: #d63638; font-weight: 600;">+RM<?php echo esc_html(number_format($amount, 2)); ?></span>
-                                <?php else: ?>
-                                    <span style="color: #999;">—</span>
                                 <?php endif; ?>
                             </td>
                             <td>
@@ -203,31 +189,6 @@ function ckl_peak_price_calendar_page_html() {
                     </tr>
                     <tr>
                         <th>
-                            <label for="ckl-peak-adjustment-type"><?php _e('Adjustment Type', 'ckl-car-rental'); ?></label>
-                        </th>
-                        <td>
-                            <select id="ckl-peak-adjustment-type">
-                                <option value="percentage"><?php _e('Percentage', 'ckl-car-rental'); ?></option>
-                                <option value="fixed"><?php _e('Fixed Amount (RM)', 'ckl-car-rental'); ?></option>
-                            </select>
-                            <p class="description">
-                                <?php _e('How the pricing adjustment is calculated', 'ckl-car-rental'); ?>
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            <label for="ckl-peak-amount"><?php _e('Adjustment Amount', 'ckl-car-rental'); ?></label>
-                        </th>
-                        <td>
-                            <input type="number" id="ckl-peak-amount" step="0.01" min="0" value="0">
-                            <p class="description" id="ckl-peak-amount-desc">
-                                <?php _e('Percentage increase (e.g., 25 = 25% more)', 'ckl-car-rental'); ?>
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             <label for="ckl-peak-active"><?php _e('Active', 'ckl-car-rental'); ?></label>
                         </th>
                         <td>
@@ -277,8 +238,6 @@ function ckl_peak_price_calendar_page_html() {
             $('#ckl-peak-start').val(peak.start_date);
             $('#ckl-peak-end').val(peak.end_date);
             $('#ckl-peak-recurring').val(peak.recurring);
-            $('#ckl-peak-adjustment-type').val(peak.adjustment_type || 'percentage');
-            $('#ckl-peak-amount').val(peak.amount || 0);
             $('#ckl-peak-active').prop('checked', peak.active == 1);
             $('#ckl-peak-price-modal').show();
         }
@@ -344,8 +303,6 @@ function ckl_peak_price_calendar_page_html() {
                     start_date: $('#ckl-peak-start').val(),
                     end_date: $('#ckl-peak-end').val(),
                     recurring: $('#ckl-peak-recurring').val(),
-                    adjustment_type: $('#ckl-peak-adjustment-type').val(),
-                    amount: parseFloat($('#ckl-peak-amount').val()) || 0,
                     active: $('#ckl-peak-active').prop('checked') ? 1 : 0,
                     priority: 100,
                     created_at: new Date().toISOString(),
@@ -379,16 +336,6 @@ function ckl_peak_price_calendar_page_html() {
         // Refresh table
         $('#ckl-refresh-calendar').on('click', function() {
             location.reload();
-        });
-
-        // Update amount description based on adjustment type
-        $('#ckl-peak-adjustment-type').on('change', function() {
-            var type = $(this).val();
-            if (type === 'percentage') {
-                $('#ckl-peak-amount-desc').text('<?php _e('Percentage increase (e.g., 25 = 25% more)', 'ckl-car-rental'); ?>');
-            } else {
-                $('#ckl-peak-amount-desc').text('<?php _e('Fixed RM amount per day (e.g., 50 = RM50 more per day)', 'ckl-car-rental'); ?>');
-            }
         });
     });
     </script>
